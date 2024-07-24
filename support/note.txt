@@ -1,0 +1,98 @@
+to use user C libraries in arduino:
+
+rename the .c file to .cpp
+
+or add in main File Libraries:
+
+extern "C" {
+	#include <TheLibrary.h>
+}
+
+// 2
+if(window == 2){ // testing	
+	// check character table of LCD
+	//for(i=0;i<16;lcd.putch(i),i++);
+	//for(i=16;i<32;lcd.putch(i),i++);
+	//for(i=32;i<64;lcd.putch(i),i++);
+	//for(i=64;i<80;lcd.putch(i),i++);
+	//for(i=80;i<96;lcd.putch(i),i++);
+	//for(i=96;i<112;lcd.putch(i),i++);
+	//for(i=112;i<128;lcd.putch(i),i++);
+	//for(i=128;i<144;lcd.putch(i),i++);
+	//for(i=144;i<160;lcd.putch(i),i++);
+	//for(i=160;i<176;lcd.putch(i),i++);
+	//for(i=176;i<192;lcd.putch(i),i++);
+	//for(i=192;i<208;lcd.putch(i),i++);
+	//for(i=208;i<224;lcd.putch(i),i++);
+	//for(i=224;i<240;lcd.putch(i),i++);
+	//for(i=240;i<255;lcd.putch(i),i++); // 255 is a BLACK P.
+	window = 0; continue;
+}
+
+//		OLD WAY
+//atmega328.portb.reg->ddr = 0x00;
+//atmega328.portb.reg->port |= 0xF0;
+//atmega328.portc.reg->ddr = 0x00;
+//atmega328.portc.reg->port |= 0xF0;
+//atmega328.portd.reg->ddr &= ~m.byte_shiftleft(1, 2);
+//atmega328.portd.reg->port |= m.byte_shiftleft(1, 2);
+
+
+// make a library for these functions with extra functionalities (these are incomplete)
+void linear(double* target, double rate) // *target = rate * t -> t is interrupt timer
+{
+	double cpy = *target;
+	double next;
+	next = rate + cpy;
+	*target = next;
+}
+void exponencial(double* target, double rate) // *target = rate ^ t -> t is interrupt timer therefore rate > 0
+{
+	double cpy = *target;
+	double next;
+	double diff;
+	// filter inputs
+	if( rate ){ if(rate < 0) rate = - rate; }else rate = 1;
+	if( cpy ) ; else cpy = 1;
+	
+	next = rate * cpy;
+	diff = next - cpy; // to have growth rate (could be bypassed)
+	*target = cpy + diff;
+}
+//double product (double u, double v){return (u * v);}
+
+void interrupt1(void){d++;}
+void linear(double* target, double rate);
+void exponencial(double* target, double rate);
+
+//d=2.0 * 2;
+/**
+// Play around
+if(i < 8){
+	if(j){
+		sh.bit(1);
+		sh.out();
+		i++;
+	}else{
+		sh.bit(0);
+		sh.out();
+		i++;
+	}
+}else{
+	i = 0; 
+	if(j) j = 0;
+	else j =1;
+}
+**/
+
+if(!window){ // preamble
+	lcd.reboot();
+	input = ( atmega328.portc.reg->pin & 0xF0 ) | ( atmega328.portb.reg->pin >> 4 );
+	button.update(&button.par, input);
+	uartreceive = atmega328.usart.run.gets();
+	uartrcv[0] = 'O'; uartrcv[1] = 'K'; uartrcv[2] = '\0';
+	strcpy( uartmsg, uartreceive );
+	if(atmega328.usart.run.getch() == '.'){ strcpy(uartrcv, uartreceive); atmega328.usart.run.rxflush(); }
+	window = 1; continue;
+}		
+
