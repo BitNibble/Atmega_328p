@@ -16,27 +16,27 @@ static ATMEGA328 setup_atmega328;
 
 /*** File Procedure & Function ***/
 ATMEGA328 atmega328_enable(void){
-	// GPWR
+	/***GPWR***/
 	setup_atmega328.gpwr_instance = gpwr_instance();
-	// AC
+	/***AC***/
 	setup_atmega328.ac_instance = ac_instance();
 	setup_atmega328.ac_did_instance = ac_did_instance();
-	// ADC
+	/***ADC***/
 	setup_atmega328.adc_instance = adc_instance();
 	#if defined(_ANALOG_MODULE_)
 		setup_atmega328.adc_enable = adc_enable;
 		setup_atmega328.adc = adc();
 	#endif
-	// CPU
+	/***CPU***/
 	setup_atmega328.cpu_instance = cpu_instance();
 	setup_atmega328.cpu_gpio012_instance = cpu_gpio012_instance();
-	// EEPROM
+	/***EEPROM***/
 	setup_atmega328.eeprom_instance = eeprom_instance();
 	#if defined(_EEPROM_MODULE_)
 		setup_atmega328.eeprom_enable = eeprom_enable;
 		setup_atmega328.eeprom = eeprom();
 	#endif
-	// EXINT
+	/***EXINT***/
 	setup_atmega328.exint_instance = exint_instance();
 	setup_atmega328.exint_flag_instance = exint_flag_instance();
 	setup_atmega328.exint_mask_instance = exint_mask_instance();
@@ -45,19 +45,19 @@ ATMEGA328 atmega328_enable(void){
 		setup_atmega328.exint_enable = exint_enable;
 		setup_atmega328.exint = exint();
 	#endif
-	// PORTB
+	/***PORTB***/
 	setup_atmega328.portb_instance = portb_instance();
-	// PORTC
+	/***PORTC***/
 	setup_atmega328.portc_instance = portc_instance();
-	// PORTD
+	/***PORTD***/
 	setup_atmega328.portd_instance = portd_instance();
-	// SPI
+	/***SPI***/
 	setup_atmega328.spi_instance = spi_instance();
 	#if defined(_SPI_MODULE_)
 		setup_atmega328.spi_enable = spi_enable;
 		setup_atmega328.spi = spi();
 	#endif
-	// TC1
+	/***TC1***/
 	setup_atmega328.tc1_instance = tc1_instance();
 	setup_atmega328.tc1_gcontrol_instance = tc_gcontrol_instance();
 	setup_atmega328.tc1_iflag_instance = tc_iflag_instance();
@@ -67,7 +67,7 @@ ATMEGA328 atmega328_enable(void){
 		setup_atmega328.tc1_enable = tc1_enable;
 		setup_atmega328.tc1 = tc1();
 	#endif
-	// TC0
+	/***TC0***/
 	setup_atmega328.tc0_instance = tc0_instance();
 	setup_atmega328.tc0_gcontrol_instance = tc_gcontrol_instance();
 	setup_atmega328.tc0_iflag_instance = tc_iflag_instance();
@@ -75,9 +75,9 @@ ATMEGA328 atmega328_enable(void){
 	setup_atmega328.tc0_compare_instance = tc0_compare_instance();
 	#if defined(_TIMER0_MODULE_)
 		setup_atmega328.tc0_enable = tc0_enable;
-		setup_atmega328.tc0 = tc0();	
+		setup_atmega328.tc0 = tc0();
 	#endif
-	// TC2
+	/***TC2***/
 	setup_atmega328.tc2_instance = tc2_instance();
 	setup_atmega328.tc2_gcontrol_instance = tc_gcontrol_instance();
 	setup_atmega328.tc2_iflag_instance = tc_iflag_instance();
@@ -87,20 +87,20 @@ ATMEGA328 atmega328_enable(void){
 		setup_atmega328.tc2_enable = tc2_enable;
 		setup_atmega328.tc2 = tc2();
 	#endif
-	// TWI
+	/***TWI***/
 	setup_atmega328.twi_instance = twi_instance();
 	#if defined(_TWI_MODULE_)
 		setup_atmega328.twi_enable = twi_enable;
 		setup_atmega328.twi = twi();
 	#endif
-	// USART
+	/***USART***/
 	setup_atmega328.usart0_instance = usart0_instance();
 	#if defined(_USART0_MODULE_)
 		setup_atmega328.usart0_enable = usart0_enable;
 	#endif
-	// WDT
+	/***WDT***/
 	setup_atmega328.wdt_instance = wdt_instance();
-	/******/
+	/*** Pointer Function***/
 	setup_atmega328.Clock_Prescaler_Select = Atmega328ClockPrescalerSelect;
 	setup_atmega328.Move_Interrupts_To_Boot = Atmega328MoveInterruptsToBoot;
 	

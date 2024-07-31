@@ -12,7 +12,7 @@ Update: 05/01/2024
 ************************************************************************/
 #ifndef _74HC595_H_
 	#define _74HC595_H_
-	
+
 /*** Global Constant & Macro ***/
 #if defined (STM32F446xx)
 	#ifndef IO_var

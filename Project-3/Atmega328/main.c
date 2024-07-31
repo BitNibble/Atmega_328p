@@ -79,7 +79,7 @@ for (menu = 1; TRUE; ) // Looping
 		default:
 		break;
 	}
-	
+
 	//OUT 1
 	if( !strcmp( uart_oneshot, "s00." ) ){
 		if( pcf8575.readhbits( &pcf8575.par, (1 << 0) ) ){
@@ -217,18 +217,18 @@ for (menu = 1; TRUE; ) // Looping
 	if(!strcmp( uart_oneshot, "all on." )){
 		pcf8575.writehbits( &pcf8575.par, 65535, LOW );
 	}
-	
+
 	//STATUS FEEDBACK
 	if(!strcmp(uart_oneshot, "status.")){
 		usart0()->puts( func()->print_binary( 16, ~pcf8575.readhbits( &pcf8575.par, 0xFFFF ) ) );
 		usart0()->putch('\n');
 	}
-	
+
 	lcd02p()->gotoxy(3,0);
 	lcd02p()->string_size( "->", 3);
 	lcd02p()->gotoxy(3,3);
 	lcd02p()->string_size(func()->print_binary( 16, ~pcf8575.readhbits( &pcf8575.par, 0xFFFF ) ), 16);
-	
+
 	//_delay_ms(500);
 }
 } /*** MAIN ***/
