@@ -153,6 +153,10 @@ int main(void)
 			// uart capture
 			uartreceive = usart0_messageprint( usart0(), uartrcv, uartmsg, ".");
 			
+			// catch message
+			if(!strcmp(uartreceive,"Connect\r\n")){usart0()->rxflush();lcd.clear();}
+			if(!strcmp(uartreceive,"Connected\r\n")){usart0()->rxflush();lcd.clear();}
+			
 			window = 1; continue;
 		}
 		// 1
