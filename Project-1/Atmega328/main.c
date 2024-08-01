@@ -146,7 +146,7 @@ int main(void)
 		// 0
 		if(!window){ // Loop preamble
 			lcd.reboot();
-			input = ( atmega328()->portc_instance->pin & 0xF0 ) | getreg( atmega328()->portb_instance->pin, 4, 4);
+			input = ( atmega328()->portc_instance->pin & 0xF0 ) | get_reg_block( atmega328()->portb_instance->pin, 4, 4);
 			button.update(&button.par, input);
 			disp.update(&disp.par, atmega328()->portd_instance->pin);
 			
@@ -284,12 +284,12 @@ int main(void)
 /*** Procedure and Function Definitions ***/
 void PORTINIT(void)
 {
-	writereg(&atmega328()->portb_instance->ddr,2,4,0);
-	writereg(&atmega328()->portb_instance->port,2,4,3);
-	writereg(&atmega328()->portc_instance->ddr,2,4,0);
-	writereg(&atmega328()->portc_instance->port,2,4,3);
-	writereg(&atmega328()->portd_instance->ddr,2,2,0);
-	writereg(&atmega328()->portd_instance->port,2,2,3);
+	write_reg_block(&atmega328()->portb_instance->ddr,2,4,0);
+	write_reg_block(&atmega328()->portb_instance->port,2,4,3);
+	write_reg_block(&atmega328()->portc_instance->ddr,2,4,0);
+	write_reg_block(&atmega328()->portc_instance->port,2,4,3);
+	write_reg_block(&atmega328()->portd_instance->ddr,2,2,0);
+	write_reg_block(&atmega328()->portd_instance->port,2,2,3);
 }
 void exponencial(double* target, double rate) // *target = rate ^ t -> t is interrupt timer therefore rate > 0
 {
