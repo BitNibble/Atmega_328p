@@ -64,7 +64,7 @@ for (menu = 1; TRUE; ) // Looping
 {
 	lcd02p()->reboot();
 	uart_receive = usart0_messageprint( usart0(), uart_oneshot, uart_msg, term);
-	
+
 	switch(menu){ // MENU
 		case 1: // Main Program Menu 1
 			lcd02p()->gotoxy(0,0);

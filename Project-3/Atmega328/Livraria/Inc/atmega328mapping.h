@@ -15,7 +15,7 @@ Update: 01/01/2024
 	#define _ATMEGA328MAPPING_H_
 
 /*** Global Library ***/
-#include "atmega328instance.h"	
+#include "atmega328instance.h"
 #include "query.h"
 
 /*********************************************************/

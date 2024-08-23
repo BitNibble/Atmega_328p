@@ -25,7 +25,7 @@ Comment:
 
 /*** Procedure and Function ToolSet ***/
 void set_reg(volatile uint8_t* reg, uint8_t hbits);
-void reset_reg(volatile uint8_t* reg, uint8_t hbits);
+void clear_reg(volatile uint8_t* reg, uint8_t hbits);
 uint8_t get_reg_block(uint8_t reg, uint8_t size_block, uint8_t bit_n);
 void set_reg_block(volatile uint8_t* reg, uint8_t size_block, uint8_t bit_n, uint8_t data);
 void write_reg_block(volatile uint8_t* reg, uint8_t size_block, uint8_t bit_n, uint8_t data);

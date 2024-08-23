@@ -15,7 +15,7 @@ Update: 01/01/2024
 	#define _ATMEGA328MAPPING_H_
 
 /*** Global Library ***/
-#include "atmega328instance.h"	
+#include "atmega328instance.h"
 #include "query.h"
 
 /*********************************************************/
@@ -29,7 +29,7 @@ Update: 01/01/2024
 #define _TIMER0_MODULE_
 #define _TIMER1_MODULE_
 #define _TIMER2_MODULE_
-//#define _TWI_MODULE_
+#define _TWI_MODULE_
 //#define _SPI_MODULE_
 #define _USART0_MODULE_
 /*********************************************************/
