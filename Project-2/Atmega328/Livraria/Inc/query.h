@@ -3,7 +3,7 @@
 Author: Sergio Manuel Santos
 	<sergio.salazar.santos@gmail.com>
 License: GNU General Public License
-Hardware: Atmega
+Hardware: Atmega 328
 Update:	14/01/2024
 Comment: 
 	Simple tools
@@ -16,19 +16,21 @@ Comment:
 #include <string.h>
 #include <math.h>
 
-#ifndef DATA_SIZE
-	#define DATA_SIZE 8
-#endif
-#ifndef DATA_BITS
-	#define DATA_BITS 7
-#endif
+// Macros for common operations
+#define SET_REG(REG, HBITS)		(REG |= HBITS)
+#define CLEAR_REG(REG, HBITS)	(REG &= ~HBITS)
+#define READ_BIT(REG, BIT)		((REG >> BIT) & 1)
+#define TOGGLE_REG(REG, HBITS)	(REG ^= HBITS)
 
 /*** Procedure and Function ToolSet ***/
 void set_reg(volatile uint8_t* reg, uint8_t hbits);
 void clear_reg(volatile uint8_t* reg, uint8_t hbits);
 uint8_t get_reg_block(uint8_t reg, uint8_t size_block, uint8_t bit_n);
-void set_reg_block(volatile uint8_t* reg, uint8_t size_block, uint8_t bit_n, uint8_t data);
+uint8_t get_reg_Msk(uint8_t reg, uint8_t Msk, uint8_t Pos);
 void write_reg_block(volatile uint8_t* reg, uint8_t size_block, uint8_t bit_n, uint8_t data);
+void write_reg_Msk(volatile uint8_t* reg, uint8_t Msk, uint8_t Pos, uint8_t data);
+void set_reg_block(volatile uint8_t* reg, uint8_t size_block, uint8_t bit_n, uint8_t data);
+void set_reg_Msk(volatile uint8_t* reg, uint8_t Msk, uint8_t Pos, uint8_t data);
 uint8_t get_bit_block(volatile uint8_t* reg, uint8_t size_block, uint8_t bit_n);
 void set_bit_block(volatile uint8_t* reg, uint8_t size_block, uint8_t bit_n, uint8_t data);
 
