@@ -3,7 +3,7 @@
 Author: Sergio Manuel Santos
 	<sergio.salazar.santos@gmail.com>
 License: GNU General Public License
-Hardware: Atmega 328
+Hardware: Atmega 128
 Update:	14/01/2024
 Comment: 
 	Simple tools
@@ -11,9 +11,12 @@ Comment:
 #ifndef _QUERY_H_
 	#define _QUERY_H_
 
+#include <stdio.h>
+#include <stdint.h>
+#include <stdbool.h>
 #include <stdarg.h>
-#include <inttypes.h>
 #include <string.h>
+#include <inttypes.h>
 #include <math.h>
 
 // Macros for common operations
