@@ -36,7 +36,7 @@ detail:
 #include "function.h"
 #include "lcd2p.h"
 #include "pcf8575.h"
-#include<util/delay.h>
+#include <string.h>
 
 #define TRUE 1
 #define ZERO 0

@@ -16,7 +16,7 @@ Comment:
 #ifndef F_CPU
 	#define F_CPU 16000000UL
 #endif
-	
+
 #include <avr/io.h>
 #include <avr/fuse.h>
 #include <avr/eeprom.h>
@@ -24,6 +24,12 @@ Comment:
 #include <avr/interrupt.h>
 #include <util/delay.h>
 #include "atmega328.h"
+
+// Macros for common operations
+#define SET_REG(REG, HBITS)		(REG |= HBITS)
+#define CLEAR_REG(REG, HBITS)	(REG &= ~HBITS)
+#define READ_BIT(REG, BIT)		((REG >> BIT) & 1)
+#define TOGGLE_REG(REG, HBITS)	(REG ^= HBITS)
 
 /****************************/
 /***** HARDWARE HANDLER *****/
@@ -100,6 +106,18 @@ uint16_t BAUDRATEdouble(uint32_t BAUD);
 uint16_t BAUDRATEsynchronous(uint32_t BAUD);
 void Atmega328ClockPrescalerSelect(volatile uint8_t prescaler);
 void Atmega328MoveInterruptsToBoot(void);
+
+/*** Procedure and Function ToolSet ***/
+void set_reg(volatile uint8_t* reg, uint8_t hbits);
+void clear_reg(volatile uint8_t* reg, uint8_t hbits);
+uint8_t get_reg_block(uint8_t reg, uint8_t size_block, uint8_t bit_n);
+uint8_t get_reg_Msk(uint8_t reg, uint8_t Msk, uint8_t Pos);
+void write_reg_block(volatile uint8_t* reg, uint8_t size_block, uint8_t bit_n, uint8_t data);
+void write_reg_Msk(volatile uint8_t* reg, uint8_t Msk, uint8_t Pos, uint8_t data);
+void set_reg_block(volatile uint8_t* reg, uint8_t size_block, uint8_t bit_n, uint8_t data);
+void set_reg_Msk(volatile uint8_t* reg, uint8_t Msk, uint8_t Pos, uint8_t data);
+uint8_t get_bit_block(volatile uint8_t* reg, uint8_t size_block, uint8_t bit_n);
+void set_bit_block(volatile uint8_t* reg, uint8_t size_block, uint8_t bit_n, uint8_t data);
 
 #endif
 

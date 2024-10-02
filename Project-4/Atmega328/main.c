@@ -24,7 +24,7 @@ Created: 27/01/2024 14:00:00
 #include "function.h"
 #include "lcd2p.h"
 #include "pcf8575.h"
-#include<util/delay.h>
+//#include<util/delay.h>
 
 #define TRUE 1
 #define ZERO 0

@@ -14,7 +14,6 @@ Update: 01/01/2024
 
 /*** Global Library ***/
 #include "atmega328instance.h"
-#include "query.h"
 
 /*** Global Constant & Macros ***/
 //#define External_Interrupt_Flag_instanceister EIFR

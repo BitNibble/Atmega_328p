@@ -12,6 +12,7 @@ Update: 01/01/2024
 /*** File Library ***/
 #include "atmega328usart0.h"
 #include "buffer.h"
+#include <string.h>
 
 /*** File Variable ***/
 static USART0 setup_usart0;

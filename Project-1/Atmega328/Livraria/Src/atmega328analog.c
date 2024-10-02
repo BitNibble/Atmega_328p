@@ -11,6 +11,7 @@ Update: 01/01/2024
 *************************************************************************/
 /*** File Library ***/
 #include "atmega328analog.h"
+#include <stdarg.h>
 
 /*** File Variable ***/
 static ADC0 setup_analog;

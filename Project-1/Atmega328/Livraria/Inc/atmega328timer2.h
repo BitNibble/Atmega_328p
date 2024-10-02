@@ -14,7 +14,6 @@ Update: 01/01/2024
 
 /*** Global Library ***/
 #include "atmega328instance.h"
-#include "query.h"
 
 /*** Global Constant & Macro ***/
 #if defined(__AVR_ATmega328__) || defined(__AVR_ATmega328P__)
