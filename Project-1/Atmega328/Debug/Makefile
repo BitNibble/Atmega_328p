@@ -62,7 +62,6 @@ C_SRCS +=  \
 ../Livraria/Src/lfsm.c \
 ../Livraria/Src/mm74c923.c \
 ../Livraria/Src/pcf8563rtc.c \
-../Livraria/Src/query.c \
 ../Livraria/Src/rotenc.c \
 ../Livraria/Src/watch.c \
 ../Livraria/Src/znpid.c \
@@ -98,7 +97,6 @@ Livraria/Src/lcd2p.o \
 Livraria/Src/lfsm.o \
 Livraria/Src/mm74c923.o \
 Livraria/Src/pcf8563rtc.o \
-Livraria/Src/query.o \
 Livraria/Src/rotenc.o \
 Livraria/Src/watch.o \
 Livraria/Src/znpid.o \
@@ -127,7 +125,6 @@ Livraria/Src/lcd2p.o \
 Livraria/Src/lfsm.o \
 Livraria/Src/mm74c923.o \
 Livraria/Src/pcf8563rtc.o \
-Livraria/Src/query.o \
 Livraria/Src/rotenc.o \
 Livraria/Src/watch.o \
 Livraria/Src/znpid.o \
@@ -156,7 +153,6 @@ Livraria/Src/lcd2p.d \
 Livraria/Src/lfsm.d \
 Livraria/Src/mm74c923.d \
 Livraria/Src/pcf8563rtc.d \
-Livraria/Src/query.d \
 Livraria/Src/rotenc.d \
 Livraria/Src/watch.d \
 Livraria/Src/znpid.d \
@@ -185,7 +181,6 @@ Livraria/Src/lcd2p.d \
 Livraria/Src/lfsm.d \
 Livraria/Src/mm74c923.d \
 Livraria/Src/pcf8563rtc.d \
-Livraria/Src/query.d \
 Livraria/Src/rotenc.d \
 Livraria/Src/watch.d \
 Livraria/Src/znpid.d \
@@ -353,13 +348,6 @@ Livraria/Src/mm74c923.o: ../Livraria/Src/mm74c923.c
 	
 
 Livraria/Src/pcf8563rtc.o: ../Livraria/Src/pcf8563rtc.c
-	@echo Building file: $<
-	@echo Invoking: XC8 C Compiler : 2.36
-	$(QUOTE)C:\Program Files\Microchip\xc8\v2.36\bin\xc8-cc.exe$(QUOTE)  -mcpu=ATmega328P  -mdfp="C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\xc8"  -c -x c -funsigned-char -funsigned-bitfields -mext=cci -D__ATmega328P__ -DDEBUG  -I"../Livraria/Inc"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-Livraria/Src/query.o: ../Livraria/Src/query.c
 	@echo Building file: $<
 	@echo Invoking: XC8 C Compiler : 2.36
 	$(QUOTE)C:\Program Files\Microchip\xc8\v2.36\bin\xc8-cc.exe$(QUOTE)  -mcpu=ATmega328P  -mdfp="C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\xc8"  -c -x c -funsigned-char -funsigned-bitfields -mext=cci -D__ATmega328P__ -DDEBUG  -I"../Livraria/Inc"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
