@@ -23,7 +23,13 @@ Comment:
 #include <avr/pgmspace.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
+/*********************************************************/
+#include <stddef.h>
+#include <stdint.h>
+#include <inttypes.h>
+/*********************************************************/
 #include "atmega328.h"
+/*********************************************************/
 
 // Macros for common operations
 #define SET_REG(REG, HBITS)		(REG |= HBITS)
