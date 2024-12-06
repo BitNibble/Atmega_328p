@@ -154,7 +154,7 @@ void TIMER_COUNTER0_compoutmodeA(unsigned char compoutmode)
 		break;
 		case 1: // Reserved
 				// Toggle OC0 on compare match
-			portd_instance()->ddr |= (1 << 6);
+			portd_instance()->ddr.reg |= (1 << 6);
 			tc0_instance()->tccr0a |= (1 << COM0A0);
 			
 		break;
@@ -162,14 +162,14 @@ void TIMER_COUNTER0_compoutmodeA(unsigned char compoutmode)
 				// Set OC0 on compare
 				// match when down counting.
 				// Clear OC0 on compare match
-			portd_instance()->ddr |= (1 << 6);
+			portd_instance()->ddr.reg |= (1 << 6);
 			tc0_instance()->tccr0a |= (1 << COM0A1);
 		break;
 		case 3: // Set OC0 on compare match when up-counting.
 				// Clear OC0 on compare
 				// match when down counting.
 				// Set OC0 on compare match
-			portd_instance()->ddr |= (1 << 6);
+			portd_instance()->ddr.reg |= (1 << 6);
 			tc0_instance()->tccr0a |= (1 << COM0A0) | (1 << COM0A1);
 		break;
 		default: // Normal port operation, OC0 disconnected.
@@ -188,21 +188,21 @@ void TIMER_COUNTER0_compoutmodeB(unsigned char compoutmode)
 		break;
 		case 1: // Reserved
 				// Toggle OC0 on compare match
-			portd_instance()->ddr |= (1 << 5);
+			portd_instance()->ddr.reg |= (1 << 5);
 			tc0_instance()->tccr0a |= (1 << COM0B0);
 		break;
 		case 2: // Clear OC0 on compare match when up-counting.
 				// Set OC0 on compare
 				// match when down counting.
 				// Clear OC0 on compare match
-			portd_instance()->ddr |= (1 << 5);
+			portd_instance()->ddr.reg |= (1 << 5);
 			tc0_instance()->tccr0a |= (1 << COM0B1);
 		break;
 		case 3: // Set OC0 on compare match when up-counting.
 				// Clear OC0 on compare
 				// match when down counting.
 				// Set OC0 on compare match
-			portd_instance()->ddr |= (1 << 5);
+			portd_instance()->ddr.reg |= (1 << 5);
 			tc0_instance()->tccr0a |= (1 << COM0B0) | (1 << COM0B1);
 		break;
 		default: // Normal port operation, OC0 disconnected.

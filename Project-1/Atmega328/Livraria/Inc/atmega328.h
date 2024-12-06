@@ -16,6 +16,22 @@ Update: 01/01/2024
 #include <inttypes.h>
 
 /*** Global Constant & Macro ***/
+/******** REGISTERS *******/
+#define ADDR_PIN_b 0x23
+#define ADDR_DD_rb 0x24
+#define ADDR_PORT_b 0x25
+#define ADDR_PIN_c 0x26
+#define ADDR_DD_rc 0x27
+#define ADDR_PORT_c 0x28
+#define ADDR_PIN_d 0x29
+#define ADDR_DD_rd 0x2A
+#define ADDR_PORT_d 0x2B
+
+
+
+#define ADDR_ADC_srb 0x7B
+#define ADDR_AC_sr 0x50
+/******** INSTANCES *******/
 #define Atmega328GPWR_Address 0x0000
 #define Atmega328PORTB_Address 0x0023
 #define Atmega328PORTC_Address 0x0026
@@ -65,7 +81,377 @@ typedef union {
 	}par;
 	uint32_t reg;
 } HighLowWord;
+/**** GENERAL REGISTER ****/
+// 8 bit Register
+typedef volatile union {
+	struct{
+		uint8_t b0:1; // bit0
+		uint8_t b1:1; // bit1
+		uint8_t b2:1; // bit2
+		uint8_t b3:1; // bit3
+		uint8_t b4:1; // bit4
+		uint8_t b5:1; // bit5
+		uint8_t b6:1; // bit6
+		uint8_t b7:1; // bit7
+	}par;
+	uint8_t reg;
+} GENERAL;
+/******** REGISTERS *******/
+// PINB
+typedef volatile union {
+	struct{
+		uint8_t b0:1;
+		uint8_t b1:1;
+		uint8_t b2:1;
+		uint8_t b3:1;
+		uint8_t b4:1;
+		uint8_t b5:1;
+		uint8_t b6:1;
+		uint8_t b7:1;
+	}par;
+	uint8_t reg;
+} PIN_b;
+// DDRB
+typedef volatile union {
+	struct{
+		uint8_t b0:1;
+		uint8_t b1:1;
+		uint8_t b2:1;
+		uint8_t b3:1;
+		uint8_t b4:1;
+		uint8_t b5:1;
+		uint8_t b6:1;
+		uint8_t b7:1;
+	}par;
+	uint8_t reg;
+} DD_rb;
+// PORTB
+typedef volatile union {
+	struct{
+		uint8_t b0:1;
+		uint8_t b1:1;
+		uint8_t b2:1;
+		uint8_t b3:1;
+		uint8_t b4:1;
+		uint8_t b5:1;
+		uint8_t b6:1;
+		uint8_t b7:1;
+	}par;
+	uint8_t reg;
+} PORT_b;
+// PINC
+typedef volatile union {
+	struct{
+		uint8_t c0:1;
+		uint8_t c1:1;
+		uint8_t c2:1;
+		uint8_t c3:1;
+		uint8_t c4:1;
+		uint8_t c5:1;
+		uint8_t c6:1;
+		uint8_t fill:1;
+	}par;
+	uint8_t reg;
+} PIN_c;
+// DDRC
+typedef volatile union {
+	struct{
+		uint8_t c0:1;
+		uint8_t c1:1;
+		uint8_t c2:1;
+		uint8_t c3:1;
+		uint8_t c4:1;
+		uint8_t c5:1;
+		uint8_t c6:1;
+		uint8_t fill:1;
+	}par;
+	uint8_t reg;
+} DD_rc;
+// PORTC
+typedef volatile union {
+	struct{
+		uint8_t c0:1;
+		uint8_t c1:1;
+		uint8_t c2:1;
+		uint8_t c3:1;
+		uint8_t c4:1;
+		uint8_t c5:1;
+		uint8_t c6:1;
+		uint8_t fill:1;
+	}par;
+	uint8_t reg;
+} PORT_c;
+// PIND
+typedef volatile union {
+	struct{
+		uint8_t d0:1;
+		uint8_t d1:1;
+		uint8_t d2:1;
+		uint8_t d3:1;
+		uint8_t d4:1;
+		uint8_t d5:1;
+		uint8_t d6:1;
+		uint8_t d7:1;
+	}par;
+	uint8_t reg;
+} PIN_d;
+// DDRD
+typedef volatile union {
+	struct{
+		uint8_t d0:1;
+		uint8_t d1:1;
+		uint8_t d2:1;
+		uint8_t d3:1;
+		uint8_t d4:1;
+		uint8_t d5:1;
+		uint8_t d6:1;
+		uint8_t d7:1;
+	}par;
+	uint8_t reg;
+} DD_rd;
+// PORTD
+typedef volatile union {
+	struct{
+		uint8_t d0:1;
+		uint8_t d1:1;
+		uint8_t d2:1;
+		uint8_t d3:1;
+		uint8_t d4:1;
+		uint8_t d5:1;
+		uint8_t d6:1;
+		uint8_t d7:1;
+	}par;
+	uint8_t reg;
+} PORT_d;
+// TIFR1
+typedef volatile union {
+	struct{
+		uint8_t tov1:1;
+		uint8_t ocf1a:1;
+		uint8_t ocf1b:1;
+		uint8_t fill0:2;
+		uint8_t icf1:1;
+		uint8_t fill1:2;
+	}par;
+	uint8_t reg;
+} TIF_r1;
+// TIFR2
+typedef volatile union {
+	struct{
+		uint8_t tov2:1;
+		uint8_t ocf2a:1;
+		uint8_t ocf2b:1;
+		uint8_t fill0:5;
+	}par;
+	uint8_t reg;
+} TIF_r2;
+// PCIFR
+typedef volatile union {
+	struct{
+		uint8_t pcif0:1;
+		uint8_t pcif1:1;
+		uint8_t pcif2:1;
+		uint8_t fill0:5;
+	}par;
+	uint8_t reg;
+} PCI_fr;
+// EIFR
+typedef volatile union {
+	struct{
+		uint8_t intf0:1;
+		uint8_t intf1:1;
+		uint8_t fill0:6;
+	}par;
+	uint8_t reg;
+} EI_fr;
+// EIMSK
+typedef volatile union {
+	struct{
+		uint8_t int0:1;
+		uint8_t int1:1;
+		uint8_t fill0:6;
+	}par;
+	uint8_t reg;
+} EI_msk;
+// GPIOR0
+typedef volatile union {
+	struct{
+		uint8_t b0:1;
+		uint8_t b1:1;
+		uint8_t b2:1;
+		uint8_t b3:1;
+		uint8_t b4:1;
+		uint8_t b5:1;
+		uint8_t b6:1;
+		uint8_t b7:1;
+	}par;
+	uint8_t reg;
+} GPIO_r0;
+// EECR
+typedef volatile union {
+	struct{
+		uint8_t eere:1;
+		uint8_t eepe:1;
+		uint8_t eempe:1;
+		uint8_t eerie:1;
+		uint8_t eepm:2;
+		uint8_t fill0:2;
+	}par;
+	uint8_t reg;
+} EE_cr;
+// EEDR
+typedef volatile union {
+	struct{
+		uint8_t b0:1;
+		uint8_t b1:1;
+		uint8_t b2:1;
+		uint8_t b3:1;
+		uint8_t b4:1;
+		uint8_t b5:1;
+		uint8_t b6:1;
+		uint8_t b7:1;
+	}par;
+	uint8_t reg;
+} EE_dr;
+// EEAR
+typedef union {
+	struct{
+		uint8_t L; // Lower Address
+		uint8_t H; // Higher Address
+	}par;
+	uint16_t reg;
+} EE_ar;
+// GTCCR
+typedef volatile union {
+	struct{
+		uint8_t psrsync:1;
+		uint8_t psrasy:1;
+		uint8_t fill0:5;
+		uint8_t tsm:1;
+	}par;
+	uint8_t reg;
+} GTC_cr;
+// TCCR0A
+typedef volatile union {
+	struct{
+		uint8_t wgm00:1;
+		uint8_t wgm01:1;
+		uint8_t fill0:2;
+		uint8_t com0b0:1;
+		uint8_t com0b1:1;
+		uint8_t com0a0:1;
+		uint8_t com0a1:1;
+	}par;
+	uint8_t reg;
+} TC_cr0a;
+// TCCR0B
+typedef volatile union {
+	struct{
+		uint8_t cs0:3;
+		uint8_t wgm02:1;
+		uint8_t fill0:2;
+		uint8_t foc0b:1;
+		uint8_t foc0a:1;
+	}par;
+	uint8_t reg;
+} TC_cr0b;
+// TCNT0
+typedef volatile union {
+	struct{
+		uint8_t b0:1;
+		uint8_t b1:1;
+		uint8_t b2:1;
+		uint8_t b3:1;
+		uint8_t b4:1;
+		uint8_t b5:1;
+		uint8_t b6:1;
+		uint8_t b7:1;
+	}par;
+	uint8_t reg;
+} TC_nt0;
+// OCR0A
+typedef volatile union {
+	struct{
+		uint8_t b0:1;
+		uint8_t b1:1;
+		uint8_t b2:1;
+		uint8_t b3:1;
+		uint8_t b4:1;
+		uint8_t b5:1;
+		uint8_t b6:1;
+		uint8_t b7:1;
+	}par;
+	uint8_t reg;
+} OC_r0a;
+// OCR0B
+typedef volatile union {
+	struct{
+		uint8_t b0:1;
+		uint8_t b1:1;
+		uint8_t b2:1;
+		uint8_t b3:1;
+		uint8_t b4:1;
+		uint8_t b5:1;
+		uint8_t b6:1;
+		uint8_t b7:1;
+	}par;
+	uint8_t reg;
+} OC_r0b;
+// ---BLANK---
+// GPIOR1
+typedef volatile union {
+	struct{
+		uint8_t b0:1;
+		uint8_t b1:1;
+		uint8_t b2:1;
+		uint8_t b3:1;
+		uint8_t b4:1;
+		uint8_t b5:1;
+		uint8_t b6:1;
+		uint8_t b7:1;
+	}par;
+	uint8_t reg;
+} GPIO_r1;
+// GPIOR2
+typedef volatile union {
+	struct{
+		uint8_t b0:1;
+		uint8_t b1:1;
+		uint8_t b2:1;
+		uint8_t b3:1;
+		uint8_t b4:1;
+		uint8_t b5:1;
+		uint8_t b6:1;
+		uint8_t b7:1;
+	}par;
+	uint8_t reg;
+} GPIO_r2;
 
+
+
+//ADCSRB
+typedef volatile union { // 0x7B
+	struct{
+		uint8_t fill0:1;
+		uint8_t acme:1;
+		uint8_t fill1:3;
+		uint8_t adts:3;
+	}par;
+	uint8_t reg;
+} ADC_srb;
+//ACSR
+typedef volatile union { // 0x50
+	struct{
+		uint8_t acd:1; // bit0
+		uint8_t acbg:1; // bit1
+		uint8_t aco:1; // bit2
+		uint8_t aci:1; // bit3
+		uint8_t acie:1; // bit4
+		uint8_t acic:1; // bit5
+		uint8_t acis:2; // bit6 and 7
+	}par;
+	uint8_t reg;
+} AC_sr;
 /*****************************/
 /**** MAIN HARDWARE LAYER ****/
 /*****************************/

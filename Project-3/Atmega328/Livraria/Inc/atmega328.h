@@ -1,5 +1,5 @@
 /************************************************************************
-	ATMEGA 328 REGISTERS
+	ATMEGA 328 INSTANCES
 Author: Sergio Manuel Santos
 	<sergio.salazar.santos@gmail.com>
 License: GNU General Public License
@@ -13,9 +13,10 @@ Update: 01/01/2024
 	#define _ATMEGA328_H_
 
 /*** Global Library ***/
-#include <inttypes.h>
+#include "atmega328registers.h"
 
 /*** Global Constant & Macro ***/
+/******** INSTANCES *******/
 #define Atmega328GPWR_Address 0x0000
 #define Atmega328PORTB_Address 0x0023
 #define Atmega328PORTC_Address 0x0026
@@ -49,6 +50,7 @@ Update: 01/01/2024
 #define Atmega328TimerCompareRegister2_Address 0x00B3
 
 /*** Global Variable ***/
+// 8 bit Register
 // Low Byte High Byte
 typedef union {
 	struct{
@@ -104,23 +106,23 @@ typedef struct {
 
 // I/O Port (PORTB)
 typedef struct {
-	volatile uint8_t pin; // 0x23
-	volatile uint8_t ddr; // 0x24
-	volatile uint8_t port; //0x25
+	PIN_b pin; // 0x23
+	DD_rb ddr; // 0x24
+	PORT_b port; //0x25
 } Atmega328PORTB_TypeDef;
 
 // I/O Port (PORTC)
 typedef struct {
-	volatile uint8_t pin; // 0x26
-	volatile uint8_t ddr; // 0x27
-	volatile uint8_t port; // 0x28
+	PIN_c pin; // 0x26
+	DD_rc ddr; // 0x27
+	PORT_c port; // 0x28
 } Atmega328PORTC_TypeDef;
 
 // I/O Port (PORTD)
 typedef struct {
-	volatile uint8_t pin; // 0x29
-	volatile uint8_t ddr; // 0x2A
-	volatile uint8_t port; // 0x2B
+	PIN_d pin; // 0x29
+	DD_rd ddr; // 0x2A
+	PORT_d port; // 0x2B
 } Atmega328PORTD_TypeDef;
 
 // Timer/Counter 0, 1 and 2 Interrupt Flag
@@ -310,22 +312,22 @@ typedef struct {
 
 // Two Wire Serial Interface (TWI)
 typedef struct {
-	volatile uint8_t twbr; // 0xB8
-	volatile uint8_t twsr; // 0xB9
-	volatile uint8_t twar; // 0xBA
-	volatile uint8_t twdr; // 0xBB
-	volatile uint8_t twcr; // 0xBC
-	volatile uint8_t twamr; // 0xBD
+	TWI_br twbr; // 0xB8
+	TWI_sr twsr; // 0xB9
+	TWI_ar twar; // 0xBA
+	TWI_dr twdr; // 0xBB
+	TWI_cr twcr; // 0xBC
+	TWI_amr twamr; // 0xBD
 } Atmega328TwoWireSerialInterface_TypeDef;
 
 // USART (USART0)
 typedef struct {
-	volatile uint8_t ucsr0a; // 0xC0
-	volatile uint8_t ucsr0b; // 0xC1
-	volatile uint8_t ucsr0c; // 0xC2
+	USART0_csra ucsr0a; // 0xC0
+	USART0_csrb ucsr0b; // 0xC1
+	USART0_csrc ucsr0c; // 0xC2
 	uint8_t fill; // (0xC4 - 0xC2) - 1
-	volatile HighLowByte ubrr0; // 0xC4 0xC5
-	volatile uint8_t udr0; // 0xC6
+	HighLowByte ubrr0; // 0xC4 0xC5
+	USART0_dr udr0; // 0xC6
 } Atmega328Usart0_TypeDef;
 
 /*** FLASH ***/

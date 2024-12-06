@@ -209,21 +209,21 @@ void TIMER_COUNTER1_compoutmodeA(unsigned char compoutmode)
 		break;
 		case 1: // Reserved
 				// Toggle OC1 on compare match
-			portb_instance()->ddr |= (1 << 1);
+			portb_instance()->ddr.reg |= (1 << 1);
 			tc1_instance()->tccr1a |= (1 << COM1A0);
 		break;
 		case 2: // Clear OC1 on compare match when up-counting.
 				// Set OC1 on compare
 				// match when down counting.
 				// Clear OC1 on compare match
-			portb_instance()->ddr |= (1 << 1);
+			portb_instance()->ddr.reg |= (1 << 1);
 			tc1_instance()->tccr1a |= (1 << COM1A1);
 		break;
 		case 3: // Set OC1 on compare match when up-counting.
 				// Clear OC1 on compare
 				// match when down counting.
 				// Set OC1 on compare match
-			portb_instance()->ddr |= (1 << 1);
+			portb_instance()->ddr.reg |= (1 << 1);
 			tc1_instance()->tccr1a |= (1 << COM1A0) | (1 << COM1A1);
 		break;
 		default: // Normal port operation, OC1 disconnected.
@@ -238,21 +238,21 @@ void TIMER_COUNTER1_compoutmodeB(unsigned char compoutmode)
 		break;
 		case 1: // Reserved
 				// Toggle OC1 on compare match
-			portb_instance()->ddr |= (1 << 2);
+			portb_instance()->ddr.reg |= (1 << 2);
 			tc1_instance()->tccr1a |= (1 << COM1B0);
 		break;
 		case 2: // Clear OC1 on compare match when up-counting.
 				// Set OC1 on compare
 				// match when down counting.
 				// Clear OC1 on compare match
-			portb_instance()->ddr |= (1 << 2);
+			portb_instance()->ddr.reg |= (1 << 2);
 			tc1_instance()->tccr1a |= (1 << COM1B1);
 		break;
 		case 3: // Set OC1 on compare match when up-counting.
 				// Clear OC1 on compare
 				// match when down counting.
 				// Set OC1 on compare match
-			portb_instance()->ddr |= (1 << 2);
+			portb_instance()->ddr.reg |= (1 << 2);
 			tc1_instance()->tccr1a |= (1 << COM1B0) | (1 << COM1B1);
 		break;
 		default: // Normal port operation, OC1 disconnected.
