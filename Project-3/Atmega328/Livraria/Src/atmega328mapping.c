@@ -38,8 +38,8 @@ ATMEGA328 atmega328_enable(void){
 	#endif
 	/***EXINT***/
 	setup_atmega328.exint_instance = exint_instance();
-	setup_atmega328.exint_flag_instance = exint_flag_instance();
-	setup_atmega328.exint_mask_instance = exint_mask_instance();
+	setup_atmega328.exint_iflag_instance = exint_iflag_instance();
+	setup_atmega328.exint_imask_instance = exint_imask_instance();
 	setup_atmega328.exint_pcmask_instance = exint_pcmask_instance();
 	#if defined(_INTERRUPT_MODULE_)
 		setup_atmega328.exint_enable = exint_enable;

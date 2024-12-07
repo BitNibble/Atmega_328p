@@ -25,7 +25,7 @@ EXINT0 exint_enable(void)
 // setup blank
 {
 	// Pre-Processor Case 1
-	exint_mask_instance()->eimsk.reg = 0X00;
+	exint_imask_instance()->eimsk.reg = 0X00;
 	
 	setup_interrupt.set = INTERRUPT_set;
 	setup_interrupt.off = INTERRUPT_off;
@@ -68,7 +68,7 @@ void INTERRUPT_set(uint8_t channel, uint8_t sense)
 {
 	switch( channel ){
 		case 0: 
-			exint_mask_instance()->eimsk.reg &= ~(1 << INT0);
+			exint_imask_instance()->eimsk.reg &= ~(1 << INT0);
 			exint_instance()->eicra.reg &= ~((1 << ISC01) | (1 << ISC00));
 			switch(sense){
 				case 0: // The low level of INT0 generates an interrupt request.
@@ -83,10 +83,10 @@ void INTERRUPT_set(uint8_t channel, uint8_t sense)
 				default: // The low level of INT0 generates an interrupt request.
 					break;
 			}
-			exint_mask_instance()->eimsk.reg |= (1 << INT0);
+			exint_imask_instance()->eimsk.reg |= (1 << INT0);
 			break;
 		case 1:
-			exint_mask_instance()->eimsk.reg &= ~(1 << INT1);
+			exint_imask_instance()->eimsk.reg &= ~(1 << INT1);
 			exint_instance()->eicra.reg &= ~((1 << ISC11) | (1 << ISC10));
 			switch(sense){
 				case 0: // The low level of INT1 generates an interrupt request.
@@ -101,10 +101,10 @@ void INTERRUPT_set(uint8_t channel, uint8_t sense)
 				default: // The low level of INT1 generates an interrupt request.
 					break;
 			}
-			exint_mask_instance()->eimsk.reg |= (1 << INT1);
+			exint_imask_instance()->eimsk.reg |= (1 << INT1);
 			break;
 		default:
-			exint_mask_instance()->eimsk.reg = 0X00;
+			exint_imask_instance()->eimsk.reg = 0X00;
 			break;
 	}
 }
@@ -112,13 +112,13 @@ void INTERRUPT_off(uint8_t channel)
 {
 	switch( channel ){
 		case 0: // disable
-			exint_mask_instance()->eimsk.reg &= ~(1 << INT0);
+			exint_imask_instance()->eimsk.reg &= ~(1 << INT0);
 			break;
 		case 1: // disable
-			exint_mask_instance()->eimsk.reg &= ~(1 << INT1);
+			exint_imask_instance()->eimsk.reg &= ~(1 << INT1);
 			break;
 		default: // all disable
-			exint_mask_instance()->eimsk.reg = 0X00;
+			exint_imask_instance()->eimsk.reg = 0X00;
 			break;
 	}
 }

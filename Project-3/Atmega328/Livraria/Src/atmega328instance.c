@@ -47,12 +47,12 @@ Atmega328TimerInterruptFlag_TypeDef* tc_iflag_instance(void)
 	return (Atmega328TimerInterruptFlag_TypeDef*) Atmega328TimerInterruptFlag_Address;
 }
 // External Interrupts Flag (EXINT)
-Atmega328ExternalInterruptFlag_TypeDef* exint_flag_instance(void)
+Atmega328ExternalInterruptFlag_TypeDef* exint_iflag_instance(void)
 {
 	return (Atmega328ExternalInterruptFlag_TypeDef*) Atmega328ExternalInterruptFlag_Address;
 }
 // External Interrupts Mask (EXINT)
-Atmega328ExternalInterruptMask_TypeDef* exint_mask_instance(void)
+Atmega328ExternalInterruptMask_TypeDef* exint_imask_instance(void)
 {
 	return (Atmega328ExternalInterruptMask_TypeDef*) Atmega328ExternalInterruptMask_Address;
 }

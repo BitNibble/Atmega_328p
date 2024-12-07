@@ -107,8 +107,8 @@ typedef struct {
 	#endif
 	/***EXINT***/
 	Atmega328ExternalInterrupt_TypeDef* exint_instance;
-	Atmega328ExternalInterruptFlag_TypeDef* exint_flag_instance;
-	Atmega328ExternalInterruptMask_TypeDef* exint_mask_instance;
+	Atmega328ExternalInterruptFlag_TypeDef* exint_iflag_instance;
+	Atmega328ExternalInterruptMask_TypeDef* exint_imask_instance;
 	Atmega328ExternalInterruptPinChangeMask_TypeDef* exint_pcmask_instance;
 	#ifdef _INTERRUPT_MODULE_
 		EXINT0 (*exint_enable)(void);

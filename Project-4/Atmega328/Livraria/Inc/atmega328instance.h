@@ -51,9 +51,9 @@ Atmega328PORTD_TypeDef* portd_instance(void);
 // Timer/Counter 0, 1 and 2 Interrupt Flag
 Atmega328TimerInterruptFlag_TypeDef* tc_iflag_instance(void);
 // External Interrupts Flag (EXINT)
-Atmega328ExternalInterruptFlag_TypeDef* exint_flag_instance(void);
+Atmega328ExternalInterruptFlag_TypeDef* exint_iflag_instance(void);
 // External Interrupts Mask (EXINT)
-Atmega328ExternalInterruptMask_TypeDef* exint_mask_instance(void);
+Atmega328ExternalInterruptMask_TypeDef* exint_imask_instance(void);
 // CPU Register Gpio0 (CPU)
 Atmega328CpuGeneralPurposeIoRegister0_TypeDef* cpu_gpio0_instance(void);
 // EEPROM (EEPROM)
