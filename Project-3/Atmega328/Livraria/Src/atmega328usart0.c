@@ -47,7 +47,7 @@ USART0 usart0_enable(uint32_t baud, unsigned int FDbits, unsigned int Stopbits, 
 {
 	uint8_t tSREG;
 	tSREG = cpu_instance()->sreg.reg;
-	cpu_instance()->sreg.reg &= ~(1 << GLOBAL_INTERRUPT_ENABLE);
+	cpu_instance()->sreg.par.i = 0;
 	uart0flag = 1;
 	uint16_t ubrr;
 	rxbuff = buff_enable(UART_RX_BUFFER_SIZE, UART_RxBuf);
@@ -66,88 +66,94 @@ USART0 usart0_enable(uint32_t baud, unsigned int FDbits, unsigned int Stopbits, 
 	{
    		USART0DoubleTransmissionSpeed();  //Enable 2x speed
 		ubrr = BAUDRATEdouble(baud);
-   		setup_usart0.par.ubrr = ubrr;
    	}
 	usart0_instance()->ubrr0 = writehlbyte(ubrr);
+	setup_usart0.par.ubrr = ubrr;
 	// Enable USART receiver and transmitter and receive complete interrupt
 	usart0_instance()->ucsr0b.reg = (1 << RXCIE0) | (1 << RXEN0) | (1 << TXEN0);
 	
 	#ifdef URSEL0 // Set frame format: asynchronous, 8data, no parity, 1stop bit
-		usart0_instance()->ucsr0c = (1 << UMSEL0) | (3 << UCSZ00);
+		usart0_instance()->ucsr0c.par.ucsz0 = 1;
+		usart0_instance()->ucsr0c.par.ucsz1 = 1;
+		usart0_instance()->ucsr0b.par.ucsz2 = 0;
+		usart0_instance()->ucsr0c.par.umsel = 1;
 		setup_usart0.par.FDbits = 8;
 		setup_usart0.par.Stopbits = 1;
 		setup_usart0.par.Parity = 0;
 	#else
 		switch(FDbits){
 			case 9:
-				usart0_instance()->ucsr0b.reg |= (1 << UCSZ02);
-				usart0_instance()->ucsr0c.reg |= (3 << UCSZ00);
+				usart0_instance()->ucsr0c.par.ucsz0 = 1;
+				usart0_instance()->ucsr0c.par.ucsz1 = 1;
+				usart0_instance()->ucsr0b.par.ucsz2 = 1;
 				setup_usart0.par.FDbits = 9;
 			break;
 			case 8:
-				usart0_instance()->ucsr0b.reg &= ~(1 << UCSZ02);
-				usart0_instance()->ucsr0c.reg |= (3 << UCSZ00);
+				usart0_instance()->ucsr0c.par.ucsz0 = 1;
+				usart0_instance()->ucsr0c.par.ucsz1 = 1;
+				usart0_instance()->ucsr0b.par.ucsz2 = 0;
 				setup_usart0.par.FDbits=8;
 			break;
 			case 7:
-				usart0_instance()->ucsr0b.reg &= ~(1 << UCSZ02);
-				usart0_instance()->ucsr0c.reg |= (1 << UCSZ01);
-				usart0_instance()->ucsr0c.reg &= ~(1 << UCSZ00);
+				usart0_instance()->ucsr0c.par.ucsz0 = 0;
+				usart0_instance()->ucsr0c.par.ucsz1 = 1;
+				usart0_instance()->ucsr0b.par.ucsz2 = 0;
 				setup_usart0.par.FDbits=7;
 			break;
-			case 6:	
-				usart0_instance()->ucsr0b.reg &= ~(1 << UCSZ02);
-				usart0_instance()->ucsr0c.reg &= ~(1 << UCSZ01);
-				usart0_instance()->ucsr0c.reg |= (1 << UCSZ00);
+			case 6:
+				usart0_instance()->ucsr0c.par.ucsz0 = 1;
+				usart0_instance()->ucsr0c.par.ucsz1 = 0;
+				usart0_instance()->ucsr0b.par.ucsz2 = 0;
 				setup_usart0.par.FDbits = 6;
 			break;
-			case 5:	
-				usart0_instance()->ucsr0b.reg &= ~(1 << UCSZ02);
-				usart0_instance()->ucsr0c.reg &= ~(3 << UCSZ00);
+			case 5:
+				usart0_instance()->ucsr0c.par.ucsz0 = 0;
+				usart0_instance()->ucsr0c.par.ucsz1 = 0;
+				usart0_instance()->ucsr0b.par.ucsz2 = 0;
 				setup_usart0.par.FDbits=5;
 			break;
 			default:
-				usart0_instance()->ucsr0b.reg &= ~(1 << UCSZ02);
-				usart0_instance()->ucsr0c.reg |= (3 << UCSZ00);
+				usart0_instance()->ucsr0c.par.ucsz0 = 1;
+				usart0_instance()->ucsr0c.par.ucsz1 = 1;
+				usart0_instance()->ucsr0b.par.ucsz2 = 0;
 				setup_usart0.par.FDbits = 8;
 			break;
 		}
 		switch(Stopbits){
 			case 1:
-				usart0_instance()->ucsr0c.reg &= ~(1 << USBS0);
+				usart0_instance()->ucsr0c.par.usbs = 0;
 				setup_usart0.par.Stopbits = 1;
 			break;
 			case 2:
-				usart0_instance()->ucsr0c.reg |= (1 << USBS0);
+				usart0_instance()->ucsr0c.par.usbs = 1;
 				setup_usart0.par.Stopbits=2;
 			break;	
 			default:
-				usart0_instance()->ucsr0c.reg &= ~(1 << USBS0);
+				usart0_instance()->ucsr0c.par.usbs = 0;
 				setup_usart0.par.Stopbits=1;
 			break;
 		}
 		switch(Parity){
 			case 0:
-				usart0_instance()->ucsr0c.reg &= ~(3 << UPM00);
+				usart0_instance()->ucsr0c.par.upm = 0;
 				setup_usart0.par.Parity=0;
 			break;
 			case 2:
-				usart0_instance()->ucsr0c.reg |= (1 << UPM01);
-				usart0_instance()->ucsr0c.reg &= ~(1 << UPM00);
+				usart0_instance()->ucsr0c.par.upm = 2;
 				setup_usart0.par.Parity=2;
 			break;
 			case 3:
-				usart0_instance()->ucsr0c.reg |= (3 << UPM00);
+				usart0_instance()->ucsr0c.par.upm = 3;
 				setup_usart0.par.Parity=3;
 			break;
 			default:
-				usart0_instance()->ucsr0c.reg &= ~(3 << UPM00);
+				usart0_instance()->ucsr0c.par.upm = 0;
 				setup_usart0.par.Parity=0;
 			break;
 		}
 	#endif
 	cpu_instance()->sreg.reg = tSREG;
-	cpu_instance()->sreg.reg |= (1 << GLOBAL_INTERRUPT_ENABLE);
+	cpu_instance()->sreg.par.i = 1;
 
 	return setup_usart0;
 }
@@ -177,7 +183,7 @@ void uart_rxflush(void)
 void uart_write(UARTvar data)
 {
 	uint16_t timeout;
-	usart0_instance()->ucsr0b.reg |= 1 << UDRIE0;
+	usart0_instance()->ucsr0b.par.udrie = 1;
 	usart0_instance()->udr0.reg = data;
 	for( timeout = 600; !USART0DataRegisterEmpty() && timeout; timeout-- ); // minimum -> +/- 450
 	//for( ; !USART0DataRegisterEmpty(); ); // without timeout
@@ -202,8 +208,8 @@ ISR(UART_RX_COMPLETE)
     unsigned char usr;
 	
 	usr = USART0ReadErrors();
-    bit_8 = usart0_instance()->ucsr0b.reg;
-    bit_8 = 0x01 & (bit_8 >> 1);
+    bit_8 = usart0_instance()->ucsr0b.par.rxb8;
+	(void)bit_8;
 	
 	if(usr){ UART_LastRxError = usr; }
 	
@@ -213,7 +219,7 @@ ISR(UART_RX_COMPLETE)
 
 ISR(UART_UDR_EMPTY)
 { // USART, UDR Empty Handler
-	usart0_instance()->ucsr0b.reg &= ~( 1 << UDRIE0 );
+	usart0_instance()->ucsr0b.par.udrie = 0;
 }
 
 /*** Complimentary functions ***/

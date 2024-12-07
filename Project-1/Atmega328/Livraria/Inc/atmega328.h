@@ -360,7 +360,7 @@ typedef struct { // SRAM START = 0x0100 END = 0x0877 atmega328
 #endif
 
 /***
-CONTROL STATUS MASK FLAG
+CONTROL STATUS IMASK IFLAG
 ***/
 
 /*** EOF ***/

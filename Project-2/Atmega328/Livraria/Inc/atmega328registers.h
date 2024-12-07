@@ -986,7 +986,7 @@ typedef volatile union {
 #endif
 
 /***
-CONTROL STATUS MASK FLAG
+CONTROL STATUS IMASK IFLAG
 ***/
 
 /*** EOF ***/
