@@ -36,8 +36,8 @@ ADC0 adc_enable( uint8_t Vreff, uint8_t Divfactor, int n_channel, ... )
 	va_list list;
 	int i;
 
-	tSREG = cpu_instance()->sreg;
-	cpu_instance()->sreg &= ~ (1 << GLOBAL_INTERRUPT_ENABLE);
+	tSREG = cpu_instance()->sreg.reg;
+	cpu_instance()->sreg.reg &= ~ (1 << GLOBAL_INTERRUPT_ENABLE);
 	
 	ADC_N_CHANNEL = n_channel;
 	ADC_SELECTOR = 0;
@@ -46,17 +46,17 @@ ADC0 adc_enable( uint8_t Vreff, uint8_t Divfactor, int n_channel, ... )
 	//V table
 	setup_analog.read = ANALOG_read;
 	
-	adc_instance()->admux &= ~(3 << REFS0);
+	adc_instance()->admux.reg &= ~(3 << REFS0);
 	switch( Vreff ){
 		case 0:
 			setup_analog.par.VREFF = 0;
 		break;
 		case 1:
-			adc_instance()->admux |=	(1 << REFS0);
+			adc_instance()->admux.reg |=	(1 << REFS0);
 			setup_analog.par.VREFF = 1;
 		break;
 		case 3:
-			adc_instance()->admux |=	(3 << REFS0);
+			adc_instance()->admux.reg |=	(3 << REFS0);
 			setup_analog.par.VREFF = 3;
 		break;
 		default:
@@ -64,58 +64,58 @@ ADC0 adc_enable( uint8_t Vreff, uint8_t Divfactor, int n_channel, ... )
 		break;
 	}
 	
-	adc_instance()->admux &= ~(1 << ADLAR);
+	adc_instance()->admux.reg &= ~(1 << ADLAR);
 	
 	va_start(list, n_channel);
 	for( i = 0; i < n_channel; i++ ){
 		ADC_CHANNEL_GAIN[i] = va_arg(list, int);
 	}
 	va_end(list);
-	adc_instance()->admux &= ~MUX_MASK;
-	adc_instance()->admux |= (MUX_MASK & ADC_CHANNEL_GAIN[ADC_SELECTOR]);
+	adc_instance()->admux.reg &= ~MUX_MASK;
+	adc_instance()->admux.reg |= (MUX_MASK & ADC_CHANNEL_GAIN[ADC_SELECTOR]);
 	
-	adc_instance()->adcsra |= (1 << ADEN);
-	adc_instance()->adcsra |= (1 << ADSC);
-	adc_instance()->adcsra &= ~(1 << ADATE);
-	adc_instance()->adcsrb &= ~(7 << ADTS0);
-	adc_instance()->adcsra |= (1 << ADIE);
+	adc_instance()->adcsra.reg |= (1 << ADEN);
+	adc_instance()->adcsra.reg |= (1 << ADSC);
+	adc_instance()->adcsra.reg &= ~(1 << ADATE);
+	adc_instance()->adcsrb.reg &= ~(7 << ADTS0);
+	adc_instance()->adcsra.reg |= (1 << ADIE);
 	
-	adc_instance()->adcsra &= ~(7 << ADPS0);
+	adc_instance()->adcsra.reg &= ~(7 << ADPS0);
 	switch( Divfactor ){
 		case 2: // 1
 			setup_analog.par.DIVISION_FACTOR = 2;
 		break;
 		case 4: // 2
-			adc_instance()->adcsra |= (1 << ADPS1);
+			adc_instance()->adcsra.reg |= (1 << ADPS1);
 			setup_analog.par.DIVISION_FACTOR = 4;
 		break;
 		case 8: // 3
-			adc_instance()->adcsra |= (3 << ADPS0);
+			adc_instance()->adcsra.reg |= (3 << ADPS0);
 			setup_analog.par.DIVISION_FACTOR = 8;
 		break;
 		case 16: // 4
-			adc_instance()->adcsra |= (1 << ADPS2);
+			adc_instance()->adcsra.reg |= (1 << ADPS2);
 			setup_analog.par.DIVISION_FACTOR	=	16;
 		break;
 		case 32: // 5
-			adc_instance()->adcsra |= (5 << ADPS0);
+			adc_instance()->adcsra.reg |= (5 << ADPS0);
 			setup_analog.par.DIVISION_FACTOR = 32;
 		break;
 		case 64: // 6
-			adc_instance()->adcsra |= (6 << ADPS0);
+			adc_instance()->adcsra.reg |= (6 << ADPS0);
 			setup_analog.par.DIVISION_FACTOR = 64;
 		break;
 		case 128: // 7
-			adc_instance()->adcsra |= (7 << ADPS0);
+			adc_instance()->adcsra.reg |= (7 << ADPS0);
 			setup_analog.par.DIVISION_FACTOR = 128;
 		break;
 		default: // 7
-			adc_instance()->adcsra |= (7 << ADPS0);
+			adc_instance()->adcsra.reg |= (7 << ADPS0);
 			setup_analog.par.DIVISION_FACTOR = 128;
 		break;
 	}
-	cpu_instance()->sreg = tSREG;
-	cpu_instance()->sreg |= (1 << GLOBAL_INTERRUPT_ENABLE);
+	cpu_instance()->sreg.reg = tSREG;
+	cpu_instance()->sreg.reg |= (1 << GLOBAL_INTERRUPT_ENABLE);
 
 	return setup_analog;
 }
@@ -127,9 +127,9 @@ int ANALOG_read(int selection)
 {
 	uint8_t ADSC_FLAG;
 	ADSC_FLAG = (1 << ADSC);
-	if( !(adc_instance()->adcsra & ADSC_FLAG) ){
+	if( !(adc_instance()->adcsra.reg & ADSC_FLAG) ){
 		//ADC_SELECT
-		adc_instance()->adcsra |= (1 << ADSC);
+		adc_instance()->adcsra.reg |= (1 << ADSC);
 	}	
 	return ADC_VALUE[selection];
 }
@@ -152,8 +152,8 @@ ISR(ANALOG_INTERRUPT)
 			ADC_SELECTOR++;
 		else
 			ADC_SELECTOR = 0;
-		adc_instance()->admux &= ~MUX_MASK;
-		adc_instance()->admux |= (ADC_CHANNEL_GAIN[ADC_SELECTOR] & MUX_MASK);
+		adc_instance()->admux.reg &= ~MUX_MASK;
+		adc_instance()->admux.reg |= (ADC_CHANNEL_GAIN[ADC_SELECTOR] & MUX_MASK);
 	}		
 }
 

@@ -46,8 +46,8 @@ void USART0DoubleTransmissionSpeed(void);
 USART0 usart0_enable(uint32_t baud, unsigned int FDbits, unsigned int Stopbits, unsigned int Parity )
 {
 	uint8_t tSREG;
-	tSREG = cpu_instance()->sreg;
-	cpu_instance()->sreg &= ~(1 << GLOBAL_INTERRUPT_ENABLE);
+	tSREG = cpu_instance()->sreg.reg;
+	cpu_instance()->sreg.reg &= ~(1 << GLOBAL_INTERRUPT_ENABLE);
 	uart0flag = 1;
 	uint16_t ubrr;
 	rxbuff = buff_enable(UART_RX_BUFFER_SIZE, UART_RxBuf);
@@ -146,8 +146,8 @@ USART0 usart0_enable(uint32_t baud, unsigned int FDbits, unsigned int Stopbits, 
 			break;
 		}
 	#endif
-	cpu_instance()->sreg = tSREG;
-	cpu_instance()->sreg |= (1 << GLOBAL_INTERRUPT_ENABLE);
+	cpu_instance()->sreg.reg = tSREG;
+	cpu_instance()->sreg.reg |= (1 << GLOBAL_INTERRUPT_ENABLE);
 
 	return setup_usart0;
 }

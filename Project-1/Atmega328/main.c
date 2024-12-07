@@ -146,9 +146,9 @@ int main(void)
 		// 0
 		if(!window){ // Loop preamble
 			lcd.reboot();
-			input = ( atmega328()->portc_instance->pin & 0xF0 ) | get_reg_block( atmega328()->portb_instance->pin, 4, 4);
+			input = ( atmega328()->portc_instance->pin.reg & 0xF0 ) | get_reg_block( atmega328()->portb_instance->pin.reg, 4, 4);
 			button.update(&button.par, input);
-			disp.update(&disp.par, atmega328()->portd_instance->pin);
+			disp.update(&disp.par, atmega328()->portd_instance->pin.reg);
 			
 			// uart capture
 			uartreceive = usart0_messageprint( usart0(), uartrcv, uartmsg, ".");
@@ -284,12 +284,12 @@ int main(void)
 /*** Procedure and Function Definitions ***/
 void PORTINIT(void)
 {
-	write_reg_block(&atmega328()->portb_instance->ddr,2,4,0);
-	write_reg_block(&atmega328()->portb_instance->port,2,4,3);
-	write_reg_block(&atmega328()->portc_instance->ddr,2,4,0);
-	write_reg_block(&atmega328()->portc_instance->port,2,4,3);
-	write_reg_block(&atmega328()->portd_instance->ddr,2,2,0);
-	write_reg_block(&atmega328()->portd_instance->port,2,2,3);
+	write_reg_block(&atmega328()->portb_instance->ddr.reg,2,4,0);
+	write_reg_block(&atmega328()->portb_instance->port.reg,2,4,3);
+	write_reg_block(&atmega328()->portc_instance->ddr.reg,2,4,0);
+	write_reg_block(&atmega328()->portc_instance->port.reg,2,4,3);
+	write_reg_block(&atmega328()->portd_instance->ddr.reg,2,2,0);
+	write_reg_block(&atmega328()->portd_instance->port.reg,2,2,3);
 }
 void exponencial(double* target, double rate) // *target = rate ^ t -> t is interrupt timer therefore rate > 0
 {

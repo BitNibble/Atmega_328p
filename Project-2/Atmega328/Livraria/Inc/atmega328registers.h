@@ -17,7 +17,7 @@ Update: 06/12/2024
 
 /*** Global Variable ***/
 // 8 bit Register
-typedef union {
+typedef volatile union {
 	struct{
 		uint8_t b0:1;
 		uint8_t b1:1;
@@ -494,7 +494,7 @@ typedef volatile union {
 		uint8_t i:1;
 	}par;
 	uint8_t reg;
-} MPU_sreg;
+} MCU_sreg;
 // WDTCSR
 typedef volatile union {
 	struct{
@@ -565,7 +565,7 @@ typedef volatile union {
 		uint8_t fill0:4;
 	}par;
 	uint8_t reg;
-} EXINT_cra;
+} EXINT_icra;
 // ---BLANK--- 1
 // PCMSK0
 typedef volatile union {

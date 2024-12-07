@@ -34,8 +34,8 @@ TWI0 twi_enable(uint8_t atmega_ID,  uint8_t prescaler)
 	uint8_t tSREG;
 	
 	//inic local var
-	tSREG = cpu_instance()->sreg;
-	cpu_instance()->sreg &= ~(1<<GLOBAL_INTERRUPT_ENABLE);
+	tSREG = cpu_instance()->sreg.reg;
+	cpu_instance()->sreg.reg &= ~(1<<GLOBAL_INTERRUPT_ENABLE);
 	// Vtable
 	setup_i2c.start = TWI_start;
 	setup_i2c.connect = TWI_connect;
@@ -45,7 +45,7 @@ TWI0 twi_enable(uint8_t atmega_ID,  uint8_t prescaler)
 	setup_i2c.status = TWI_status;
 	
 	TWI_init(atmega_ID, prescaler);
-	cpu_instance()->sreg = tSREG;
+	cpu_instance()->sreg.reg = tSREG;
 
 	return setup_i2c;
 }
