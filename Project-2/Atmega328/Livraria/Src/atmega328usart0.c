@@ -67,7 +67,7 @@ USART0 usart0_enable(uint32_t baud, unsigned int FDbits, unsigned int Stopbits, 
    		USART0DoubleTransmissionSpeed();  //Enable 2x speed
 		ubrr = BAUDRATEdouble(baud);
    	}
-	usart0_instance()->ubrr0 = writehlbyte(ubrr);
+	usart0_instance()->ubrr0.reg = writehlbyte(ubrr).reg;
 	setup_usart0.par.ubrr = ubrr;
 	// Enable USART receiver and transmitter and receive complete interrupt
 	usart0_instance()->ucsr0b.reg = (1 << RXCIE0) | (1 << RXEN0) | (1 << TXEN0);

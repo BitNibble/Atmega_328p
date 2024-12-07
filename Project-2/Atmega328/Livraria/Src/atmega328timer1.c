@@ -261,17 +261,17 @@ void TIMER_COUNTER1_compoutmodeB(unsigned char compoutmode)
 }
 void TIMER_COUNTER1_compareA(uint16_t compare)
 {
-	tc1_compare_instance()->ocr1a = writehlbyte(compare);
+	tc1_compare_instance()->ocr1a.reg = writehlbyte(compare).reg;
 }
 void TIMER_COUNTER1_compareB(uint16_t compare)
 {
-	tc1_compare_instance()->ocr1b = writehlbyte(compare);
+	tc1_compare_instance()->ocr1b.reg = writehlbyte(compare).reg;
 }
 void TIMER_COUNTER1_stop(void)
 // stops timer by setting prescaler to zero
 {
 	tc1_instance()->tccr1b.reg &= ~(7 << CS10); // No clock source. (Timer/Counter stopped)
-	tc1_instance()->tcnt1 = writehlbyte(0X0000);
+	tc1_instance()->tcnt1.reg = writehlbyte(0X0000).reg;
 	timer1_state = 0;
 }
 

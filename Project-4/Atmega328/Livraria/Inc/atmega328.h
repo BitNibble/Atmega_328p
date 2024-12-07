@@ -217,7 +217,7 @@ typedef struct {
 	uint8_t fill1; // (0x57 - 0x55) - 1
 	MCU_spmcsr spmcsr; // 0x57
 	uint8_t fill2[5]; // (0x5D - 0x57) - 1
-	volatile HighLowByte sp; // 0x5D 0x5E
+	MCU_sp sp; // 0x5D 0x5E
 	MCU_sreg sreg; // 0x5F
 	uint8_t fill3; // (0x61 - 0x5F) - 1
 	MCU_clkpr clkpr; // 0x61
@@ -253,7 +253,7 @@ typedef struct {
 
 // Analog to Digital Converter (ADC)
 typedef struct {
-	volatile HighLowByte adc; // 0x78 0x79
+	ADC_dr adc; // 0x78 0x79
 	ADC_sra adcsra; // 0x7A
 	ADC_srb adcsrb; // 0x7B
 	ADC_admux admux; // 0x7C
@@ -274,17 +274,17 @@ typedef struct {
 	TC1_crb tccr1b; // 0x81
 	TC1_crc tccr1c; // 0x82
 	uint8_t fill; // (0x84 - 0x82) - 1
-	volatile HighLowByte tcnt1; // 0x84 0x85
-	volatile HighLowByte icr1; // 0x86 0x87
-	volatile HighLowByte ocr1a; // 0x88 0x89
-	volatile HighLowByte ocr1b; // 0x8A 0x8B
+	TC1_nt tcnt1; // 0x84 0x85
+	TC1_icr icr1; // 0x86 0x87
+	TC1_ocra ocr1a; // 0x88 0x89
+	TC1_ocrb ocr1b; // 0x8A 0x8B
 } Atmega328TimerCounter1_TypeDef;
 
 // Timer/Counter, 16-bit Compare (TC1)
 typedef struct {
-	volatile HighLowByte icr1; // 0x86 0x87
-	volatile HighLowByte ocr1a; // 0x88 0x89
-	volatile HighLowByte ocr1b; // 0x8A 0x8B
+	TC1_icr icr1; // 0x86 0x87
+	TC1_ocra ocr1a; // 0x88 0x89
+	TC1_ocrb ocr1b; // 0x8A 0x8B
 } Atmega328TimerCompareRegister1_TypeDef;
 
 // Timer/Counter, 8-bit (TC2)
@@ -322,7 +322,7 @@ typedef struct {
 	USART0_csrb ucsr0b; // 0xC1
 	USART0_csrc ucsr0c; // 0xC2
 	uint8_t fill; // (0xC4 - 0xC2) - 1
-	HighLowByte ubrr0; // 0xC4 0xC5
+	USART0_brr ubrr0; // 0xC4 0xC5
 	USART0_dr udr0; // 0xC6
 } Atmega328Usart0_TypeDef;
 
