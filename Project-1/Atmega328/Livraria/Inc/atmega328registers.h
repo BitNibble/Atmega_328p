@@ -262,7 +262,7 @@ typedef volatile union {
 	uint8_t reg;
 } EEPROM_dr;
 // EEAR
-typedef union {
+typedef volatile union {
 	struct{
 		uint8_t L;
 		uint8_t H;
@@ -474,7 +474,7 @@ typedef volatile union {
 } MCU_spmcsr;
 // ---BLANK--- 5
 // SP
-typedef union {
+typedef volatile union {
 	struct{
 		uint8_t L;
 		uint8_t H;
@@ -643,7 +643,7 @@ typedef volatile union {
 } TC2_imsk;
 // ---BLANK--- 7
 // ADC
-typedef union {
+typedef volatile union {
 	struct{
 		uint8_t L;
 		uint8_t H;
@@ -739,7 +739,7 @@ typedef volatile union {
 } TC1_crc;
 // ---BLANK--- 1
 // TCNT1
-typedef union {
+typedef volatile union {
 	struct{
 		uint8_t L;
 		uint8_t H;
@@ -747,7 +747,7 @@ typedef union {
 	uint16_t reg;
 } TC1_nt;
 // ICR1
-typedef union {
+typedef volatile union {
 	struct{
 		uint8_t L;
 		uint8_t H;
@@ -755,7 +755,7 @@ typedef union {
 	uint16_t reg;
 } TC1_icr;
 // OCR1A
-typedef union {
+typedef volatile union {
 	struct{
 		uint8_t L;
 		uint8_t H;
@@ -763,7 +763,7 @@ typedef union {
 	uint16_t reg;
 } TC1_ocra;
 // OCR1B
-typedef union {
+typedef volatile union {
 	struct{
 		uint8_t L;
 		uint8_t H;
@@ -961,7 +961,7 @@ typedef volatile union {
 } USART0_csrc;
 // ---BLANK--- 1
 // UBRR0
-typedef union {
+typedef volatile union {
 	struct{
 		uint8_t L;
 		uint8_t H;
