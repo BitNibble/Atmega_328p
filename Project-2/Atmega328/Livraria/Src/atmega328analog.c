@@ -16,8 +16,8 @@ Update: 01/01/2024
 /*** File Variable ***/
 static ADC0 setup_analog;
 
-static volatile int ADC_VALUE[MAX_CHANNEL];
-static volatile int ADC_CHANNEL_GAIN[MAX_CHANNEL];
+static volatile int ADC_VALUE[ADC_MAX_CHANNEL];
+static volatile int ADC_CHANNEL_GAIN[ADC_MAX_CHANNEL];
 static volatile int ADC_N_CHANNEL;
 static volatile int ADC_SELECTOR;
 static volatile int adc_sample;
@@ -37,13 +37,13 @@ ADC0 adc_enable( uint8_t Vreff, uint8_t Divfactor, int n_channel, ... )
 	int i;
 
 	tSREG = cpu_instance()->sreg.reg;
-	cpu_instance()->sreg.reg &= ~ (1 << GLOBAL_INTERRUPT_ENABLE);
+	cpu_instance()->sreg.par.i= 0;
 	
 	ADC_N_CHANNEL = n_channel;
 	ADC_SELECTOR = 0;
 	adc_n_sample = 0;
 
-	//V table
+	//V-table
 	setup_analog.read = ANALOG_read;
 	
 	adc_instance()->admux.reg &= ~(3 << REFS0);
@@ -69,10 +69,33 @@ ADC0 adc_enable( uint8_t Vreff, uint8_t Divfactor, int n_channel, ... )
 	va_start(list, n_channel);
 	for( i = 0; i < n_channel; i++ ){
 		ADC_CHANNEL_GAIN[i] = va_arg(list, int);
+		switch(ADC_CHANNEL_GAIN[i]){
+			case 0:
+				portc_instance()->ddr.par.c0 = 0;
+			break;
+			case 1:
+				portc_instance()->ddr.par.c1 = 0;
+			break;
+			case 2:
+				portc_instance()->ddr.par.c2 = 0;
+			break;
+			case 3:
+				portc_instance()->ddr.par.c3 = 0;
+			break;
+			case 4:
+				portc_instance()->ddr.par.c4 = 0;
+			break;
+			case 5:
+				portc_instance()->ddr.par.c5 = 0;
+			break;
+			default:
+			break;
+		}
 	}
 	va_end(list);
-	adc_instance()->admux.reg &= ~MUX_MASK;
-	adc_instance()->admux.reg |= (MUX_MASK & ADC_CHANNEL_GAIN[ADC_SELECTOR]);
+	
+	adc_instance()->admux.reg &= ~ADC_MUX_MASK;
+	adc_instance()->admux.reg |= (ADC_MUX_MASK & ADC_CHANNEL_GAIN[ADC_SELECTOR]);
 	
 	adc_instance()->adcsra.reg |= (1 << ADEN);
 	adc_instance()->adcsra.reg |= (1 << ADSC);
@@ -115,7 +138,7 @@ ADC0 adc_enable( uint8_t Vreff, uint8_t Divfactor, int n_channel, ... )
 		break;
 	}
 	cpu_instance()->sreg.reg = tSREG;
-	cpu_instance()->sreg.reg |= (1 << GLOBAL_INTERRUPT_ENABLE);
+	cpu_instance()->sreg.par.i = 1;
 
 	return setup_analog;
 }
@@ -152,8 +175,8 @@ ISR(ANALOG_INTERRUPT)
 			ADC_SELECTOR++;
 		else
 			ADC_SELECTOR = 0;
-		adc_instance()->admux.reg &= ~MUX_MASK;
-		adc_instance()->admux.reg |= (ADC_CHANNEL_GAIN[ADC_SELECTOR] & MUX_MASK);
+		adc_instance()->admux.reg &= ~ADC_MUX_MASK;
+		adc_instance()->admux.reg |= (ADC_CHANNEL_GAIN[ADC_SELECTOR] & ADC_MUX_MASK);
 	}		
 }
 
