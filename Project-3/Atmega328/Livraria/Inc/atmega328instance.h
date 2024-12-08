@@ -158,6 +158,13 @@ void set_bit_block(volatile uint8_t* reg, uint8_t size_block, uint8_t bit_n, uin
 // ISR(USART_RX_vect){}
 // ISR(USART_UDRE_vect){}
 // ISR(USART_TX_vect){}
+	
+/******
+1º Sequence
+2º Scope
+3º Pointer and Variable
+4º Casting
+******/
 
 /*** EOF ***/
 

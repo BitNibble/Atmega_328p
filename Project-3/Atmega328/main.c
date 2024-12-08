@@ -32,7 +32,7 @@ detail:
 ********************************************************************/
 #define F_CPU 16000000UL
 /*** File library ***/
-#include "atmega328mapping.h"
+#include "atmega328usart0.h"
 #include "function.h"
 #include "lcd2p.h"
 #include "pcf8575.h"
@@ -52,8 +52,6 @@ uint16_t count;
 
 int main(void)
 {
-atmega328_enable();
-
 func_enable();
 lcd02p_enable(&DDRB, &PINB, &PORTB, &DDRC, &PINC, &PORTC);
 usart0_enable(38400,8,1,NONE);
