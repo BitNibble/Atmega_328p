@@ -53,7 +53,7 @@ USART0 usart0_enable(uint32_t baud, unsigned int FDbits, unsigned int Stopbits, 
 	rxbuff = buff_enable(UART_RX_BUFFER_SIZE, UART_RxBuf);
 	ubrr = BAUDRATEnormal(baud);
 	setup_usart0.par.ubrr = ubrr;
-	// Vtable
+	// V-table
 	setup_usart0.read = uart_read;
 	setup_usart0.getch = uart_getch;
 	setup_usart0.gets = uart_gets;
@@ -243,39 +243,39 @@ char* usart0_messageprint(USART0* uart, char* oneshot, char* msg, const char* en
 /*** Auxiliar ***/
 uint8_t USART0ReceiveComplete(void)
 {
-	return (UCSR0A & (1 << RXC0));
+	return usart0_instance()->ucsr0a.par.rxc;
 }
 uint8_t USART0TransmitComplete(void)
 {
-	return (UCSR0A & (1 << TXC0));
+	return usart0_instance()->ucsr0a.par.txc;
 }
 uint8_t USART0DataRegisterEmpty(void)
 {
-	return (UCSR0A & (1 << UDRE0));
+	return usart0_instance()->ucsr0a.par.udre;
 }
 uint8_t USART0FrameError(void)
 {
-	return (UCSR0A & (1 << FE0));
+	return usart0_instance()->ucsr0a.par.fe;
 }
 uint8_t USART0DataOverRun(void)
 {
-	return (UCSR0A & (1 << DOR0));
+	return usart0_instance()->ucsr0a.par.dor;
 }
 uint8_t USART0ParityError(void)
 {
-	return (UCSR0A & (1 << FE0));
+	return usart0_instance()->ucsr0a.par.upe;
 }
 uint8_t USART0ReadErrors(void)
 {
-	return get_reg_block(UCSR0A,3,2);
+	return get_reg_block(usart0_instance()->ucsr0a.reg,3,2);
 }
 void USART0ClearErrors(void)
 {
-	set_reg_block(&UCSR0A,3,2,0);
+	set_reg_block(&usart0_instance()->ucsr0a.reg,3,2,0);
 }
 void USART0DoubleTransmissionSpeed(void)
 {
-	set_reg_block(&UCSR0A,4,1,1);
+	usart0_instance()->ucsr0a.par.u2x = 1;
 }
 
 /*** EOF ***/

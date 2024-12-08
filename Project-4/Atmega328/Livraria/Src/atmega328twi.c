@@ -33,10 +33,10 @@ TWI0 twi_enable(uint8_t atmega_ID,  uint8_t prescaler)
 	//local var
 	uint8_t tSREG;
 	
-	//inic local var
+	// Init local var
 	tSREG = cpu_instance()->sreg.reg;
-	cpu_instance()->sreg.reg &= ~(1<<GLOBAL_INTERRUPT_ENABLE);
-	// Vtable
+	cpu_instance()->sreg.par.i = 0;
+	// V-table
 	setup_i2c.start = TWI_start;
 	setup_i2c.connect = TWI_connect;
 	setup_i2c.stop = TWI_stop;
@@ -65,27 +65,27 @@ void TWI_init(uint8_t device_id, uint8_t prescaler)
 	portc_instance()->port.reg |= TWI_IO_MASK;
 	switch(prescaler){
 		case 1:
-			twi_instance()->twsr.reg &= ~TWI_PRESCALER_MASK;
+			twi_instance()->twsr.par.twps = 0;
 		break;
 		case 4:
-			twi_instance()->twsr.reg |= (1 << TWPS0);
+			twi_instance()->twsr.par.twps = 1;
 		break;
 		case 16:
-			twi_instance()->twsr.reg |= (2 << TWPS0);
+			twi_instance()->twsr.par.twps= 2;
 		break;
 		case 64:
-			twi_instance()->twsr.reg |= (3 << TWPS0);
+			twi_instance()->twsr.par.twps = 3;
 		break;
 		default:
 			prescaler = 1;
-			twi_instance()->twsr.reg &= ~TWI_PRESCALER_MASK;
+			twi_instance()->twsr.par.twps = 0;
 		break;
 	}
 	twi_instance()->twbr.reg = ((F_CPU / TWI_SCL_CLOCK) - 16) / (2 * prescaler);
 	// Standard Config begin
-	//twi_instance()->twsr = 0x00; //set presca1er bits to zero
-	//twi_instance()->twbr = 0x46; //SCL frequency is 50K for 16Mhz
-	//twi_instance()->twcr = 0x04; //enab1e TWI module
+	//twi_instance()->twsr.reg = 0x00; //set presca1er bits to zero
+	//twi_instance()->twbr.reg = 0x46; //SCL frequency is 50K for 16Mhz
+	//twi_instance()->twcr.reg = 0x04; //enab1e TWI module
 	// Standard Config end
 }
 // void TWI_Start(void)
@@ -185,14 +185,14 @@ void TWI_stop(void)
 // auxiliary
 uint8_t TWI_status( void )
 {
-	uint8_t cmd = twi_instance()->twsr.reg & TWI_STATUS_MASK;
+	uint8_t cmd = twi_instance()->twsr.par.tws;
 	return cmd;
 }
 
 void TWI_wait_twint( uint16_t nticks ) // hardware triggered
 {
 	unsigned int i;
-	for(i = 0; !( twi_instance()->twcr.reg & (1 << TWINT)); i++ ){ // wait for acknowledgment confirmation bit.
+	for(i = 0; !( twi_instance()->twcr.par.twint ); i++ ){ // wait for acknowledgment confirmation bit.
 		if( i > nticks ) // timeout
 			break;
 	}
