@@ -149,6 +149,9 @@
     <Compile Include="Livraria\Inc\atmega328mapping.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Livraria\Inc\atmega328registers.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Livraria\Inc\atmega328timer0.h">
       <SubType>compile</SubType>
     </Compile>

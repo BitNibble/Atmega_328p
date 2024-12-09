@@ -18,16 +18,19 @@ Created: 27/01/2024 14:00:00
 		PCF8575 (twi) IO Expander
 -PC4 SDA pin 27
 -PC5 SCL pin 28
+	USART0
+-PD0 RXD pin 2
+-PD1 TXD pin 3
 ********************************************************************/
 /*** File library ***/
-#include "atmega328mapping.h"
+#include "atmega328usart0.h"
 #include "function.h"
 #include "lcd2p.h"
 #include "pcf8575.h"
 //#include<util/delay.h>
 
 #define TRUE 1
-#define ZERO 0
+#define FALSE 0
 
 LCD02P lcd;
 PCF8575 pcf8575;
@@ -40,7 +43,6 @@ uint16_t count;
 
 int main(void)
 {
-atmega328_enable();
 func_enable();
 lcd02p_enable(&DDRB, &PINB, &PORTB, &DDRC, &PINC, &PORTC);
 usart0_enable(38400,8,1,0);
