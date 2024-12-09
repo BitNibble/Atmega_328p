@@ -15,6 +15,89 @@ Update: 06/12/2024
 /*** Global Library ***/
 #include <inttypes.h>
 
+/*** Global Constant & Macro ***/
+/******** Registers *******/
+#define ADDRESS_PIN_b 0x23
+#define ADDRESS_DD_rb 0x24
+#define ADDRESS_PORT_b 0x25
+#define ADDRESS_PIN_c 0x26
+#define ADDRESS_DD_rc 0x27
+#define ADDRESS_PORT_c 0x28
+#define ADDRESS_PIN_d 0x29
+#define ADDRESS_DD_rd 0x2A
+#define ADDRESS_PORT_d 0x2B
+#define ADDRESS_TC0_ifr 0x35
+#define ADDRESS_TC1_ifr 0x36
+#define ADDRESS_TC2_ifr 0x37
+#define ADDRESS_EXINT_pcifr 0x3B
+#define ADDRESS_EXINT_ifr 0x3C
+#define ADDRESS_EXINT_imsk 0x3D
+#define ADDRESS_MCU_gpior0 0x3E
+#define ADDRESS_EEPROM_cr 0x3F
+#define ADDRESS_EEPROM_dr 0x40
+#define ADDRESS_EEPROM_ar 0x41
+#define ADDRESS_GTC_cr 0x43
+#define ADDRESS_TC0_cra 0x44
+#define ADDRESS_TC0_crb 0x45
+#define ADDRESS_TC0_nt 0x46
+#define ADDRESS_TC0_ocra 0x47
+#define ADDRESS_TC0_ocrb 0x48
+#define ADDRESS_MCU_gpior1 0x4A
+#define ADDRESS_MCU_gpior2 0x4B
+#define ADDRESS_SPI_cr 0x4C
+#define ADDRESS_SPI_sr 0x4D
+#define ADDRESS_SPI_dr 0x4E
+#define ADDRESS_AC_sr 0x50
+#define ADDRESS_MCU_smcr 0x53
+#define ADDRESS_MCU_sr 0x54
+#define ADDRESS_MCU_cr 0x55
+#define ADDRESS_MCU_spmcsr 0x57
+#define ADDRESS_MCU_sp 0x5D
+#define ADDRESS_MCU_sreg 0x5F
+#define ADDRESS_WDT_csr 0x60
+#define ADDRESS_MCU_clkpr 0x61
+#define ADDRESS_MCU_prr 0x64
+#define ADDRESS_MCU_osccal 0x66
+#define ADDRESS_EXINT_pcicr 0x68
+#define ADDRESS_EXINT_icra 0x69
+#define ADDRESS_EXINT_pcmsk0 0x6B
+#define ADDRESS_EXINT_pcmsk1 0x6C
+#define ADDRESS_EXINT_pcmsk2 0x6D
+#define ADDRESS_TC0_imsk 0x6E
+#define ADDRESS_TC1_imsk 0x6F
+#define ADDRESS_TC2_imsk 0x70
+#define ADDRESS_ADC_dr 0x78
+#define ADDRESS_ADC_sra 0x7A
+#define ADDRESS_ADC_srb 0x7B
+#define ADDRESS_ADC_admux 0x7C
+#define ADDRESS_ADC_didr0 0x7E
+#define ADDRESS_AC_didr1 0x7F
+#define ADDRESS_TC1_cra 0x80
+#define ADDRESS_TC1_crb 0x81
+#define ADDRESS_TC1_crc 0x82
+#define ADDRESS_TC1_nt 0x84
+#define ADDRESS_TC1_icr 0x86
+#define ADDRESS_TC1_ocra 0x88
+#define ADDRESS_TC1_ocrb 0x8A
+#define ADDRESS_TC2_cra 0xB0
+#define ADDRESS_TC2_crb 0xB1
+#define ADDRESS_TC2_nt 0xB2
+#define ADDRESS_TC2_ocra 0xB3
+#define ADDRESS_TC2_ocrb 0xB4
+#define ADDRESS_TC2_assr 0xB6
+#define ADDRESS_TWI_br 0xB8
+#define ADDRESS_TWI_sr 0xB9
+#define ADDRESS_TWI_ar 0xBA
+#define ADDRESS_TWI_dr 0xBB
+#define ADDRESS_TWI_cr 0xBC
+#define ADDRESS_TWI_amr 0xBD
+#define ADDRESS_USART0_csra 0xC0
+#define ADDRESS_USART0_csrb 0xC1
+#define ADDRESS_USART0_csrc 0xC2
+#define ADDRESS_USART0_brr 0xC4
+#define ADDRESS_USART0_dr 0xC6
+/**************************/
+
 /*** Global Variable ***/
 // 8 bit Register
 typedef volatile union {
