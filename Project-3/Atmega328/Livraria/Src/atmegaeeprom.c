@@ -17,6 +17,8 @@ static EEPROM0 setup_eeprom;
 
 /*** Procedure & Function ***/
 EEPROM0 eeprom_enable(void){
+	setup_eeprom.instance = eeprom_instance();
+	// V-table
 	setup_eeprom.read_byte = eeprom_read_byte;
 	setup_eeprom.write_byte = eeprom_write_byte;
 	setup_eeprom.update_byte = eeprom_update_byte;

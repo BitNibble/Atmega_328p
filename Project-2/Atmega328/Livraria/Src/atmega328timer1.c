@@ -148,7 +148,12 @@ TC1 tc1_enable(unsigned char wavegenmode, unsigned char interrupt)
 		default:
 		break;
 	}
-	//
+	setup_tc1.gcontrol_instance = tc_gcontrol_instance();
+	setup_tc1.compare_instance = tc1_compare_instance();
+	setup_tc1.imask_instance = tc_imask_instance();
+	setup_tc1.iflag_instance = tc_iflag_instance();
+	setup_tc1.instance = tc1_instance();	
+	// V-table
 	setup_tc1.compoutmodeA = TIMER_COUNTER1_compoutmodeA;
 	setup_tc1.compoutmodeB = TIMER_COUNTER1_compoutmodeB;
 	setup_tc1.compareA = TIMER_COUNTER1_compareA;

@@ -43,9 +43,6 @@ ADC0 adc_enable( uint8_t Vreff, uint8_t Divfactor, int n_channel, ... )
 	ADC_SELECTOR = 0;
 	adc_n_sample = 0;
 
-	//V-table
-	setup_analog.read = ANALOG_read;
-	
 	adc_instance()->admux.reg &= ~(3 << REFS0);
 	switch( Vreff ){
 		case 0:
@@ -137,6 +134,9 @@ ADC0 adc_enable( uint8_t Vreff, uint8_t Divfactor, int n_channel, ... )
 			setup_analog.par.DIVISION_FACTOR = 128;
 		break;
 	}
+	//V-table
+	setup_analog.read = ANALOG_read;
+	
 	cpu_instance()->sreg.reg = tSREG;
 	cpu_instance()->sreg.par.i = 1;
 

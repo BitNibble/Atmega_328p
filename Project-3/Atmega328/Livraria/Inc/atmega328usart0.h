@@ -53,7 +53,8 @@ typedef struct{
 typedef struct{
 	// Parameters
 	uart_parameter par;
-	// prototype pointers
+	Atmega328Usart0_TypeDef* instance;
+	// V-table
 	UARTvar (*read)(void);
 	UARTvar (*getch)(void);
 	UARTvar* (*gets)(void);

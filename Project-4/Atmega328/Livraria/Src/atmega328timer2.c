@@ -87,6 +87,12 @@ TC2 tc2_enable(unsigned char wavegenmode, unsigned char interrupt)
 		default:
 		break;
 	}
+	setup_tc2.gcontrol_instance = tc_gcontrol_instance();
+	setup_tc2.compare_instance = tc2_compare_instance();
+	setup_tc2.imask_instance = tc_imask_instance();
+	setup_tc2.iflag_instance = tc_iflag_instance();
+	setup_tc2.instance = tc2_instance();
+	// V-table
 	setup_tc2.compoutmodeA = TIMER_COUNTER2_compoutmodeA;
 	setup_tc2.compoutmodeB = TIMER_COUNTER2_compoutmodeB;
 	setup_tc2.compareA = TIMER_COUNTER2_compareA;

@@ -31,6 +31,7 @@ typedef struct {
 
 typedef struct{
 	analog_parameter par;
+	// V-table
 	int (*read)(int selection);
 }ADC0;
 

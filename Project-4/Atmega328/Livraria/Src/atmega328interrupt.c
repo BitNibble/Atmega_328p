@@ -26,7 +26,11 @@ EXINT0 exint_enable(void)
 {
 	// Pre-Processor Case 1
 	exint_imask_instance()->eimsk.reg = 0X00;
-	
+	setup_interrupt.pcmask_instance = exint_pcmask_instance();
+	setup_interrupt.imask_instance = exint_imask_instance();
+	setup_interrupt.iflag_instance = exint_iflag_instance();
+	setup_interrupt.instance = exint_instance();
+	// V-table
 	setup_interrupt.set = INTERRUPT_set;
 	setup_interrupt.off = INTERRUPT_off;
 	setup_interrupt.reset_status = INTERRUPT_reset_status;

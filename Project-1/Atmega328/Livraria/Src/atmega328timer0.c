@@ -91,6 +91,12 @@ TC0 tc0_enable(unsigned char wavegenmode, unsigned char interrupt)
 		default:
 		break;
 	}
+	setup_tc0.gcontrol_instance = tc_gcontrol_instance();
+	setup_tc0.compare_instance = tc0_compare_instance();
+	setup_tc0.imask_instance = tc_imask_instance();
+	setup_tc0.iflag_instance = tc_iflag_instance();
+	setup_tc0.instance = tc0_instance();
+	// V-table
 	setup_tc0.compoutmodeA = TIMER_COUNTER0_compoutmodeA;
 	setup_tc0.compoutmodeB = TIMER_COUNTER0_compoutmodeB;
 	setup_tc0.compareA = TIMER_COUNTER0_compareA;

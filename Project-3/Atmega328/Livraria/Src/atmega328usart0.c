@@ -53,6 +53,7 @@ USART0 usart0_enable(uint32_t baud, unsigned int FDbits, unsigned int Stopbits, 
 	rxbuff = buff_enable(UART_RX_BUFFER_SIZE, UART_RxBuf);
 	ubrr = BAUDRATEnormal(baud);
 	setup_usart0.par.ubrr = ubrr;
+	setup_usart0.instance = usart0_instance();
 	// V-table
 	setup_usart0.read = uart_read;
 	setup_usart0.getch = uart_getch;
