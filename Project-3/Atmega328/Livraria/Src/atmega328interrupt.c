@@ -43,7 +43,7 @@ EXINT0* exint(void){ return &setup_interrupt; };
 uint8_t INTERRUPT_reset_status(void)
 {
 	uint8_t reset, ret = 0;
-	reset = (cpu_instance()->mcusr.reg & MCU_Control_Status_instanceister_Mask);
+	reset = (cpu_instance()->mcusr.reg & MCU_Control_Status_register_Mask);
 	switch(reset){
 		case 1: // Power-On Reset Flag
 			ret = 0;
@@ -62,7 +62,7 @@ uint8_t INTERRUPT_reset_status(void)
 			ret = 3;
 			break;
 		default: // clear all status
-			cpu_instance()->mcusr.reg &= ~(MCU_Control_Status_instanceister_Mask);
+			cpu_instance()->mcusr.reg &= ~(MCU_Control_Status_register_Mask);
 			break;
 	}
 	

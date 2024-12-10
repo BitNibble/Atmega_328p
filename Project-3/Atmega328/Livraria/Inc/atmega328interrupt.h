@@ -16,14 +16,7 @@ Update: 01/01/2024
 #include "atmega328instance.h"
 
 /*** Global Constant & Macros ***/
-//#define External_Interrupt_Flag_register EIFR
-//#define Pin_Change_Interrrupt_Control_register PCICR
-//#define Pin_Change_Interrupt_Flag_register PCIFR
-//#define Pin_Change_Mask_register_2 PCMSK2
-//#define Pin_Change_Mask_register_1 PCMSK1
-//#define Pin_Change_Mask_register_0 PCMSK0
-//#define MCU_Control_Status_register MCUSR
-#define MCU_Control_Status_instanceister_Mask 0X0F
+#define MCU_Control_Status_register_Mask 0X0F
 
 /*** Global Variable ***/
 typedef struct{
