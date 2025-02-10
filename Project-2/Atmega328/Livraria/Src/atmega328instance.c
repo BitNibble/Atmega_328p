@@ -11,13 +11,6 @@ Comment:
 #include "atmega328instance.h"
 #include <stdarg.h>
 
-#define TWO 2
-#define NIBBLE_BITS 4
-#define BYTE_BITS 8
-#define WORD_BITS 16
-#define DWORD_BITS 32
-#define QWORD_BITS 64
-#define FTDELAY_SIZE 255
 unsigned int ft_Delay_Lock[FTDELAY_SIZE] = {0};
 unsigned int ftCounter[FTDELAY_SIZE] = {0};
 /**************************/
@@ -206,28 +199,28 @@ inline void set_reg(volatile uint8_t* reg, uint8_t hbits){
 inline void clear_reg(volatile uint8_t* reg, uint8_t hbits){
 	*reg &= ~hbits;
 }
-inline uint8_t get_reg_Msk(uint8_t reg, uint8_t Msk, uint8_t Pos)
-{
-	uint8_t filter = 1 << Pos;
-	if(Msk & filter){
-		reg = (reg & Msk) >> Pos;
+inline uint8_t Msk_Pos(uint8_t Msk){
+	uint8_t Pos = 0;
+	if( Msk ){
+		for( ; !(Msk & 1); Msk >>= 1, Pos++ );
 	}
+	return Pos;
+}
+inline uint8_t get_reg_Msk(uint8_t reg, uint8_t Msk)
+{
+	reg = (reg & Msk) >> Msk_Pos(Msk);
 	return reg;
 }
-inline void write_reg_Msk(volatile uint8_t* reg, uint8_t Msk, uint8_t Pos, uint8_t data)
+inline void write_reg_Msk(volatile uint8_t* reg, uint8_t Msk, uint8_t data)
 {
 	uint8_t value = *reg;
-	uint8_t filter = 1 << Pos;
-	if(Msk & filter){
-		data = (data << Pos) & Msk; value &= ~(Msk); value |= data; *reg = value;
-	}
+	uint8_t Pos = Msk_Pos(Msk);
+	data = (data << Pos) & Msk; value &= ~(Msk); value |= data; *reg = value;
 }
-inline void set_reg_Msk(volatile uint8_t* reg, uint8_t Msk, uint8_t Pos, uint8_t data)
+inline void set_reg_Msk(volatile uint8_t* reg, uint8_t Msk, uint8_t data)
 {
-	uint8_t filter = 1 << Pos;
-	if(Msk & filter){
-		data = (data << Pos) & Msk; *reg &= ~(Msk); *reg |= data;
-	}
+	uint8_t Pos = Msk_Pos(Msk);
+	data = (data << Pos) & Msk; *reg &= ~(Msk); *reg |= data;
 }
 uint8_t get_reg_block(uint8_t reg, uint8_t size_block, uint8_t bit_n)
 {
