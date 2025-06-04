@@ -44,7 +44,7 @@ uint16_t count;
 int main(void)
 {
 func_enable();
-lcd02p_enable(&DDRB, &PINB, &PORTB, &DDRC, &PINC, &PORTC);
+lcd02p_enable(&portb_instance()->ddr->reg, &PINB, &PORTB, &DDRC, &PINC, &PORTC);
 usart0_enable(38400,8,1,0);
 pcf8575 = pcf8575_enable(32, 16);
 pcf8575.writehbits( &pcf8575.par, 65535, 1 );

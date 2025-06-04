@@ -105,9 +105,9 @@ typedef struct {
 
 // I/O Port (PORTB)
 typedef struct {
-	PIN_b pin; // 0x23
-	DD_rb ddr; // 0x24
-	PORT_b port; //0x25
+	PIN_b* pin; // 0x23
+	DD_rb* ddr; // 0x24
+	PORT_b* port; //0x25
 } Atmega328PORTB_TypeDef;
 
 // I/O Port (PORTC)
