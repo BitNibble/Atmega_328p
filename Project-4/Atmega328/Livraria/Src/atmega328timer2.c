@@ -156,21 +156,21 @@ void TIMER_COUNTER2_compoutmodeA(unsigned char compoutmode)
 		break;
 		case 1: // Reserved
 				// Toggle OC2 on compare match
-			portb_instance()->ddr->reg |= (1 << 3);
+			portb_instance()->ddr.reg |= (1 << 3);
 			tc2_instance()->tccr2a.reg |= (1 << COM2A0);
 		break;
 		case 2: // Clear OC2 on compare match when up-counting. 
 				// Set OC2 on compare
 				// match when down counting.
 				// Clear OC2 on compare match
-			portb_instance()->ddr->reg |= (1 << 3);
+			portb_instance()->ddr.reg |= (1 << 3);
 			tc2_instance()->tccr2a.reg |= (1 << COM2A1);
 		break;
 		case 3: // Set OC2 on compare match when up-counting.
 				// Clear OC2 on compare
 				// match when down counting.
 				// Set OC2 on compare match
-			portb_instance()->ddr->reg |= (1 << 3);
+			portb_instance()->ddr.reg |= (1 << 3);
 			tc2_instance()->tccr2a.reg |= (1 << COM2A0) | (1 << COM2A1);
 		break;
 		default: // Normal port operation, OC2 disconnected.

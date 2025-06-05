@@ -25,9 +25,6 @@ Atmega328GPWR_TypeDef* gpwr_instance(void)
 // I/O Port (PORTB)
 Atmega328PORTB_TypeDef* portb_instance(void)
 {
-	((Atmega328PORTB_TypeDef*) Atmega328PORTB_Address)->pin = ((PIN_b*) ADDRESS_PIN_b);
-	((Atmega328PORTB_TypeDef*) Atmega328PORTB_Address)->ddr = ((DD_rb*) ADDRESS_DD_rb);
-	((Atmega328PORTB_TypeDef*) Atmega328PORTB_Address)->port = ((PORT_b*) ADDRESS_PORT_b);
 	return (Atmega328PORTB_TypeDef*) Atmega328PORTB_Address;
 }
 // I/O Port (PORTC)

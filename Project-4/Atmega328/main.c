@@ -26,14 +26,12 @@ Created: 27/01/2024 14:00:00
 #include "atmega328usart0.h"
 #include "function.h"
 #include "lcd2p.h"
-#include "pcf8575.h"
 //#include<util/delay.h>
 
 #define TRUE 1
 #define FALSE 0
 
 LCD02P lcd;
-PCF8575 pcf8575;
 
 char* uart_receive = NULL; // pointing to Rx Buffer raw
 char uart_oneshot[UART_RX_BUFFER_SIZE];
@@ -44,10 +42,8 @@ uint16_t count;
 int main(void)
 {
 func_enable();
-lcd02p_enable(&portb_instance()->ddr->reg, &PINB, &PORTB, &DDRC, &PINC, &PORTC);
+lcd02p_enable(&DDRB, &PINB, &PORTB, &DDRC, &PINC, &PORTC);
 usart0_enable(38400,8,1,0);
-pcf8575 = pcf8575_enable(32, 16);
-pcf8575.writehbits( &pcf8575.par, 65535, 1 );
 
 uint8_t menu;
 for (menu = 1; TRUE; ) // Looping
