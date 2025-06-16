@@ -3,7 +3,7 @@ Title:    watch.h
 Author:   Sergio Manuel Santos <sergio.salazar.santos@gmail.com>
 File:     $Id: watch.h,v 0.2 2017/07/01 17:00:00 Sergio Exp $
 Software: AVR-GCC 4.1, AVR Libc 1.4
-Hardware:
+Hardware: all
 License:  GNU General Public License
 ************************************************************************/
 /****** Comment:

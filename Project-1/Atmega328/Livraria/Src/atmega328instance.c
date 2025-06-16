@@ -1,10 +1,9 @@
 /*********************************************************
 	ATMEGA 328 Instance
-Author: Sergio Manuel Santos
-	<sergio.salazar.santos@gmail.com>
-License: GNU General Public License
+Author:   <sergio.salazar.santos@gmail.com>
+License:  GNU General Public License
 Hardware: Atmega 328
-Update:	07/04/2024
+Update:	  07/04/2024
 Comment: 
 
 **********************************************************/

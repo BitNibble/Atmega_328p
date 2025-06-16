@@ -1,10 +1,9 @@
 /************************************************************************
 	Atmega328Usart0
-Author: Sergio Manuel Santos
-	<sergio.salazar.santos@gmail.com>
-License: GNU General Public License
+Author:   <sergio.salazar.santos@gmail.com>
+License:  GNU General Public License
 Hardware: Atmega328 ETT ET-BASE
-Update: 01/01/2024
+Update:   01/01/2024
 ************************************************************************/
 /****** Comment:
 	stable

@@ -1,12 +1,11 @@
 /*********************************************************************
 Hardware: Atmega328.c
-Author: Sergio Santos
-	<sergio.salazar.santos@gmail.com>
-License: GNU General Public License
-Created: 27/01/2024 14:00:00
+Author:   <sergio.salazar.santos@gmail.com>
+License:  GNU General Public License
+Created:  27/01/2024 14:00:00
  ********************************************************************/
 /****** Comment:
-		LCD
+	LCD
 -PB0 pin 14 cmd RS
 -PB1 pin 15 cmd RW
 -PB2 pin 16 cmd E
@@ -15,7 +14,7 @@ Created: 27/01/2024 14:00:00
 -PC1 pin 24 data D5
 -PC2 pin 25 data D6
 -PC3 pin 26 data D7
-		PCF8575 (twi) IO Expander
+	PCF8575 (twi) IO Expander
 -PC4 SDA pin 27
 -PC5 SCL pin 28
 	USART0

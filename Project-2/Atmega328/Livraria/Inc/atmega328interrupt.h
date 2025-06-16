@@ -1,10 +1,9 @@
 /************************************************************************
 	Atmega 328 Interrupt
-Author: Sergio Manuel Santos
-		<sergio.salazar.santos@gmail.com>
+Author:   <sergio.salazar.santos@gmail.com>
 Hardware: ATmega328
-License: GNU General Public License 
-Update: 01/01/2024
+License:  GNU General Public License 
+Update:   01/01/2024
 ************************************************************************/
 /****** Comment:
 

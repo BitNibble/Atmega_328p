@@ -1,10 +1,9 @@
 /*********************************************************************
 Hardware: Atmega328.c
-Author: Sergio Santos
-	<sergio.salazar.santos@gmail.com>
-License: GNU General Public License
-Created: 20/04/2023 14:00:00
-Update: 22/01/2024
+Author:   <sergio.salazar.santos@gmail.com>
+License:  GNU General Public License
+Created:  20/04/2023 14:00:00
+Update:   22/01/2024
 *********************************************************************/
 /****** Comment:
 		74HC595

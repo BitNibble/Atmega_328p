@@ -1,10 +1,9 @@
 /************************************************************************
 	ATMEGA 328P REGISTERS
-Author: Sergio Manuel Santos
-	<sergio.salazar.santos@gmail.com>
-License: GNU General Public License
+Author:   <sergio.salazar.santos@gmail.com>
+License:  GNU General Public License
 Hardware: Atmega328 by ETT ET-BASE
-Update: 06/12/2024
+Update:   06/12/2024
 ************************************************************************/
 /****** Comment:
 	Virtual Image Atmega 328.
