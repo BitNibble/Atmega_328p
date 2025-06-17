@@ -23,25 +23,25 @@ explode_parameter explode_par_inic(void);
 /*** EXPLODE Auxilar ***/
 explode_parameter explode_par_inic(void)
 {
-	explode_parameter setup_explode_par;
+	explode_parameter setup;
 
-	setup_explode_par.XI = 0;
-	setup_explode_par.XF = 0;
+	setup.XI = 0;
+	setup.XF = 0;
 
-	return setup_explode_par;
+	return setup;
 }
 /*** EXPLODE Procedure & Function Definition ***/
 EXPLODE explode_enable( void )
 {
 	// struct object
-	EXPLODE setup_explode;
+	EXPLODE setup;
 
 	// inic VAR
-	setup_explode.par = explode_par_inic();
+	setup.par = explode_par_inic();
 	// function pointers
-	setup_explode.update = EXPLODEupdate;
+	setup.update = EXPLODEupdate;
 
-	return setup_explode;
+	return setup;
 }
 // boot
 void EXPLODEupdate(explode_parameter* par, IO_var x)

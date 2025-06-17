@@ -42,8 +42,8 @@ Update:   01/01/2024
 #define Atmega328TimerCompareRegister0_Address 0x0047
 #define Atmega328CpuGeneralPurposeIoRegister1_Address 0x004A
 #define Atmega328CpuGeneralPurposeIoRegister2_Address 0x004B
-#define Atmega328ExternalInterruptPinChangeMask_Address 0x006B;
-#define Atmega328TimerInterruptMask_Address 0x006E;
+#define Atmega328ExternalInterruptPinChangeMask_Address 0x006B
+#define Atmega328TimerInterruptMask_Address 0x006E
 #define Atmega328AnalogComparatorDid_Address 0x007F
 #define Atmega328TimerCompareRegister1_Address 0x0086
 #define Atmega328TimerCompareRegister2_Address 0x00B3
@@ -341,7 +341,7 @@ typedef struct { // SRAM START = 0x0100 END = 0x0877 atmega328
 	HighLowByte TIMER1_CAPT_vect; // 0x0014
 	HighLowByte TIMER1_COMPA_vect; // 0x0016
 	HighLowByte TIMER1_COMPB_vect; // 0x0018
-	HighLowByte TIMER1_OVF_vect; // 0x0001A
+	HighLowByte TIMER1_OVF_vect; // 0x001A
 	HighLowByte TIMER0_COMPA_vect; // 0x001C
 	HighLowByte TIMER0_COMPB_vect; // 0x001E
 	HighLowByte TIMER0_OVF_vect; // 0x0020
