@@ -19,7 +19,7 @@ Update:   01/01/2024
 	#define GLOBAL_INTERRUPT_ENABLE 7
 #endif
 #ifndef UART_RX_BUFFER_SIZE
-	#define UART_RX_BUFFER_SIZE 32
+	#define UART0_RX_BUFFER_SIZE 32
 #endif
 #define UARTvar char
 // test if the size of the circular buffers fits into SRAM

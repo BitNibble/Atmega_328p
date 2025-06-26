@@ -35,7 +35,7 @@ struct buffer
 typedef struct buffer BUFF;
 
 /*** Global Header ***/
-BUFF buff_enable(uint8_t size_buff, BUFFvar* buff);
+BUFF buff_enable(uint16_t size_buff, BUFFvar* buff);
 
 #endif
 

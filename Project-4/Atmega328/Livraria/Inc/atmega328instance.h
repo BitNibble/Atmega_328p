@@ -29,10 +29,6 @@ Comment:
 #include <avr/interrupt.h>
 #include <util/delay.h>
 /*********************************************************/
-#include <stddef.h>
-#include <stdint.h>
-#include <inttypes.h>
-/*********************************************************/
 #include "atmega328.h"
 /*********************************************************/
 

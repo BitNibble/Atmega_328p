@@ -16,10 +16,12 @@ Update:   01/01/2024
 /*** File Variable ***/
 static USART0 setup_usart0;
 
-BUFF rxbuff;
-UARTvar UART_Rx;
-UARTvar UART_RxBuf[UART_RX_BUFFER_SIZE+1];
-uint8_t UART_LastRxError;
+static BUFF rxbuff;
+static UARTvar UART_Rx;
+
+static UARTvar UART_RxBuf[UART0_RX_BUFFER_SIZE];
+static const uint16_t uart0_rx_buffer_size = UART0_RX_BUFFER_SIZE - 1;
+static uint8_t UART_LastRxError;
 static uint8_t uart0flag;
 
 /*** File Header ***/
@@ -49,7 +51,7 @@ USART0 usart0_enable(uint32_t baud, unsigned int FDbits, unsigned int Stopbits, 
 	cpu_instance()->sreg.par.i = 0;
 	uart0flag = 1;
 	uint16_t ubrr;
-	rxbuff = buff_enable(UART_RX_BUFFER_SIZE, UART_RxBuf);
+	rxbuff = buff_enable(uart0_rx_buffer_size, UART_RxBuf);
 	ubrr = BAUDRATEnormal(baud);
 	setup_usart0.par.ubrr = ubrr;
 	setup_usart0.instance = usart0_instance();

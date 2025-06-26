@@ -33,8 +33,8 @@ Created:  27/01/2024 14:00:00
 LCD02P lcd;
 
 char* uart_receive = NULL; // pointing to Rx Buffer raw
-char uart_oneshot[UART_RX_BUFFER_SIZE];
-char uart_msg[UART_RX_BUFFER_SIZE];
+char uart_oneshot[UART0_RX_BUFFER_SIZE];
+char uart_msg[UART0_RX_BUFFER_SIZE];
 
 uint16_t count;
 
