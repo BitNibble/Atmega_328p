@@ -43,8 +43,8 @@ detail:
 PCF8575 pcf8575;
 
 char* uart_receive = NULL; // pointing to Rx Buffer raw
-char uart_oneshot[UART_RX_BUFFER_SIZE];
-char uart_msg[UART_RX_BUFFER_SIZE];
+char uart_oneshot[UART0_RX_BUFFER_SIZE];
+char uart_msg[UART0_RX_BUFFER_SIZE];
 const char* term = ".";
 
 uint16_t count;

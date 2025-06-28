@@ -63,8 +63,8 @@ uint8_t j;
 uint8_t tmp;
 
 char* uartreceive = NULL; // pointing to Rx Buffer raw
-char uartrcv[UART_RX_BUFFER_SIZE];
-char uartmsg[UART_RX_BUFFER_SIZE];
+char uartrcv[UART0_RX_BUFFER_SIZE];
+char uartmsg[UART0_RX_BUFFER_SIZE];
 
 // Virtual LCD
 struct LCDposition {
