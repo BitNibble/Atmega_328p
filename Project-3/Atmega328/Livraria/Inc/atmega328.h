@@ -15,6 +15,14 @@ Update:   01/01/2024
 #include "atmega328registers.h"
 
 /*** Global Constant & Macro ***/
+#define TWO 2
+#define NIBBLE_BITS 4
+#define BYTE_BITS 8
+#define WORD_BITS 16
+#define DWORD_BITS 32
+#define QWORD_BITS 64
+#define SRAMSTART 0x0100
+#define SRAMEND 0x08FF
 /******** INSTANCES *******/
 #define Atmega328GPWR_Address 0x0000
 #define Atmega328PORTB_Address 0x0023
@@ -357,10 +365,6 @@ typedef struct { // SRAM START = 0x0100 END = 0x0877 atmega328
 } Atmega328InterruptVectors_TypeDef;
 
 #endif
-
-/***
-CONTROL STATUS IMASK IFLAG
-***/
 
 /*** EOF ***/
 

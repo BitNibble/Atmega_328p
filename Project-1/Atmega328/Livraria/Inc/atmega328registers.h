@@ -1111,9 +1111,5 @@ typedef volatile union {
 // Reserved 0xFF
 #endif
 
-/***
-CONTROL STATUS IMASK IFLAG
-***/
-
 /*** EOF ***/
 
