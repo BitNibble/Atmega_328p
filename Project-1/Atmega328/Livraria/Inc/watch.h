@@ -3,10 +3,9 @@ Title:    watch.h
 Author:   Sergio Manuel Santos <sergio.salazar.santos@gmail.com>
 File:     $Id: watch.h,v 0.2 2017/07/01 17:00:00 Sergio Exp $
 Software: AVR-GCC 4.1, AVR Libc 1.4
-Hardware: all
+Hardware:
 License:  GNU General Public License
-************************************************************************/
-/****** Comment:
+Comment:
 	
 ************************************************************************/
 #ifndef _WATCH_H_
@@ -15,26 +14,29 @@ License:  GNU General Public License
 /*** Global library ***/
 #include <inttypes.h>
 
+/*** Global Constant & Macro ***/
+
 /*** Global Variable ***/
-struct WATCHTIME{
+typedef struct {
 	uint8_t hour;
 	uint8_t minute;
 	uint8_t second;
-	uint16_t seconds;
-};
-struct WATCH{
-	struct WATCHTIME* time;
-	uint8_t (*start_delay)(uint8_t n_delay, uint16_t seconds);
+	volatile uint32_t seconds;
+} WATCH_TIME;
+
+typedef struct {
+	void (*preset)(uint8_t hour, uint8_t minute, uint8_t second);
+	uint8_t (*start_delay)(uint8_t n_delay, uint32_t seconds);
 	void (*increment)(void);
-	void (*decrement)(void);
 	char* (*show)(void);
-};
-typedef struct WATCH WATCH;
+} WATCH;
 
 /*** Global Header ***/
-WATCH watch_enable(void);
+WATCH WATCH_enable(void);
+extern void WATCH_increment(void);
+extern void WATCH_decrement(void);
 
 #endif
 
-/*** EOF ***/
+/***EOF***/
 
