@@ -131,9 +131,6 @@
     <Compile Include="Livraria\Inc\atmega328interrupt.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Livraria\Inc\atmega328mapping.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="Livraria\Inc\atmega328registers.h">
       <SubType>compile</SubType>
     </Compile>
@@ -207,9 +204,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Livraria\Src\atmega328interrupt.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Livraria\Src\atmega328mapping.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Livraria\Src\atmega328timer0.c">

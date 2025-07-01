@@ -44,7 +44,6 @@ C_SRCS +=  \
 ../Livraria/Src/atmega328analog.c \
 ../Livraria/Src/atmega328instance.c \
 ../Livraria/Src/atmega328interrupt.c \
-../Livraria/Src/atmega328mapping.c \
 ../Livraria/Src/atmega328timer0.c \
 ../Livraria/Src/atmega328timer1.c \
 ../Livraria/Src/atmega328timer2.c \
@@ -79,7 +78,6 @@ Livraria/Src/74hc595.o \
 Livraria/Src/atmega328analog.o \
 Livraria/Src/atmega328instance.o \
 Livraria/Src/atmega328interrupt.o \
-Livraria/Src/atmega328mapping.o \
 Livraria/Src/atmega328timer0.o \
 Livraria/Src/atmega328timer1.o \
 Livraria/Src/atmega328timer2.o \
@@ -107,7 +105,6 @@ Livraria/Src/74hc595.o \
 Livraria/Src/atmega328analog.o \
 Livraria/Src/atmega328instance.o \
 Livraria/Src/atmega328interrupt.o \
-Livraria/Src/atmega328mapping.o \
 Livraria/Src/atmega328timer0.o \
 Livraria/Src/atmega328timer1.o \
 Livraria/Src/atmega328timer2.o \
@@ -135,7 +132,6 @@ Livraria/Src/74hc595.d \
 Livraria/Src/atmega328analog.d \
 Livraria/Src/atmega328instance.d \
 Livraria/Src/atmega328interrupt.d \
-Livraria/Src/atmega328mapping.d \
 Livraria/Src/atmega328timer0.d \
 Livraria/Src/atmega328timer1.d \
 Livraria/Src/atmega328timer2.d \
@@ -163,7 +159,6 @@ Livraria/Src/74hc595.d \
 Livraria/Src/atmega328analog.d \
 Livraria/Src/atmega328instance.d \
 Livraria/Src/atmega328interrupt.d \
-Livraria/Src/atmega328mapping.d \
 Livraria/Src/atmega328timer0.d \
 Livraria/Src/atmega328timer1.d \
 Livraria/Src/atmega328timer2.d \
@@ -222,13 +217,6 @@ Livraria/Src/atmega328instance.o: ../Livraria/Src/atmega328instance.c
 	
 
 Livraria/Src/atmega328interrupt.o: ../Livraria/Src/atmega328interrupt.c
-	@echo Building file: $<
-	@echo Invoking: XC8 C Compiler : 0.0
-	$(QUOTE)C:\Program Files\Microchip\xc8\v3.00\bin\xc8-cc.exe$(QUOTE)  -mcpu=ATmega328P  -mdfp="C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\xc8"  -c -x c -funsigned-char -funsigned-bitfields -mext=cci -D__ATmega328P__ -DDEBUG  -I"../Livraria/Inc"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-Livraria/Src/atmega328mapping.o: ../Livraria/Src/atmega328mapping.c
 	@echo Building file: $<
 	@echo Invoking: XC8 C Compiler : 0.0
 	$(QUOTE)C:\Program Files\Microchip\xc8\v3.00\bin\xc8-cc.exe$(QUOTE)  -mcpu=ATmega328P  -mdfp="C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\xc8"  -c -x c -funsigned-char -funsigned-bitfields -mext=cci -D__ATmega328P__ -DDEBUG  -I"../Livraria/Inc"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

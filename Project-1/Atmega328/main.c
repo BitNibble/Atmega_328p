@@ -34,14 +34,13 @@ Update:   22/01/2024
 	-PD3 pin 5 -> used to send command to HC05
 	
  ********************************************************************/
-#include "atmega328mapping.h"
+#include "atmega328timer1.h"
+#include "atmega328usart0.h"
 #include "function.h"
 #include "lcd2p.h"
 #include "74hc595.h"
 #include "explode.h"
 #include "bt05atcommands.h"
-#include <util/delay.h>
-//#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 //#include <stdarg.h>
@@ -91,7 +90,6 @@ void exponencial(double* target, double rate);
 int main(void)
 {	
 	//		main preamble
-	atmega328_enable();
 	PORTINIT();
 	
 	//		Inic Global Vars
@@ -119,12 +117,12 @@ int main(void)
 	
 	// UART 103 para 9600, 68 para 14400, 25 para 38400, 8 para 115200 at 16Mhz
 	// UART 51 para 9600, 12 para 38400 at 8Mhz
-	atmega328()->usart0_enable(38400,8,1,NONE);
+	usart0_enable(38400,8,1,NONE);
 	
 	button = explode_enable();
 	disp = explode_enable();
 	
-	atmega328()->tc1_enable(4, 2);
+	tc1_enable(4, 2);
 	tc1()->start(1024);
 	tc1()->compareA(0x1AFF);
 	
@@ -145,12 +143,12 @@ int main(void)
 		// 0
 		if(!window){ // Loop preamble
 			lcd.reboot();
-			input = ( atmega328()->portc_instance->pin.reg & 0xF0 ) | get_reg_block( atmega328()->portb_instance->pin.reg, 4, 4);
+			input = ( portc_instance()->pin.reg & 0xF0 ) | get_reg_block( portb_instance()->pin.reg, 4, 4);
 			button.update(&button.par, input);
-			disp.update(&disp.par, atmega328()->portd_instance->pin.reg);
+			disp.update(&disp.par, portd_instance()->pin.reg);
 			
 			// uart capture
-			uartreceive = usart0_messageprint( usart0(), uartrcv, uartmsg, ".");
+			uartreceive = usart0_messageprint( usart0(), uartrcv, uartmsg, "\r\n");
 			
 			// catch message
 			if(!strcmp(uartreceive,"Connect\r\n")){usart0()->rxflush();lcd.clear();}
@@ -186,10 +184,10 @@ int main(void)
 						lcd02p()->hspace(4); lcd.string_size("bt05 ->",7);
 						if((disp.par.HL & (1 << 3)))
 						{
-							//usart0.puts(BT05ATcmd(2));
-							usart0()->puts(bt05at_cmd(27));
-							//usart0()->puts(BT05ATcmd(29));
-							//usart0()->puts(BT05ATcmd(20));
+							usart0()->puts(bt05at_cmd(2));
+							//usart0()->puts(bt05at_cmd(27));
+							//usart0()->puts(bt05at_cmd(29));
+							//usart0()->puts(bt05at_cmd(20));
 							usart0()->rxflush();
 						}
 					}
@@ -208,7 +206,7 @@ int main(void)
 			}
 			sh.byte(&sh.par,output);	
 			//LED 1
-			if(!strcmp(uartrcv, "s00.") || (button.par.HL & 1)){
+			if(!strcmp(uartrcv, "s00\r\n") || (button.par.HL & 1)){
 				if(output & 1){
 					output&=~1;
 					func()->strtovec(LCD.pos.l10, "on ");
@@ -217,12 +215,12 @@ int main(void)
 					func()->strtovec(LCD.pos.l10, "off");
 				}
 			}
-			if(!strcmp(uartrcv, "s00 off.")){
+			if(!strcmp(uartrcv, "s00 off\r\n")){
 					output|=1;
 					func()->strtovec(LCD.pos.l10, "off");
 			}
 			//LED 2
-			if(!strcmp(uartrcv, "s01.") || (button.par.HL & 2)){
+			if(!strcmp(uartrcv, "s01\r\n") || (button.par.HL & 2)){
 				if(output & 2){
 					output&=~2;
 					func()->strtovec(LCD.pos.l11, "on ");
@@ -231,12 +229,12 @@ int main(void)
 					func()->strtovec(LCD.pos.l11, "off");
 				}
 			}
-			if(!strcmp(uartrcv, "s01 off.")){
+			if(!strcmp(uartrcv, "s01 off\r\n")){
 				output|=2;
 				func()->strtovec(LCD.pos.l11, "off");
 			}		
 			//LED 3
-			if(!strcmp(uartrcv, "s02.") || (button.par.HL & 16)){
+			if(!strcmp(uartrcv, "s02\r\n") || (button.par.HL & 16)){
 				if(output & 4){
 					output&=~4;
 					func()->strtovec(LCD.pos.l12, "on ");
@@ -245,12 +243,12 @@ int main(void)
 					func()->strtovec(LCD.pos.l12, "off");
 				}
 			}
-			if(!strcmp(uartrcv, "s02 off.")){
+			if(!strcmp(uartrcv, "s02 off\r\n")){
 				output|=4;
 				func()->strtovec(LCD.pos.l12, "off");
 			}
 			//LED 4
-			if(!strcmp(uartrcv, "s03.") || (button.par.HL & 32)){
+			if(!strcmp(uartrcv, "s03\r\n") || (button.par.HL & 32)){
 				if(output & 8){
 					output&=~8;
 					func()->strtovec(LCD.pos.l13, "on ");
@@ -259,12 +257,12 @@ int main(void)
 					func()->strtovec(LCD.pos.l13, "off");
 				}
 			}
-			if(!strcmp(uartrcv, "s03 off.")){
+			if(!strcmp(uartrcv, "s03 off\r\n")){
 				output|=8;
 				func()->strtovec(LCD.pos.l13, "off");
 			}
 			//ALL OFF
-			if(!strcmp(uartrcv, "all off.")){
+			if(!strcmp(uartrcv, "all off\r\n")){
 				output = 0xFF;
 				func()->strtovec(LCD.pos.l10, "off");
 				func()->strtovec(LCD.pos.l11, "off");
@@ -272,7 +270,7 @@ int main(void)
 				func()->strtovec(LCD.pos.l13, "off");
 			}
 			//STATUS FEEDBACK
-			if(!strcmp(uartrcv, "status.")){
+			if(!strcmp(uartrcv, "status\r\n")){
 				usart0()->puts(LCDline1);
 			}
 			window = 0; continue;
@@ -283,12 +281,12 @@ int main(void)
 /*** Procedure and Function Definitions ***/
 void PORTINIT(void)
 {
-	write_reg_block(&atmega328()->portb_instance->ddr.reg,2,4,0);
-	write_reg_block(&atmega328()->portb_instance->port.reg,2,4,3);
-	write_reg_block(&atmega328()->portc_instance->ddr.reg,2,4,0);
-	write_reg_block(&atmega328()->portc_instance->port.reg,2,4,3);
-	write_reg_block(&atmega328()->portd_instance->ddr.reg,2,2,0);
-	write_reg_block(&atmega328()->portd_instance->port.reg,2,2,3);
+	write_reg_block(&portb_instance()->ddr.reg,2,4,0);
+	write_reg_block(&portb_instance()->port.reg,2,4,3);
+	write_reg_block(&portc_instance()->ddr.reg,2,4,0);
+	write_reg_block(&portc_instance()->port.reg,2,4,3);
+	write_reg_block(&portd_instance()->ddr.reg,2,2,0);
+	write_reg_block(&portd_instance()->port.reg,2,2,3);
 }
 void exponencial(double* target, double rate) // *target = rate ^ t -> t is interrupt timer therefore rate > 0
 {

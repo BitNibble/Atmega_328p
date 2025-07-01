@@ -10,8 +10,6 @@ Livraria\Src\atmega328instance.c
 
 Livraria\Src\atmega328interrupt.c
 
-Livraria\Src\atmega328mapping.c
-
 Livraria\Src\atmega328timer0.c
 
 Livraria\Src\atmega328timer1.c
