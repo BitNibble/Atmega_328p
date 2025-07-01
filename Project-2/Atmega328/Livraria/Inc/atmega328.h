@@ -63,15 +63,16 @@ typedef volatile union {
 		uint8_t L; // Lower Address
 		uint8_t H; // Higher Address
 	}par;
-	uint16_t reg;
+	uint16_t var;
 } HighLowByte;
+
 // Low Word High Word
 typedef volatile union {
 	struct{
 		uint16_t L; // Lower Address
 		uint16_t H; // Higher Address
 	}par;
-	uint32_t reg;
+	uint32_t var;
 } HighLowWord;
 
 /*****************************/

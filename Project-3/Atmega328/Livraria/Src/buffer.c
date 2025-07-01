@@ -3,15 +3,16 @@
 Author:   <sergio.salazar.santos@gmail.com>
 License:  GNU General Public License
 Hardware: all
-Date:     17112022
-******************************************************************************/
-/****** Comment:
-	Buffer
+Date:     26062025
 ******************************************************************************/
 /*** File Library ***/
 #include "buffer.h"
 #include <stdio.h>
 #include <string.h>
+
+/*** File Constant & Macro ***/
+
+/*** File Variable ***/
 
 /*** File Header ***/
 void BUFF_push(bufferparameter* par, BUFFvar data);
@@ -19,19 +20,18 @@ BUFFvar* BUFF_raw(bufferparameter* par);
 void BUFF_flush(bufferparameter* par);
 
 /*** Procedure & Function ***/
-BUFF buff_enable( uint16_t size_buff, BUFFvar* buff )
+BUFF buff_enable( uint8_t size_buff, BUFFvar* buff )
 {
 	// OBJECT STRUCT
 	BUFF ret;
 	// inic VAR
 	ret.par.orig = buff;
 	ret.par.head = buff;
-	ret.par.end = buff + ( size_buff ); // generic
+	ret.par.end = buff + ( size_buff );
 	// function pointers
 	ret.push = BUFF_push;
 	ret.raw = BUFF_raw;
 	ret.flush = BUFF_flush;
-	
 	return ret; // return copy
 }
 
@@ -62,7 +62,5 @@ void BUFF_flush( bufferparameter* par ){
 	*head = 0;
 }
 
-/*** File Interrupt ***/
-
-/*** EOF ***/
+/***EOF***/
 

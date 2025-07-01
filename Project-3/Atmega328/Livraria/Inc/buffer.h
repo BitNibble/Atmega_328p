@@ -3,10 +3,7 @@
 Author:   <sergio.salazar.santos@gmail.com>
 License:  GNU General Public License
 Hardware: all
-Date:     17112022
-*******************************************************************************/
-/****** Comment:
-	Circular Buffer
+Date:     26062025
 *******************************************************************************/
 #ifndef _BUFFER_H_
 	#define _BUFFER_H_
@@ -35,9 +32,9 @@ struct buffer
 typedef struct buffer BUFF;
 
 /*** Global Header ***/
-BUFF buff_enable(uint16_t size_buff, BUFFvar* buff);
+BUFF buff_enable(uint8_t size_buff, BUFFvar* buff);
 
 #endif
 
-/*** EOF ***/
+/***EOF***/
 

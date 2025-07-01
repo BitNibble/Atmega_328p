@@ -33,7 +33,7 @@ TWI0 twi_enable(uint8_t atmega_ID,  uint8_t prescaler)
 	uint8_t tSREG;
 	
 	// Init local var
-	tSREG = cpu_instance()->sreg.reg;
+	tSREG = cpu_instance()->sreg.var;
 	cpu_instance()->sreg.par.i = 0;
 	setup_i2c.instance = twi_instance();
 	// V-table
@@ -45,7 +45,7 @@ TWI0 twi_enable(uint8_t atmega_ID,  uint8_t prescaler)
 	setup_i2c.status = TWI_status;
 	
 	TWI_init(atmega_ID, prescaler);
-	cpu_instance()->sreg.reg = tSREG;
+	cpu_instance()->sreg.var = tSREG;
 
 	return setup_i2c;
 }
@@ -60,9 +60,9 @@ void TWI_init(uint8_t device_id, uint8_t prescaler)
 		cmd = (device_id << 1) | (1 << TWGCE);
 	else
 		cmd = (1 << TWGCE); // no address, but accept general call
-	twi_instance()->twar.reg = cmd;
-	portc_instance()->ddr.reg |= TWI_IO_MASK;
-	portc_instance()->port.reg |= TWI_IO_MASK;
+	twi_instance()->twar.var = cmd;
+	portc_instance()->ddr.var |= TWI_IO_MASK;
+	portc_instance()->port.var |= TWI_IO_MASK;
 	switch(prescaler){
 		case 1:
 			twi_instance()->twsr.par.twps = 0;
@@ -81,18 +81,18 @@ void TWI_init(uint8_t device_id, uint8_t prescaler)
 			twi_instance()->twsr.par.twps = 0;
 		break;
 	}
-	twi_instance()->twbr.reg = ((F_CPU / TWI_SCL_CLOCK) - 16) / (2 * prescaler);
+	twi_instance()->twbr.var = ((F_CPU / TWI_SCL_CLOCK) - 16) / (2 * prescaler);
 	// Standard Config begin
-	//twi_instance()->twsr.reg = 0x00; //set presca1er bits to zero
-	//twi_instance()->twbr.reg = 0x46; //SCL frequency is 50K for 16Mhz
-	//twi_instance()->twcr.reg = 0x04; //enab1e TWI module
+	//twi_instance()->twsr.var = 0x00; //set presca1er bits to zero
+	//twi_instance()->twbr.var = 0x46; //SCL frequency is 50K for 16Mhz
+	//twi_instance()->twcr.var = 0x04; //enab1e TWI module
 	// Standard Config end
 }
 // void TWI_Start(void)
 void TWI_start(void) // $08
 {
 	uint8_t cmd = (1 << TWINT) | (1 << TWSTA) | (1 << TWEN);
-	twi_instance()->twcr.reg = cmd;
+	twi_instance()->twcr.var = cmd;
 	
 	TWI_wait_twint( Nticks );
 	
@@ -113,10 +113,10 @@ void TWI_connect( uint8_t address, uint8_t rw )
 		cmd = (address << 1) | (1 << 0);
 	else
 		cmd = (address << 1) | (0 << 0);
-	twi_instance()->twdr.reg = cmd;
+	twi_instance()->twdr.var = cmd;
 	
 	cmd = (1 << TWINT) | (1 << TWEN);
-	twi_instance()->twcr.reg = cmd;
+	twi_instance()->twcr.var = cmd;
 	
 	TWI_wait_twint( Nticks );
 	
@@ -136,10 +136,10 @@ void TWI_connect( uint8_t address, uint8_t rw )
 void TWI_master_write( uint8_t var_twiData_u8 )
 {
 	uint8_t cmd = var_twiData_u8;
-	twi_instance()->twdr.reg = cmd;
+	twi_instance()->twdr.var = cmd;
 	
 	cmd = (1 << TWINT) | (1 << TWEN);
-	twi_instance()->twcr.reg = cmd;
+	twi_instance()->twcr.var = cmd;
 	
 	TWI_wait_twint( Nticks );
 	
@@ -159,7 +159,7 @@ uint8_t TWI_master_read( uint8_t ack_nack )
 	if( ack_nack )
 		cmd |= ( 1 << TWEA );
 	cmd |= ( 1 << TWINT ) | ( 1 << TWEN );
-	twi_instance()->twcr.reg = cmd;
+	twi_instance()->twcr.var = cmd;
 	
 	TWI_wait_twint( Nticks );
 	
@@ -171,14 +171,14 @@ uint8_t TWI_master_read( uint8_t ack_nack )
 		break;
 	}
 	
-	cmd = twi_instance()->twdr.reg;
+	cmd = twi_instance()->twdr.var;
 	return cmd;
 }
 // void TWI_stop(void)
 void TWI_stop(void)
 {
 	uint8_t cmd = (1 << TWINT) | (1 << TWEN) | (1 << TWSTO);
-	twi_instance()->twcr.reg = cmd;
+	twi_instance()->twcr.var = cmd;
 	
 	_delay_us(100); //wait for a short time
 }

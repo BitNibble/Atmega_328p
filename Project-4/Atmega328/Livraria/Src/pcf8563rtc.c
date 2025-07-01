@@ -10,10 +10,8 @@ Comment:
 /*** File Library ***/
 #include "pcf8563rtc.h"
 
-#if defined(__AVR_ATmega64__) || defined(__AVR_Atmega328__)
-	#include "atmega328mapping.h"
-#elif defined(__AVR_ATmega328__) || defined(__AVR_ATmega328P__)
-	#include "atmega328mapping.h"
+#if defined(__AVR_ATmega64__) || defined(__AVR_ATmega328__) || defined(__AVR_ATmega328P__)
+	#include "atmega328instance.h"
 #else
 	#error "MCU Lib not available"
 #endif
@@ -215,8 +213,6 @@ uint8_t PCF8563RTC_bintobcd(uint8_t bin)
 {
 	return (((bin) / 10) << 4) + ((bin) % 10);
 }
-
-/***File Interrupt***/
 
 /*** EOF ***/
 

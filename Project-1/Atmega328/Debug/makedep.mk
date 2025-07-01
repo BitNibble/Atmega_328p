@@ -18,7 +18,7 @@ Livraria\Src\atmega328timer2.c
 
 Livraria\Src\atmega328twi.c
 
-Livraria\Src\atmega328usart0.c
+Livraria\Src\atmega328_usart0.c
 
 Livraria\Src\atmegaeeprom.c
 

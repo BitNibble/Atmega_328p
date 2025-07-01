@@ -353,24 +353,24 @@ void Atmega328ClockPrescalerSelect(volatile uint8_t prescaler)
 	volatile uint8_t sreg;
 	volatile uint8_t* clkpr = &CLKPR;
 	prescaler &= 0x0F;
-	sreg = cpu_instance()->sreg.reg;
-	cpu_instance()->sreg.reg &= ~(1 << 7);
+	sreg = cpu_instance()->sreg.var;
+	cpu_instance()->sreg.var &= ~(1 << 7);
 	
 	*clkpr = (1 << CLKPCE);
 	*clkpr = prescaler;
 	
-	cpu_instance()->sreg.reg = sreg;
+	cpu_instance()->sreg.var = sreg;
 }
 void Atmega328MoveInterruptsToBoot(void)
 {
 	volatile uint8_t sreg;
-	sreg = cpu_instance()->sreg.reg;
-	cpu_instance()->sreg.reg &= ~(1 << 7);
+	sreg = cpu_instance()->sreg.var;
+	cpu_instance()->sreg.var &= ~(1 << 7);
 	
 	MCUCR = (1<<IVCE);
 	MCUCR = (1<<IVSEL);
 	
-	cpu_instance()->sreg.reg = sreg;
+	cpu_instance()->sreg.var = sreg;
 }
 
 /******

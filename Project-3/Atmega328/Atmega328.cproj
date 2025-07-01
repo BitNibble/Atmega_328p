@@ -186,7 +186,7 @@
     <Compile Include="Livraria\Inc\atmega328twi.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Livraria\Inc\atmega328usart0.h">
+    <Compile Include="Livraria\Inc\atmega328_usart0.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Livraria\Inc\atmegaeeprom.h">
@@ -273,7 +273,7 @@
     <Compile Include="Livraria\Src\atmega328twi.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Livraria\Src\atmega328usart0.c">
+    <Compile Include="Livraria\Src\atmega328_usart0.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Livraria\Src\atmegaeeprom.c">

@@ -24,7 +24,7 @@ EXINT0 exint_enable(void)
 // setup blank
 {
 	// Pre-Processor Case 1
-	exint_imask_instance()->eimsk.reg = 0X00;
+	exint_imask_instance()->eimsk.var = 0X00;
 	setup_interrupt.pcmask_instance = exint_pcmask_instance();
 	setup_interrupt.imask_instance = exint_imask_instance();
 	setup_interrupt.iflag_instance = exint_iflag_instance();
@@ -42,26 +42,26 @@ EXINT0* exint(void){ return &setup_interrupt; };
 uint8_t INTERRUPT_reset_status(void)
 {
 	uint8_t reset, ret = 0;
-	reset = (cpu_instance()->mcusr.reg & MCU_Control_Status_register_Mask);
+	reset = (cpu_instance()->mcusr.var & MCU_Control_Status_register_Mask);
 	switch(reset){
 		case 1: // Power-On Reset Flag
 			ret = 0;
-			cpu_instance()->mcusr.reg &= ~(1 << PORF);
+			cpu_instance()->mcusr.var &= ~(1 << PORF);
 			break;
 		case 2: // External Reset Flag
-			cpu_instance()->mcusr.reg &= ~(1 << EXTRF);
+			cpu_instance()->mcusr.var &= ~(1 << EXTRF);
 			ret = 1;
 			break;
 		case 4: // Brown-out Reset Flag
-			cpu_instance()->mcusr.reg &= ~(1 << BORF);
+			cpu_instance()->mcusr.var &= ~(1 << BORF);
 			ret = 2;
 			break;
 		case 8: // Watchdog Reset Flag
-			cpu_instance()->mcusr.reg &= ~(1 << WDRF);
+			cpu_instance()->mcusr.var &= ~(1 << WDRF);
 			ret = 3;
 			break;
 		default: // clear all status
-			cpu_instance()->mcusr.reg &= ~(MCU_Control_Status_register_Mask);
+			cpu_instance()->mcusr.var &= ~(MCU_Control_Status_register_Mask);
 			break;
 	}
 	
@@ -71,43 +71,43 @@ void INTERRUPT_set(uint8_t channel, uint8_t sense)
 {
 	switch( channel ){
 		case 0: 
-			exint_imask_instance()->eimsk.reg &= ~(1 << INT0);
-			exint_instance()->eicra.reg &= ~((1 << ISC01) | (1 << ISC00));
+			exint_imask_instance()->eimsk.var &= ~(1 << INT0);
+			exint_instance()->eicra.var &= ~((1 << ISC01) | (1 << ISC00));
 			switch(sense){
 				case 0: // The low level of INT0 generates an interrupt request.
 				case 1: // Any logical change on INT0 generates an interrupt request.
 					break;
 				case 2: // The falling edge of INT0 generates an interrupt request.
-					exint_instance()->eicra.reg |= (1 << ISC01);
+					exint_instance()->eicra.var |= (1 << ISC01);
 					break;
 				case 3: // The rising edge of INT0 generates an interrupt request.
-					exint_instance()->eicra.reg |= ((1 << ISC01) | (1 << ISC00));
+					exint_instance()->eicra.var |= ((1 << ISC01) | (1 << ISC00));
 					break;
 				default: // The low level of INT0 generates an interrupt request.
 					break;
 			}
-			exint_imask_instance()->eimsk.reg |= (1 << INT0);
+			exint_imask_instance()->eimsk.var |= (1 << INT0);
 			break;
 		case 1:
-			exint_imask_instance()->eimsk.reg &= ~(1 << INT1);
-			exint_instance()->eicra.reg &= ~((1 << ISC11) | (1 << ISC10));
+			exint_imask_instance()->eimsk.var &= ~(1 << INT1);
+			exint_instance()->eicra.var &= ~((1 << ISC11) | (1 << ISC10));
 			switch(sense){
 				case 0: // The low level of INT1 generates an interrupt request.
 				case 1: // Any logical change on INT1 generates an interrupt request.
 					break;
 				case 2: // The falling edge of INT1 generates an interrupt request.
-					exint_instance()->eicra.reg |= (1 << ISC11);
+					exint_instance()->eicra.var |= (1 << ISC11);
 					break;
 				case 3: // The rising edge of INT1 generates an interrupt request.
-					exint_instance()->eicra.reg |= ((1 << ISC11) | (1 << ISC10));
+					exint_instance()->eicra.var |= ((1 << ISC11) | (1 << ISC10));
 					break;
 				default: // The low level of INT1 generates an interrupt request.
 					break;
 			}
-			exint_imask_instance()->eimsk.reg |= (1 << INT1);
+			exint_imask_instance()->eimsk.var |= (1 << INT1);
 			break;
 		default:
-			exint_imask_instance()->eimsk.reg = 0X00;
+			exint_imask_instance()->eimsk.var = 0X00;
 			break;
 	}
 }
@@ -115,13 +115,13 @@ void INTERRUPT_off(uint8_t channel)
 {
 	switch( channel ){
 		case 0: // disable
-			exint_imask_instance()->eimsk.reg &= ~(1 << INT0);
+			exint_imask_instance()->eimsk.var &= ~(1 << INT0);
 			break;
 		case 1: // disable
-			exint_imask_instance()->eimsk.reg &= ~(1 << INT1);
+			exint_imask_instance()->eimsk.var &= ~(1 << INT1);
 			break;
 		default: // all disable
-			exint_imask_instance()->eimsk.reg = 0X00;
+			exint_imask_instance()->eimsk.var = 0X00;
 			break;
 	}
 }
