@@ -1,0 +1,5 @@
+There is a bug in the verify chip with hex, it corupts the flash
+and program stops working.
+
+Not reliable program, very risky.
+
