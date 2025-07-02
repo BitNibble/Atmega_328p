@@ -3,24 +3,20 @@
 Author:   <sergio.salazar.santos@gmail.com>
 License:  GNU General Public License
 Hardware: all
-Date:     12112022
-Comment:
-	tested Atemga128 16Mhz and Atmega328 8Mhz
+Date:     02072025
 ************************************************************************/
 #ifndef _LCD_H_
 	#define _LCD_H_
 
-/***Compiler***/
-
-/***Working Frequency***/
+/*** Working Frequency ***/
 #ifndef F_CPU
-	#define F_CPU 16000000UL
+	#define F_CPU 8000000UL
 #endif
 
-/***Global Library***/
+/*** Global Library ***/
 #include <inttypes.h>
 
-/***Global Constant & Macro***/
+/*** Global Constant & Macro ***/
 // ASIGN PORT PINS TO LCD (can be setup in any way)
 #define RS 0
 #define RW 1
@@ -30,10 +26,6 @@ Comment:
 #define DB5 5
 #define DB6 6
 #define DB7 7
-/***************/
-// CMD RS
-#define INST 0
-#define DATA 1
 
 /***Global Variable***/
 typedef struct{
@@ -50,11 +42,11 @@ typedef struct{
 	void (*reboot)(void);
 }LCD0, LCD1;
 
-/***Global Header***/
-LCD0* lcd0(void);
-LCD1* lcd1(void);
+/*** Global Function declaration ***/
 LCD0 lcd0_enable(volatile uint8_t *ddr, volatile uint8_t *pin, volatile uint8_t *port);
+LCD0* lcd0(void);
 LCD1 lcd1_enable(volatile uint8_t *ddr, volatile uint8_t *pin, volatile uint8_t *port);
+LCD1* lcd1(void);
 
 #endif
 

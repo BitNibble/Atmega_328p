@@ -11,7 +11,9 @@ Comment:
 #include "pcf8563rtc.h"
 
 #if defined(__AVR_ATmega64__) || defined(__AVR_ATmega328__) || defined(__AVR_ATmega328P__)
-	#include "atmega328instance.h"
+	#include "atmega328twi.h"
+#elif #if defined(__AVR_ATmega324A__)
+	#include "atmega328twi.h"
 #else
 	#error "MCU Lib not available"
 #endif

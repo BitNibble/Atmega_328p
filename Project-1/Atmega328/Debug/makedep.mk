@@ -36,6 +36,8 @@ Livraria\Src\hx711.c
 
 Livraria\Src\keypad.c
 
+Livraria\Src\lcd.c
+
 Livraria\Src\lcd2p.c
 
 Livraria\Src\lfsm.c
