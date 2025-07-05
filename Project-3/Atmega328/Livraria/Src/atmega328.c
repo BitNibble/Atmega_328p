@@ -12,9 +12,9 @@ Update:	  05072025
 unsigned int ft_Delay_Lock[FTDELAY_SIZE] = {0};
 unsigned int ftCounter[FTDELAY_SIZE] = {0};
 
-/*************************/
-/*** HARDWARE INSTANCE ***/
-/*************************/
+/*****************************/
+/**** MAIN HARDWARE LAYER ****/
+/*****************************/
 // GPWR
 Atmega328GPWR_TypeDef* gpwr_reg(void)
 {
