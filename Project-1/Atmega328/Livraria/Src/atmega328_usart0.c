@@ -122,7 +122,7 @@ USART0 usart0_enable( uint32_t baud, unsigned int FDbits, unsigned int Stopbits,
 			break;
 		}
 	#endif
-	cpu_instance()->sreg.par.i = 1;
+	cpu_reg()->sreg.par.i = 1;
 	return atmega328_usart0;
 }
 

@@ -1,173 +1,172 @@
 /*********************************************************
-	ATMEGA 328 Instance
+	ATMEGA 328
 Author:   <sergio.salazar.santos@gmail.com>
 License:  GNU General Public License
 Hardware: Atmega 328
-Update:	  07/04/2024
-Comment: 
-
+Update:	  05072025
 **********************************************************/
-#include "atmega328instance.h"
+#include "atmega328.h"
 #include <stdarg.h>
 
 #define FTDELAY_SIZE 256
 unsigned int ft_Delay_Lock[FTDELAY_SIZE] = {0};
 unsigned int ftCounter[FTDELAY_SIZE] = {0};
-/**************************/
-/**** HARDWARE HANDLER ****/
-/**************************/
+
+/*************************/
+/*** HARDWARE INSTANCE ***/
+/*************************/
 // GPWR
-Atmega328GPWR_TypeDef* gpwr_instance(void)
+Atmega328GPWR_TypeDef* gpwr_reg(void)
 {
-	return (Atmega328GPWR_TypeDef*) Atmega328GPWR_Address;
+	return (Atmega328GPWR_TypeDef*) 0x0000;
 }
 // I/O Port (PORTB)
-Atmega328PORTB_TypeDef* portb_instance(void)
+Atmega328PORTB_TypeDef* portb_reg(void)
 {
-	return (Atmega328PORTB_TypeDef*) Atmega328PORTB_Address;
+	return (Atmega328PORTB_TypeDef*) 0x0023;
 }
 // I/O Port (PORTC)
-Atmega328PORTC_TypeDef* portc_instance(void)
+Atmega328PORTC_TypeDef* portc_reg(void)
 {
-	return (Atmega328PORTC_TypeDef*) Atmega328PORTC_Address;
+	return (Atmega328PORTC_TypeDef*) 0x0026;
 }
 // I/O Port (PORTD)
-Atmega328PORTD_TypeDef* portd_instance(void)
+Atmega328PORTD_TypeDef* portd_reg(void)
 {
-	return (Atmega328PORTD_TypeDef*) Atmega328PORTD_Address;
+	return (Atmega328PORTD_TypeDef*) 0x0029;
 }
 // Timer/Counter 0, 1 and 2 Interrupt Flag
-Atmega328TimerInterruptFlag_TypeDef* tc_iflag_instance(void)
+Atmega328TimerInterruptFlag_TypeDef* tc_iflag_reg(void)
 {
-	return (Atmega328TimerInterruptFlag_TypeDef*) Atmega328TimerInterruptFlag_Address;
+	return (Atmega328TimerInterruptFlag_TypeDef*) 0x0035;
 }
 // External Interrupts Flag (EXINT)
-Atmega328ExternalInterruptFlag_TypeDef* exint_iflag_instance(void)
+Atmega328ExternalInterruptFlag_TypeDef* exint_iflag_reg(void)
 {
-	return (Atmega328ExternalInterruptFlag_TypeDef*) Atmega328ExternalInterruptFlag_Address;
+	return (Atmega328ExternalInterruptFlag_TypeDef*) 0x003B;
 }
 // External Interrupts Mask (EXINT)
-Atmega328ExternalInterruptMask_TypeDef* exint_imask_instance(void)
+Atmega328ExternalInterruptMask_TypeDef* exint_imask_reg(void)
 {
-	return (Atmega328ExternalInterruptMask_TypeDef*) Atmega328ExternalInterruptMask_Address;
+	return (Atmega328ExternalInterruptMask_TypeDef*) 0x003D;
 }
 // CPU Register Gpio0 (CPU)
-Atmega328CpuGeneralPurposeIoRegister0_TypeDef* cpu_gpio0_instance(void)
+Atmega328CpuGeneralPurposeIoRegister0_TypeDef* cpu_gpio0_reg(void)
 {
-	return (Atmega328CpuGeneralPurposeIoRegister0_TypeDef*) Atmega328CpuGeneralPurposeIoRegister0_Address;
+	return (Atmega328CpuGeneralPurposeIoRegister0_TypeDef*) 0x003E;
 }
 // EEPROM (EEPROM)
-Atmega328Eeprom_TypeDef* eeprom_instance(void)
+Atmega328Eeprom_TypeDef* eeprom_reg(void)
 {
-	return (Atmega328Eeprom_TypeDef*) Atmega328Eeprom_Address;
+	return (Atmega328Eeprom_TypeDef*) 0x003F;
 }
 // TIMER General Control
-Atmega328TimerGeneralControlRegister_TypeDef* tc_gcontrol_instance(void)
+Atmega328TimerGeneralControlRegister_TypeDef* tc_gcontrol_reg(void)
 {
-	return (Atmega328TimerGeneralControlRegister_TypeDef*) Atmega328TimerGeneralControlRegister_Address;
+	return (Atmega328TimerGeneralControlRegister_TypeDef*) 0x0043;
 }
 // Timer/Counter, 8-bit A sync (TC0)
-Atmega328TimerCounter0_TypeDef* tc0_instance(void)
+Atmega328TimerCounter0_TypeDef* tc0_reg(void)
 {
-	return (Atmega328TimerCounter0_TypeDef*) Atmega328TimerCounter0_Address;
+	return (Atmega328TimerCounter0_TypeDef*) 0x0044;
 }
 // Timer/Counter, 8-bit A sync Compare (TC0)
-Atmega328TimerCompareRegister0_TypeDef* tc0_compare_instance(void)
+Atmega328TimerCompareRegister0_TypeDef* tc0_compare_reg(void)
 {
-	return (Atmega328TimerCompareRegister0_TypeDef*) Atmega328TimerCompareRegister0_Address;
+	return (Atmega328TimerCompareRegister0_TypeDef*) 0x0047;
 }
 // CPU Register Gpio1 (CPU)
-Atmega328CpuGeneralPurposeIoRegister1_TypeDef* cpu_gpio1_instance(void)
+Atmega328CpuGeneralPurposeIoRegister1_TypeDef* cpu_gpio1_reg(void)
 {
-	return (Atmega328CpuGeneralPurposeIoRegister1_TypeDef*) Atmega328CpuGeneralPurposeIoRegister1_Address;
+	return (Atmega328CpuGeneralPurposeIoRegister1_TypeDef*) 0x004A;
 }
 // CPU Register Gpio012 (CPU)
-Atmega328CpuGeneralPurposeIoRegister_TypeDef* cpu_gpio012_instance(void)
+Atmega328CpuGeneralPurposeIoRegister_TypeDef* cpu_gpio012_reg(void)
 {
-	return (Atmega328CpuGeneralPurposeIoRegister_TypeDef*) Atmega328CpuGeneralPurposeIoRegister_Address;
+	return (Atmega328CpuGeneralPurposeIoRegister_TypeDef*) 0x003E;
 }
 // CPU Register Gpio2 (CPU)
-Atmega328CpuGeneralPurposeIoRegister2_TypeDef* cpu_gpio2_instance(void)
+Atmega328CpuGeneralPurposeIoRegister2_TypeDef* cpu_gpio2_reg(void)
 {
-	return (Atmega328CpuGeneralPurposeIoRegister2_TypeDef*) Atmega328CpuGeneralPurposeIoRegister2_Address;
+	return (Atmega328CpuGeneralPurposeIoRegister2_TypeDef*) 0x004B;
 }
 // Serial Peripheral Interface (SPI)
-Atmega328SerialPeripherialInterface_TypeDef* spi_instance(void)
+Atmega328SerialPeripherialInterface_TypeDef* spi_reg(void)
 {
-	return (Atmega328SerialPeripherialInterface_TypeDef*) Atmega328SerialPeripherialInterface_Address;
+	return (Atmega328SerialPeripherialInterface_TypeDef*) 0x004C;
 }
 // Analog Comparator (AC)
-Atmega328AnalogComparator_TypeDef* ac_instance(void)
+Atmega328AnalogComparator_TypeDef* ac_reg(void)
 {
-	return (Atmega328AnalogComparator_TypeDef*) Atmega328AnalogComparator_Address;
+	return (Atmega328AnalogComparator_TypeDef*) 0x0050;
 }
 // Watchdog Timer (WDT)
-Atmega328WatchdogTimer_TypeDef* wdt_instance(void)
+Atmega328WatchdogTimer_TypeDef* wdt_reg(void)
 {
-	return (Atmega328WatchdogTimer_TypeDef*) Atmega328WatchdogTimer_Address;
+	return (Atmega328WatchdogTimer_TypeDef*) 0x0060;
 }
 // CPU Register (CPU)
-Atmega328CPURegister_TypeDef* cpu_instance(void)
+Atmega328CPURegister_TypeDef* cpu_reg(void)
 {
-	return (Atmega328CPURegister_TypeDef*) Atmega328CPURegister_Address;
+	return (Atmega328CPURegister_TypeDef*) 0x0053;
 }
 // External Interrupts Pin Change Mask (EXINT)
-Atmega328ExternalInterruptPinChangeMask_TypeDef* exint_pcmask_instance(void)
+Atmega328ExternalInterruptPinChangeMask_TypeDef* exint_pcmask_reg(void)
 {
-	return (Atmega328ExternalInterruptPinChangeMask_TypeDef*) Atmega328ExternalInterruptPinChangeMask_Address;
+	return (Atmega328ExternalInterruptPinChangeMask_TypeDef*) 0x006B;
 }
 // External Interrupts (EXINT)
-Atmega328ExternalInterrupt_TypeDef* exint_instance(void)
+Atmega328ExternalInterrupt_TypeDef* exint_reg(void)
 {
-	return (Atmega328ExternalInterrupt_TypeDef*) Atmega328ExternalInterrupt_Address;
+	return (Atmega328ExternalInterrupt_TypeDef*) 0x0068;
 }
 // Timer/Counter 0, 1 and 2 Interrupt Mask
-Atmega328TimerInterruptMask_TypeDef* tc_imask_instance(void)
+Atmega328TimerInterruptMask_TypeDef* tc_imask_reg(void)
 {
-	return (Atmega328TimerInterruptMask_TypeDef*) Atmega328TimerInterruptMask_Address;
+	return (Atmega328TimerInterruptMask_TypeDef*) 0x006E;
 }
 // Analog to Digital Converter (ADC)
-Atmega328AnalogToDigitalConverter_TypeDef* adc_instance(void)
+Atmega328AnalogToDigitalConverter_TypeDef* adc_reg(void)
 {
-	return (Atmega328AnalogToDigitalConverter_TypeDef*) Atmega328AnalogToDigitalConverter_Address;
+	return (Atmega328AnalogToDigitalConverter_TypeDef*) 0x0078;
 }
 // Analog Comparator Did (AC)
-Atmega328AnalogComparatorDid_TypeDef* ac_did_instance(void)
+Atmega328AnalogComparatorDid_TypeDef* ac_did_reg(void)
 {
-	return (Atmega328AnalogComparatorDid_TypeDef*) Atmega328AnalogComparatorDid_Address;
+	return (Atmega328AnalogComparatorDid_TypeDef*) 0x007F;
 }
 // Timer/Counter, 16-bit (TC1)
-Atmega328TimerCounter1_TypeDef* tc1_instance(void)
+Atmega328TimerCounter1_TypeDef* tc1_reg(void)
 {
-	return (Atmega328TimerCounter1_TypeDef*) Atmega328TimerCounter1_Address;
+	return (Atmega328TimerCounter1_TypeDef*) 0x0080;
 }
 // Timer/Counter, 16-bit Compare (TC1)
-Atmega328TimerCompareRegister1_TypeDef* tc1_compare_instance(void)
+Atmega328TimerCompareRegister1_TypeDef* tc1_compare_reg(void)
 {
-	return (Atmega328TimerCompareRegister1_TypeDef*) Atmega328TimerCompareRegister1_Address;
+	return (Atmega328TimerCompareRegister1_TypeDef*) 0x0086;
 }
 // Timer/Counter, 8-bit (TC2)
-Atmega328TimerCounter2_TypeDef* tc2_instance(void)
+Atmega328TimerCounter2_TypeDef* tc2_reg(void)
 {
-	return (Atmega328TimerCounter2_TypeDef*) Atmega328TimerCounter2_Address;
+	return (Atmega328TimerCounter2_TypeDef*) 0x00B0;
 }
 // Timer/Counter, 8-bit Compare (TC2)
-Atmega328TimerCompareRegister2_TypeDef* tc2_compare_instance(void)
+Atmega328TimerCompareRegister2_TypeDef* tc2_compare_reg(void)
 {
-	return (Atmega328TimerCompareRegister2_TypeDef*) Atmega328TimerCompareRegister2_Address;
+	return (Atmega328TimerCompareRegister2_TypeDef*) 0x00B3;
 }
 // Two Wire Serial Interface (TWI)
-Atmega328TwoWireSerialInterface_TypeDef* twi_instance(void)
+Atmega328TwoWireSerialInterface_TypeDef* twi_reg(void)
 {
-	return (Atmega328TwoWireSerialInterface_TypeDef*) Atmega328TwoWireSerialInterface_Address;
+	return (Atmega328TwoWireSerialInterface_TypeDef*) 0x00B8;
 }
 // USART (USART0)
-Atmega328Usart0_TypeDef* usart0_instance(void)
+Atmega328Usart0_TypeDef* usart0_reg(void)
 {
-	return (Atmega328Usart0_TypeDef*) Atmega328Usart0_Address;
+	return (Atmega328Usart0_TypeDef*) 0x00C0;
 }
 
-/*** Atmega 128 Procedure and Function ***/
+/*** Atmega 128 Procedure and Function definition ***/
 uint16_t readhlbyte(HighLowByte reg)
 {
 	return (reg.par.H << 8) | reg.par.L;
@@ -192,7 +191,7 @@ uint16_t SwapByte(uint16_t num)
 	tp = (num << 8);
 	return (num >> 8) | tp;
 }
-/*** Procedure & Function ToolSet ***/
+/*** Procedure & Function ToolSet definition ***/
 inline uint8_t Msk_Pos(uint8_t Msk){
 	uint8_t Pos = 0;
 	if( Msk ){
@@ -353,24 +352,24 @@ void Atmega328ClockPrescalerSelect(volatile uint8_t prescaler)
 	volatile uint8_t sreg;
 	volatile uint8_t* clkpr = &CLKPR;
 	prescaler &= 0x0F;
-	sreg = cpu_instance()->sreg.var;
-	cpu_instance()->sreg.var &= ~(1 << 7);
+	sreg = cpu_reg()->sreg.var;
+	cpu_reg()->sreg.var &= ~(1 << 7);
 	
 	*clkpr = (1 << CLKPCE);
 	*clkpr = prescaler;
 	
-	cpu_instance()->sreg.var = sreg;
+	cpu_reg()->sreg.var = sreg;
 }
 void Atmega328MoveInterruptsToBoot(void)
 {
 	volatile uint8_t sreg;
-	sreg = cpu_instance()->sreg.var;
-	cpu_instance()->sreg.var &= ~(1 << 7);
+	sreg = cpu_reg()->sreg.var;
+	cpu_reg()->sreg.var &= ~(1 << 7);
 	
 	MCUCR = (1<<IVCE);
 	MCUCR = (1<<IVSEL);
 	
-	cpu_instance()->sreg.var = sreg;
+	cpu_reg()->sreg.var = sreg;
 }
 
 /******

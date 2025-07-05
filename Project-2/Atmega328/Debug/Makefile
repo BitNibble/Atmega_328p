@@ -42,8 +42,8 @@ SUBDIRS :=  \
 C_SRCS +=  \
 ../Livraria/Src/74hc595.c \
 ../Livraria/Src/atcommands.c \
+../Livraria/Src/atmega328.c \
 ../Livraria/Src/atmega328analog.c \
-../Livraria/Src/atmega328instance.c \
 ../Livraria/Src/atmega328interrupt.c \
 ../Livraria/Src/atmega328mapping.c \
 ../Livraria/Src/atmega328timer0.c \
@@ -80,8 +80,8 @@ ASM_SRCS +=
 OBJS +=  \
 Livraria/Src/74hc595.o \
 Livraria/Src/atcommands.o \
+Livraria/Src/atmega328.o \
 Livraria/Src/atmega328analog.o \
-Livraria/Src/atmega328instance.o \
 Livraria/Src/atmega328interrupt.o \
 Livraria/Src/atmega328mapping.o \
 Livraria/Src/atmega328timer0.o \
@@ -111,8 +111,8 @@ main.o
 OBJS_AS_ARGS +=  \
 Livraria/Src/74hc595.o \
 Livraria/Src/atcommands.o \
+Livraria/Src/atmega328.o \
 Livraria/Src/atmega328analog.o \
-Livraria/Src/atmega328instance.o \
 Livraria/Src/atmega328interrupt.o \
 Livraria/Src/atmega328mapping.o \
 Livraria/Src/atmega328timer0.o \
@@ -142,8 +142,8 @@ main.o
 C_DEPS +=  \
 Livraria/Src/74hc595.d \
 Livraria/Src/atcommands.d \
+Livraria/Src/atmega328.d \
 Livraria/Src/atmega328analog.d \
-Livraria/Src/atmega328instance.d \
 Livraria/Src/atmega328interrupt.d \
 Livraria/Src/atmega328mapping.d \
 Livraria/Src/atmega328timer0.d \
@@ -173,8 +173,8 @@ main.d
 C_DEPS_AS_ARGS +=  \
 Livraria/Src/74hc595.d \
 Livraria/Src/atcommands.d \
+Livraria/Src/atmega328.d \
 Livraria/Src/atmega328analog.d \
-Livraria/Src/atmega328instance.d \
 Livraria/Src/atmega328interrupt.d \
 Livraria/Src/atmega328mapping.d \
 Livraria/Src/atmega328timer0.d \
@@ -229,14 +229,14 @@ Livraria/Src/atcommands.o: ../Livraria/Src/atcommands.c
 	@echo Finished building: $<
 	
 
-Livraria/Src/atmega328analog.o: ../Livraria/Src/atmega328analog.c
+Livraria/Src/atmega328.o: ../Livraria/Src/atmega328.c
 	@echo Building file: $<
 	@echo Invoking: XC8 C Compiler : 0.0
 	$(QUOTE)C:\Program Files\Microchip\xc8\v3.00\bin\xc8-cc.exe$(QUOTE)  -mcpu=ATmega328  -mdfp="C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\xc8"  -c -x c -funsigned-char -funsigned-bitfields -mext=cci -D__ATmega328__ -DDEBUG  -I"../Livraria/Inc"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -Werror -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-Livraria/Src/atmega328instance.o: ../Livraria/Src/atmega328instance.c
+Livraria/Src/atmega328analog.o: ../Livraria/Src/atmega328analog.c
 	@echo Building file: $<
 	@echo Invoking: XC8 C Compiler : 0.0
 	$(QUOTE)C:\Program Files\Microchip\xc8\v3.00\bin\xc8-cc.exe$(QUOTE)  -mcpu=ATmega328  -mdfp="C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\xc8"  -c -x c -funsigned-char -funsigned-bitfields -mext=cci -D__ATmega328__ -DDEBUG  -I"../Livraria/Inc"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -Werror -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

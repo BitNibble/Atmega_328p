@@ -30,71 +30,71 @@ TC0 tc0_enable(unsigned char wavegenmode, unsigned char interrupt)
 //	interrupt: off; overflow; output compare; both; default - non.
 {
 	timer0_state = 0;
-	tc0_instance()->tccr0a.var &= ~((1 << WGM01) | (1 << WGM00));
-	tc0_instance()->tccr0b.var &= ~(1 << WGM02);
+	tc0_reg()->tccr0a.var &= ~((1 << WGM01) | (1 << WGM00));
+	tc0_reg()->tccr0b.var &= ~(1 << WGM02);
 	switch(wavegenmode){
 		case 0: // Normal
 		break;
 		case 1: // PWM, Phase Correct, 8-bit
-			tc0_instance()->tccr0a.var |= (1 << WGM00);
+			tc0_reg()->tccr0a.var |= (1 << WGM00);
 		break;
 		case 2: // PWM, Phase Correct, 9-bit
-			tc0_instance()->tccr0a.var |= (1 << WGM01);
+			tc0_reg()->tccr0a.var |= (1 << WGM01);
 		break;
 		case 3: // Fast PWM
-			tc0_instance()->tccr0a.var |= (1 << WGM00) | (1 << WGM01);
+			tc0_reg()->tccr0a.var |= (1 << WGM00) | (1 << WGM01);
 		break;
 		case 5: // PWM, Phase Correct
-			tc0_instance()->tccr0a.var |= (1 << WGM00);
-			tc0_instance()->tccr0b.var |= (1 << WGM02);
+			tc0_reg()->tccr0a.var |= (1 << WGM00);
+			tc0_reg()->tccr0b.var |= (1 << WGM02);
 		break;
 		case 7: // Fast PWM
-			tc0_instance()->tccr0a.var |= (1 << WGM00) | (1 << WGM01);
-			tc0_instance()->tccr0b.var |= (1 << WGM02);
+			tc0_reg()->tccr0a.var |= (1 << WGM00) | (1 << WGM01);
+			tc0_reg()->tccr0b.var |= (1 << WGM02);
 		break;
 		default: // Normal
 		break;
 	}
-	tc_imask_instance()->timsk0.var &= ~((1 << OCIE0B) | (1 << OCIE0A) | (1 << TOIE0));
+	tc_imask_reg()->timsk0.var &= ~((1 << OCIE0B) | (1 << OCIE0A) | (1 << TOIE0));
 	switch(interrupt){
 		case 0: 
 		break;
 		case 1:
-			tc_imask_instance()->timsk0.var |= (1 << TOIE0);
-			cpu_instance()->sreg.var |= (1 << GLOBAL_INTERRUPT_ENABLE);
+			tc_imask_reg()->timsk0.var |= (1 << TOIE0);
+			cpu_reg()->sreg.var |= (1 << GLOBAL_INTERRUPT_ENABLE);
 		break;
 		case 2:
-			tc_imask_instance()->timsk0.var |= (1 << OCIE0A);
-			cpu_instance()->sreg.var |= (1 << GLOBAL_INTERRUPT_ENABLE);
+			tc_imask_reg()->timsk0.var |= (1 << OCIE0A);
+			cpu_reg()->sreg.var |= (1 << GLOBAL_INTERRUPT_ENABLE);
 		break;
 		case 3:
-			tc_imask_instance()->timsk0.var |= (1 << OCIE0B);
-			cpu_instance()->sreg.var |= (1 << GLOBAL_INTERRUPT_ENABLE);
+			tc_imask_reg()->timsk0.var |= (1 << OCIE0B);
+			cpu_reg()->sreg.var |= (1 << GLOBAL_INTERRUPT_ENABLE);
 		break;
 		case 4:
-			tc_imask_instance()->timsk0.var |= (1 << TOIE0) | (1 << OCIE0A);
-			cpu_instance()->sreg.var |= (1 << GLOBAL_INTERRUPT_ENABLE);
+			tc_imask_reg()->timsk0.var |= (1 << TOIE0) | (1 << OCIE0A);
+			cpu_reg()->sreg.var |= (1 << GLOBAL_INTERRUPT_ENABLE);
 		break;
 		case 5:
-			tc_imask_instance()->timsk0.var |= (1 << TOIE0) | (1 << OCIE0B);
-			cpu_instance()->sreg.var |= (1 << GLOBAL_INTERRUPT_ENABLE);
+			tc_imask_reg()->timsk0.var |= (1 << TOIE0) | (1 << OCIE0B);
+			cpu_reg()->sreg.var |= (1 << GLOBAL_INTERRUPT_ENABLE);
 		break;
 		case 6:
-			tc_imask_instance()->timsk0.var |= (1 << TOIE0) | (1 << OCIE0A) | (1 << OCIE0B);
-			cpu_instance()->sreg.var |= (1 << GLOBAL_INTERRUPT_ENABLE);
+			tc_imask_reg()->timsk0.var |= (1 << TOIE0) | (1 << OCIE0A) | (1 << OCIE0B);
+			cpu_reg()->sreg.var |= (1 << GLOBAL_INTERRUPT_ENABLE);
 		break;
 		case 7:
-			tc_imask_instance()->timsk0.var |= (1 << OCIE0A) | (1 << OCIE0B);
-			cpu_instance()->sreg.var |= (1 << GLOBAL_INTERRUPT_ENABLE);
+			tc_imask_reg()->timsk0.var |= (1 << OCIE0A) | (1 << OCIE0B);
+			cpu_reg()->sreg.var |= (1 << GLOBAL_INTERRUPT_ENABLE);
 		break;
 		default:
 		break;
 	}
-	setup_tc0.gcontrol_instance = tc_gcontrol_instance();
-	setup_tc0.compare_instance = tc0_compare_instance();
-	setup_tc0.imask_instance = tc_imask_instance();
-	setup_tc0.iflag_instance = tc_iflag_instance();
-	setup_tc0.instance = tc0_instance();
+	setup_tc0.gcontrol_reg = tc_gcontrol_reg();
+	setup_tc0.compare_reg = tc0_compare_reg();
+	setup_tc0.imask_reg = tc_imask_reg();
+	setup_tc0.iflag_reg = tc_iflag_reg();
+	setup_tc0.reg = tc0_reg();
 	// V-table
 	setup_tc0.compoutmodeA = TIMER_COUNTER0_compoutmodeA;
 	setup_tc0.compoutmodeB = TIMER_COUNTER0_compoutmodeB;
@@ -116,32 +116,32 @@ void TIMER_COUNTER0_start(unsigned int prescaler)
 //	clk T 0 S /1024 (From prescaler); default - clk T 0 S /1024 (From prescaler).
 {
 	if(timer0_state == 0){ // one shot
-		tc0_compare_instance()->ocr0a.var = 0XFF;
-		tc0_instance()->tccr0b.var &= ~(7 << CS00); // No clock source. (Timer/Counter stopped)
+		tc0_compare_reg()->ocr0a.var = 0XFF;
+		tc0_reg()->tccr0b.var &= ~(7 << CS00); // No clock source. (Timer/Counter stopped)
 		switch(prescaler){
 			case 1: // clk T0S /(No prescaler)
-				tc0_instance()->tccr0b.var |= (1 << CS00);
+				tc0_reg()->tccr0b.var |= (1 << CS00);
 			break;
 			case 8: // clk T0S /8 (From prescaler)
-				tc0_instance()->tccr0b.var |= (1 << CS01);
+				tc0_reg()->tccr0b.var |= (1 << CS01);
 			break;
 			case 64: // clk T0S /64 (From prescaler)
-				tc0_instance()->tccr0b.var |= (3 << CS00);
+				tc0_reg()->tccr0b.var |= (3 << CS00);
 			break;
 			case 256: // clk T 0 S /256 (From prescaler)
-				tc0_instance()->tccr0b.var |= (4 << CS00);
+				tc0_reg()->tccr0b.var |= (4 << CS00);
 			break;
 			case 1024: // clk T 0 S /1024 (From prescaler)
-				tc0_instance()->tccr0b.var |= (5 << CS00);
+				tc0_reg()->tccr0b.var |= (5 << CS00);
 			break;
 			case 3: // External clock source on T0 pin. Clock on falling edge.
-				tc0_instance()->tccr0b.var |= (6 << CS00);
+				tc0_reg()->tccr0b.var |= (6 << CS00);
 			break;
 			case 5: // External clock source on T0 pin. Clock on rising edge.
-				tc0_instance()->tccr0b.var |= (7 << CS00);
+				tc0_reg()->tccr0b.var |= (7 << CS00);
 			break;
 			default: // clk T 0 S /1024 (From prescaler)
-				tc0_instance()->tccr0b.var |= (5 << CS00);
+				tc0_reg()->tccr0b.var |= (5 << CS00);
 			break;
 		}
 		timer0_state = 1;
@@ -153,29 +153,29 @@ void TIMER_COUNTER0_compoutmodeA(unsigned char compoutmode)
 //	Set OC0 on compare match when up-counting. Clear OC0 on compare match when downcounting. Set OC0 on compare match ;
 //	default-Normal port operation, OC0 disconnected.
 {
-	tc0_instance()->tccr0a.var &= ~((1 << COM0A0) | (1 << COM0A1));
+	tc0_reg()->tccr0a.var &= ~((1 << COM0A0) | (1 << COM0A1));
 	switch(compoutmode){
 		case 0: // Normal port operation, OC0 disconnected.
 		break;
 		case 1: // Reserved
 				// Toggle OC0 on compare match
-			portd_instance()->ddr.var |= (1 << 6);
-			tc0_instance()->tccr0a.var |= (1 << COM0A0);
+			portd_reg()->ddr.var |= (1 << 6);
+			tc0_reg()->tccr0a.var |= (1 << COM0A0);
 			
 		break;
 		case 2: // Clear OC0 on compare match when up-counting.
 				// Set OC0 on compare
 				// match when down counting.
 				// Clear OC0 on compare match
-			portd_instance()->ddr.var |= (1 << 6);
-			tc0_instance()->tccr0a.var |= (1 << COM0A1);
+			portd_reg()->ddr.var |= (1 << 6);
+			tc0_reg()->tccr0a.var |= (1 << COM0A1);
 		break;
 		case 3: // Set OC0 on compare match when up-counting.
 				// Clear OC0 on compare
 				// match when down counting.
 				// Set OC0 on compare match
-			portd_instance()->ddr.var |= (1 << 6);
-			tc0_instance()->tccr0a.var |= (1 << COM0A0) | (1 << COM0A1);
+			portd_reg()->ddr.var |= (1 << 6);
+			tc0_reg()->tccr0a.var |= (1 << COM0A0) | (1 << COM0A1);
 		break;
 		default: // Normal port operation, OC0 disconnected.
 		break;
@@ -187,28 +187,28 @@ void TIMER_COUNTER0_compoutmodeB(unsigned char compoutmode)
 //	Set OC0 on compare match when up-counting. Clear OC0 on compare match when downcounting. Set OC0 on compare match ;
 //	default-Normal port operation, OC0 disconnected.
 {
-	tc0_instance()->tccr0a.var &= ~((1 << COM0B0) | (1 << COM0B1));
+	tc0_reg()->tccr0a.var &= ~((1 << COM0B0) | (1 << COM0B1));
 	switch(compoutmode){ // see table 53, 54, 55 in data sheet for more information
 		case 0: // Normal port operation, OC0 disconnected.
 		break;
 		case 1: // Reserved
 				// Toggle OC0 on compare match
-			portd_instance()->ddr.var |= (1 << 5);
-			tc0_instance()->tccr0a.var |= (1 << COM0B0);
+			portd_reg()->ddr.var |= (1 << 5);
+			tc0_reg()->tccr0a.var |= (1 << COM0B0);
 		break;
 		case 2: // Clear OC0 on compare match when up-counting.
 				// Set OC0 on compare
 				// match when down counting.
 				// Clear OC0 on compare match
-			portd_instance()->ddr.var |= (1 << 5);
-			tc0_instance()->tccr0a.var |= (1 << COM0B1);
+			portd_reg()->ddr.var |= (1 << 5);
+			tc0_reg()->tccr0a.var |= (1 << COM0B1);
 		break;
 		case 3: // Set OC0 on compare match when up-counting.
 				// Clear OC0 on compare
 				// match when down counting.
 				// Set OC0 on compare match
-			portd_instance()->ddr.var |= (1 << 5);
-			tc0_instance()->tccr0a.var |= (1 << COM0B0) | (1 << COM0B1);
+			portd_reg()->ddr.var |= (1 << 5);
+			tc0_reg()->tccr0a.var |= (1 << COM0B0) | (1 << COM0B1);
 		break;
 		default: // Normal port operation, OC0 disconnected.
 		break;
@@ -216,17 +216,17 @@ void TIMER_COUNTER0_compoutmodeB(unsigned char compoutmode)
 }
 void TIMER_COUNTER0_compareA(unsigned char compare)
 {
-	tc0_compare_instance()->ocr0a.var = compare;
+	tc0_compare_reg()->ocr0a.var = compare;
 }
 void TIMER_COUNTER0_compareB(unsigned char compare)
 {
-	tc0_compare_instance()->ocr0b.var = compare;
+	tc0_compare_reg()->ocr0b.var = compare;
 }
 void TIMER_COUNTER0_stop(void)
 // stops timer by setting prescaler to zero
 {
-	tc0_instance()->tccr0b.var &= ~(7 << CS00); // No clock source. (Timer/Counter stopped)
-	tc0_instance()->tcnt0.var = 0X00;
+	tc0_reg()->tccr0b.var &= ~(7 << CS00); // No clock source. (Timer/Counter stopped)
+	tc0_reg()->tcnt0.var = 0X00;
 	timer0_state = 0;
 }
 

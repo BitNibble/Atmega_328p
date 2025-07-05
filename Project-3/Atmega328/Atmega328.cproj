@@ -162,9 +162,6 @@
     <Compile Include="Livraria\Inc\atmega328analog.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Livraria\Inc\atmega328instance.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="Livraria\Inc\atmega328interrupt.h">
       <SubType>compile</SubType>
     </Compile>
@@ -249,10 +246,10 @@
     <Compile Include="Livraria\Src\atcommands.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Livraria\Src\atmega328analog.c">
+    <Compile Include="Livraria\Src\atmega328.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Livraria\Src\atmega328instance.c">
+    <Compile Include="Livraria\Src\atmega328analog.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Livraria\Src\atmega328interrupt.c">

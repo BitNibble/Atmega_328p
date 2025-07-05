@@ -35,24 +35,24 @@ ADC0 adc_enable( uint8_t Vreff, uint8_t Divfactor, int n_channel, ... )
 	va_list list;
 	int i;
 
-	tSREG = cpu_instance()->sreg.var;
-	cpu_instance()->sreg.par.i= 0;
+	tSREG = cpu_reg()->sreg.var;
+	cpu_reg()->sreg.par.i= 0;
 	
 	ADC_N_CHANNEL = n_channel;
 	ADC_SELECTOR = 0;
 	adc_n_sample = 0;
 
-	adc_instance()->admux.var &= ~(3 << REFS0);
+	adc_reg()->admux.var &= ~(3 << REFS0);
 	switch( Vreff ){
 		case 0:
 			setup_analog.par.VREFF = 0;
 		break;
 		case 1:
-			adc_instance()->admux.var |=	(1 << REFS0);
+			adc_reg()->admux.var |=	(1 << REFS0);
 			setup_analog.par.VREFF = 1;
 		break;
 		case 3:
-			adc_instance()->admux.var |=	(3 << REFS0);
+			adc_reg()->admux.var |=	(3 << REFS0);
 			setup_analog.par.VREFF = 3;
 		break;
 		default:
@@ -60,29 +60,29 @@ ADC0 adc_enable( uint8_t Vreff, uint8_t Divfactor, int n_channel, ... )
 		break;
 	}
 	
-	adc_instance()->admux.var &= ~(1 << ADLAR);
+	adc_reg()->admux.var &= ~(1 << ADLAR);
 	
 	va_start(list, n_channel);
 	for( i = 0; i < n_channel; i++ ){
 		ADC_CHANNEL_GAIN[i] = va_arg(list, int);
 		switch(ADC_CHANNEL_GAIN[i]){
 			case 0:
-				portc_instance()->ddr.par.c0 = 0;
+				portc_reg()->ddr.par.c0 = 0;
 			break;
 			case 1:
-				portc_instance()->ddr.par.c1 = 0;
+				portc_reg()->ddr.par.c1 = 0;
 			break;
 			case 2:
-				portc_instance()->ddr.par.c2 = 0;
+				portc_reg()->ddr.par.c2 = 0;
 			break;
 			case 3:
-				portc_instance()->ddr.par.c3 = 0;
+				portc_reg()->ddr.par.c3 = 0;
 			break;
 			case 4:
-				portc_instance()->ddr.par.c4 = 0;
+				portc_reg()->ddr.par.c4 = 0;
 			break;
 			case 5:
-				portc_instance()->ddr.par.c5 = 0;
+				portc_reg()->ddr.par.c5 = 0;
 			break;
 			default:
 			break;
@@ -90,54 +90,54 @@ ADC0 adc_enable( uint8_t Vreff, uint8_t Divfactor, int n_channel, ... )
 	}
 	va_end(list);
 	
-	adc_instance()->admux.var &= ~ADC_MUX_MASK;
-	adc_instance()->admux.var |= (ADC_MUX_MASK & ADC_CHANNEL_GAIN[ADC_SELECTOR]);
+	adc_reg()->admux.var &= ~ADC_MUX_MASK;
+	adc_reg()->admux.var |= (ADC_MUX_MASK & ADC_CHANNEL_GAIN[ADC_SELECTOR]);
 	
-	adc_instance()->adcsra.var |= (1 << ADEN);
-	adc_instance()->adcsra.var |= (1 << ADSC);
-	adc_instance()->adcsra.var &= ~(1 << ADATE);
-	adc_instance()->adcsrb.var &= ~(7 << ADTS0);
-	adc_instance()->adcsra.var |= (1 << ADIE);
+	adc_reg()->adcsra.var |= (1 << ADEN);
+	adc_reg()->adcsra.var |= (1 << ADSC);
+	adc_reg()->adcsra.var &= ~(1 << ADATE);
+	adc_reg()->adcsrb.var &= ~(7 << ADTS0);
+	adc_reg()->adcsra.var |= (1 << ADIE);
 	
-	adc_instance()->adcsra.var &= ~(7 << ADPS0);
+	adc_reg()->adcsra.var &= ~(7 << ADPS0);
 	switch( Divfactor ){
 		case 2: // 1
 			setup_analog.par.DIVISION_FACTOR = 2;
 		break;
 		case 4: // 2
-			adc_instance()->adcsra.var |= (1 << ADPS1);
+			adc_reg()->adcsra.var |= (1 << ADPS1);
 			setup_analog.par.DIVISION_FACTOR = 4;
 		break;
 		case 8: // 3
-			adc_instance()->adcsra.var |= (3 << ADPS0);
+			adc_reg()->adcsra.var |= (3 << ADPS0);
 			setup_analog.par.DIVISION_FACTOR = 8;
 		break;
 		case 16: // 4
-			adc_instance()->adcsra.var |= (1 << ADPS2);
+			adc_reg()->adcsra.var |= (1 << ADPS2);
 			setup_analog.par.DIVISION_FACTOR	=	16;
 		break;
 		case 32: // 5
-			adc_instance()->adcsra.var |= (5 << ADPS0);
+			adc_reg()->adcsra.var |= (5 << ADPS0);
 			setup_analog.par.DIVISION_FACTOR = 32;
 		break;
 		case 64: // 6
-			adc_instance()->adcsra.var |= (6 << ADPS0);
+			adc_reg()->adcsra.var |= (6 << ADPS0);
 			setup_analog.par.DIVISION_FACTOR = 64;
 		break;
 		case 128: // 7
-			adc_instance()->adcsra.var |= (7 << ADPS0);
+			adc_reg()->adcsra.var |= (7 << ADPS0);
 			setup_analog.par.DIVISION_FACTOR = 128;
 		break;
 		default: // 7
-			adc_instance()->adcsra.var |= (7 << ADPS0);
+			adc_reg()->adcsra.var |= (7 << ADPS0);
 			setup_analog.par.DIVISION_FACTOR = 128;
 		break;
 	}
 	//V-table
 	setup_analog.read = ANALOG_read;
 	
-	cpu_instance()->sreg.var = tSREG;
-	cpu_instance()->sreg.par.i = 1;
+	cpu_reg()->sreg.var = tSREG;
+	cpu_reg()->sreg.par.i = 1;
 
 	return setup_analog;
 }
@@ -149,9 +149,9 @@ int ANALOG_read(int selection)
 {
 	uint8_t ADSC_FLAG;
 	ADSC_FLAG = (1 << ADSC);
-	if( !(adc_instance()->adcsra.var & ADSC_FLAG) ){
+	if( !(adc_reg()->adcsra.var & ADSC_FLAG) ){
 		//ADC_SELECT
-		adc_instance()->adcsra.var |= (1 << ADSC);
+		adc_reg()->adcsra.var |= (1 << ADSC);
 	}	
 	return ADC_VALUE[selection];
 }
@@ -174,8 +174,8 @@ ISR(ANALOG_INTERRUPT)
 			ADC_SELECTOR++;
 		else
 			ADC_SELECTOR = 0;
-		adc_instance()->admux.var &= ~ADC_MUX_MASK;
-		adc_instance()->admux.var |= (ADC_CHANNEL_GAIN[ADC_SELECTOR] & ADC_MUX_MASK);
+		adc_reg()->admux.var &= ~ADC_MUX_MASK;
+		adc_reg()->admux.var |= (ADC_CHANNEL_GAIN[ADC_SELECTOR] & ADC_MUX_MASK);
 	}		
 }
 

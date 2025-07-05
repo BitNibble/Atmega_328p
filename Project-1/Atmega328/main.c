@@ -146,9 +146,9 @@ for (window = 0, menu = 1; TRUE; )
 	if(!window){ // Loop preamble
 		lcd.reboot();
 		
-		input = ( portc_instance()->pin.var & 0xF0 ) | get_reg_block( portb_instance()->pin.var, 4, 4 );
+		input = ( portc_reg()->pin.var & 0xF0 ) | get_reg_block( portb_reg()->pin.var, 4, 4 );
 		button.update(&button.par, input);
-		disp.update(&disp.par, portd_instance()->pin.var);
+		disp.update(&disp.par, portd_reg()->pin.var);
 		
 		// uart capture
 		uartreceive = usart0_messageprint( usart0(), uartrcv, uartmsg, "\r\n");
@@ -280,12 +280,12 @@ for (window = 0, menu = 1; TRUE; )
 /*** Procedure and Function Definitions ***/
 void PORTINIT(void)
 {
-	write_reg_block(&portb_instance()->ddr.var,2,4,0);
-	write_reg_block(&portb_instance()->port.var,2,4,3);
-	write_reg_block(&portc_instance()->ddr.var,2,4,0);
-	write_reg_block(&portc_instance()->port.var,2,4,3);
-	write_reg_block(&portd_instance()->ddr.var,2,2,0);
-	write_reg_block(&portd_instance()->port.var,2,2,3);
+	write_reg_block(&portb_reg()->ddr.var,2,4,0);
+	write_reg_block(&portb_reg()->port.var,2,4,3);
+	write_reg_block(&portc_reg()->ddr.var,2,4,0);
+	write_reg_block(&portc_reg()->port.var,2,4,3);
+	write_reg_block(&portd_reg()->ddr.var,2,2,0);
+	write_reg_block(&portd_reg()->port.var,2,2,3);
 }
 void exponencial(double* target, double rate) // *target = rate ^ t -> t is interrupt timer therefore rate > 0
 {

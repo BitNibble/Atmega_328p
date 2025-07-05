@@ -12,17 +12,17 @@ Update:   01/01/2024
 	#define _ATMEGA328INTERRUPT_H_
 
 /*** Global Library ***/
-#include "atmega328instance.h"
+#include "atmega328.h"
 
 /*** Global Constant & Macros ***/
 #define MCU_Control_Status_register_Mask 0X0F
 
 /*** Global Variable ***/
 typedef struct{
-	Atmega328ExternalInterruptPinChangeMask_TypeDef* pcmask_instance;
-	Atmega328ExternalInterruptMask_TypeDef* imask_instance;
-	Atmega328ExternalInterruptFlag_TypeDef* iflag_instance;
-	Atmega328ExternalInterrupt_TypeDef* instance;
+	Atmega328ExternalInterruptPinChangeMask_TypeDef* pcmask_reg;
+	Atmega328ExternalInterruptMask_TypeDef* imask_reg;
+	Atmega328ExternalInterruptFlag_TypeDef* iflag_reg;
+	Atmega328ExternalInterrupt_TypeDef* reg;
 	// V-table
 	void (*set)(uint8_t channel, uint8_t sense);
 	void (*off)(uint8_t channel);

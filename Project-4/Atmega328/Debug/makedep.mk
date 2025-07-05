@@ -6,9 +6,9 @@ Livraria\Src\74hc595.c
 
 Livraria\Src\atcommands.c
 
-Livraria\Src\atmega328analog.c
+Livraria\Src\atmega328.c
 
-Livraria\Src\atmega328instance.c
+Livraria\Src\atmega328analog.c
 
 Livraria\Src\atmega328interrupt.c
 

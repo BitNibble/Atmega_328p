@@ -64,17 +64,10 @@ for (menu = 1; TRUE; ) // Looping
 		break;
 	}
 	
-}
-} /*** MAIN ***/
-
-/*** File Interrupt ***/
+}}
 
 /***EOF***/
 
-/******
-1º Sequence
-2º Scope
-3º Pointer and Variable
-4º Casting
-******/
+
+
 

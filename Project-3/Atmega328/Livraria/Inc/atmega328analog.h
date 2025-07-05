@@ -12,7 +12,7 @@ Update:   01/01/2024
 	#define _ATMEGA328ANALOG_H_
 
 /*** Global Library ***/
-#include "atmega328instance.h"
+#include "atmega328.h"
 
 /*** Global Constant & Macro ***/
 #ifndef GLOBAL_INTERRUPT_ENABLE
