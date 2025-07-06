@@ -81,7 +81,6 @@ Update:   01/01/2024
 
 /*** Global Variable ***/
 typedef struct{
-	Atmega328TwoWireSerialInterface_TypeDef* reg;
 	// V-table
 	void (*start)(void);
 	void (*connect)(uint8_t address, uint8_t rw);

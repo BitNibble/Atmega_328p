@@ -23,12 +23,7 @@ uint8_t INTERRUPT_reset_status(void);
 EXINT0 exint_enable(void)
 // setup blank
 {
-	// Pre-Processor Case 1
 	exint_imask_reg()->eimsk.var = 0X00;
-	setup_interrupt.pcmask_reg = exint_pcmask_reg();
-	setup_interrupt.imask_reg = exint_imask_reg();
-	setup_interrupt.iflag_reg = exint_iflag_reg();
-	setup_interrupt.reg = exint_reg();
 	// V-table
 	setup_interrupt.set = INTERRUPT_set;
 	setup_interrupt.off = INTERRUPT_off;

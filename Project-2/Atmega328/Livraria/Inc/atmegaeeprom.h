@@ -16,7 +16,6 @@ Update:   01/01/2024
 
 /*** Global Variable ***/
 typedef struct{
-	Atmega328Eeprom_TypeDef* reg;
 	// V-table
 	uint8_t (*read_byte) ( const uint8_t * addr );
 	void (*write_byte) ( uint8_t *addr , uint8_t value );

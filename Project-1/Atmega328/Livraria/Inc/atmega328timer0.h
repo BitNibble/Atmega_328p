@@ -20,11 +20,6 @@ Update:   01/01/2024
 
 /*** Global variable ***/
 typedef struct{
-	Atmega328TimerGeneralControlRegister_TypeDef* gcontrol_reg;
-	Atmega328TimerCompareRegister0_TypeDef* compare_reg;
-	Atmega328TimerInterruptMask_TypeDef* imask_reg;
-	Atmega328TimerInterruptFlag_TypeDef* iflag_reg;
-	Atmega328TimerCounter0_TypeDef* reg;
 	// V-table
 	void (*compoutmodeA)(unsigned char compoutmode);
 	void (*compoutmodeB)(unsigned char compoutmode);

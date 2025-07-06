@@ -35,7 +35,6 @@ TWI0 twi_enable(uint8_t atmega_ID,  uint8_t prescaler)
 	// Init local var
 	tSREG = cpu_reg()->sreg.var;
 	cpu_reg()->sreg.par.i = 0;
-	setup_i2c.reg = twi_reg();
 	// V-table
 	setup_i2c.start = TWI_start;
 	setup_i2c.connect = TWI_connect;
