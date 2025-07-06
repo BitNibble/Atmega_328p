@@ -367,10 +367,10 @@ typedef struct {
 Atmega328Usart0_TypeDef* usart0_reg(void);
 
 /*** Atmega 328 Procedure and Function ***/
-uint16_t readhlbyte(HighLowByte reg);
-uint16_t readlhbyte(HighLowByte reg);
-HighLowByte writehlbyte(uint16_t val);
-HighLowByte writelhbyte(uint16_t val);
+uint16_t readhlbyte(U_word reg);
+uint16_t readlhbyte(U_word reg);
+U_word writehlbyte(uint16_t val);
+U_word writelhbyte(uint16_t val);
 uint16_t swapbyte(uint16_t num);
 uint16_t BAUDRATEnormal(uint32_t BAUD);
 uint16_t BAUDRATEdouble(uint32_t BAUD);
@@ -403,31 +403,31 @@ void ftdelayReset(uint8_t ID);
 /*** FLASH ***
 // Interrupt Vectors (ISR)
 typedef struct { // SRAM START = 0x0100 END = 0x0877 atmega328
-	HighLowByte RESET_vect; // 0x0000
-	HighLowByte INT0_vect; // 0x0002
-	HighLowByte INT1_vect; // 0x0004
-	HighLowByte PCINT0_vect; // 0x0006
-	HighLowByte PCINT1_vect; // 0x0008
-	HighLowByte PCINT2_vect; // 0x000A
-	HighLowByte WDT_vect; // 0x000C
-	HighLowByte TIMER2_COMPA_vect; // 0x000E
-	HighLowByte TIMER2_COMPB_vect; // 0x0010
-	HighLowByte TIMER2_OVF_vect; // 0x0012
-	HighLowByte TIMER1_CAPT_vect; // 0x0014
-	HighLowByte TIMER1_COMPA_vect; // 0x0016
-	HighLowByte TIMER1_COMPB_vect; // 0x0018
-	HighLowByte TIMER1_OVF_vect; // 0x001A
-	HighLowByte TIMER0_COMPA_vect; // 0x001C
-	HighLowByte TIMER0_COMPB_vect; // 0x001E
-	HighLowByte TIMER0_OVF_vect; // 0x0020
-	HighLowByte SPI_STC_vect; // 0x0022
-	HighLowByte USART_RX_vect; // 0x0024
-	HighLowByte USART_UDRE_vect; // 0x0026
-	HighLowByte USART_TX_vect; // 0x0028
-	HighLowByte ADC_vect; // 0x002A
-	HighLowByte EE_READY_vect; // 0x002C
-	HighLowByte ANALOG_COMP_vect; // 0x002E
-	HighLowByte TWI_vect; // 0x0030
-	HighLowByte SPM_READY_vect; // 0x0032
+	U_word RESET_vect; // 0x0000
+	U_word INT0_vect; // 0x0002
+	U_word INT1_vect; // 0x0004
+	U_word PCINT0_vect; // 0x0006
+	U_word PCINT1_vect; // 0x0008
+	U_word PCINT2_vect; // 0x000A
+	U_word WDT_vect; // 0x000C
+	U_word TIMER2_COMPA_vect; // 0x000E
+	U_word TIMER2_COMPB_vect; // 0x0010
+	U_word TIMER2_OVF_vect; // 0x0012
+	U_word TIMER1_CAPT_vect; // 0x0014
+	U_word TIMER1_COMPA_vect; // 0x0016
+	U_word TIMER1_COMPB_vect; // 0x0018
+	U_word TIMER1_OVF_vect; // 0x001A
+	U_word TIMER0_COMPA_vect; // 0x001C
+	U_word TIMER0_COMPB_vect; // 0x001E
+	U_word TIMER0_OVF_vect; // 0x0020
+	U_word SPI_STC_vect; // 0x0022
+	U_word USART_RX_vect; // 0x0024
+	U_word USART_UDRE_vect; // 0x0026
+	U_word USART_TX_vect; // 0x0028
+	U_word ADC_vect; // 0x002A
+	U_word EE_READY_vect; // 0x002C
+	U_word ANALOG_COMP_vect; // 0x002E
+	U_word TWI_vect; // 0x0030
+	U_word SPM_READY_vect; // 0x0032
 } Atmega328InterruptVectors_TypeDef;
 *** FLASH ***/

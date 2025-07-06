@@ -31,7 +31,7 @@ typedef union {
 		uint8_t b7:1;
 	}par;
 	uint8_t var;
-} _uint8_t;
+} U_byte;
 
 typedef union {
 	struct{
@@ -39,15 +39,7 @@ typedef union {
 		uint8_t h;
 	}par;
 	uint16_t var;
-} _uint16_t;
-
-typedef union {
-	struct{
-		uint8_t L; // Lower Address
-		uint8_t H; // Higher Address
-	}par;
-	uint16_t var;
-} HighLowByte;
+} U_word;
 
 /**** REGISTERS ****/
 // Reserved 0x20

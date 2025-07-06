@@ -167,22 +167,22 @@ Atmega328Usart0_TypeDef* usart0_reg(void)
 }
 
 /*** Atmega 128 Procedure and Function definition ***/
-uint16_t readhlbyte(HighLowByte reg)
+uint16_t readhlbyte(U_word reg)
 {
-	return (reg.par.H << 8) | reg.par.L;
+	return (reg.par.h << 8) | reg.par.l;
 }
-uint16_t readlhbyte(HighLowByte reg)
+uint16_t readlhbyte(U_word reg)
 {
-	return (reg.par.L << 8) | reg.par.H;
+	return (reg.par.l << 8) | reg.par.h;
 }
-HighLowByte writehlbyte(uint16_t val)
+U_word writehlbyte(uint16_t val)
 {
-	HighLowByte reg; reg.par.H = (val >> 8); reg.par.L = val;
+	U_word reg; reg.par.h = (val >> 8); reg.par.l = val;
 	return reg;
 }
-HighLowByte writelhbyte(uint16_t val)
+U_word writelhbyte(uint16_t val)
 {
-	HighLowByte reg; reg.par.L = (val >> 8); reg.par.H = val;
+	U_word reg; reg.par.l = (val >> 8); reg.par.h = val;
 	return reg;
 }
 uint16_t SwapByte(uint16_t num)
