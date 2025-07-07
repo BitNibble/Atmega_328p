@@ -4,16 +4,13 @@ Author:   <sergio.salazar.santos@gmail.com>
 License:  GNU General Public License
 Hardware: 74HC595
 Date:     25/10/2020
-Update:   05/01/2024
-************************************************************************/
-/****** Comment:
-	tested Atemga128 16Mhz and Atmega328 8Mhz and STM32F446RET
 ************************************************************************/
 #ifndef _74HC595_H_
 	#define _74HC595_H_
-
+	
 /*** Global Constant & Macro ***/
-#if defined (STM32F446xx)
+//#define STM32F4
+#if defined (STM32F4)
 	#ifndef IO_var
 		#define IO_var uint32_t
 	#endif
@@ -50,6 +47,8 @@ HC595 hc595_enable(volatile IO_var *ddr, volatile IO_var *port, uint8_t datapin,
 
 #endif
 
+/***EOF***/
+
 /******
 1º Sequence
 2º Scope
@@ -60,6 +59,4 @@ HC595 hc595_enable(volatile IO_var *ddr, volatile IO_var *port, uint8_t datapin,
 3º Pointer and Variable
 4º Casting
 ******/
-
-/***EOF***/
 
