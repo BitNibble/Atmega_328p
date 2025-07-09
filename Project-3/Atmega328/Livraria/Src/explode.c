@@ -4,46 +4,39 @@ Author:   <sergio.salazar.santos@gmail.com>
 License:  GNU General Public License
 Hardware: all
 Date:     16032021
-********************************************************************/
-/****** Comment:
+Comment:
 	Pin Analysis
 	Tested Atemga128 16Mhz and Atmega328 8Mhz and STM32F446RE
 ********************************************************************/
 /*** File Library ***/
-#include "explode.h"
+#include"explode.h"
 
-/*** File Header ***/
+/*** Procedure and Function declaration ***/
 void EXPLODEupdate(explode_parameter* par, IO_var x);
 IO_var EXPLODEhh(explode_parameter* par);
 IO_var EXPLODEll(explode_parameter* par);
 IO_var EXPLODElh(explode_parameter* par);
 IO_var EXPLODEhl(explode_parameter* par);
-explode_parameter explode_par_inic(void);
 
-/*** EXPLODE Auxilar ***/
-explode_parameter explode_par_inic(void)
-{
-	explode_parameter setup;
-
-	setup.XI = 0;
-	setup.XF = 0;
-
-	return setup;
-}
-/*** EXPLODE Procedure & Function Definition ***/
+/*** Handler ***/
 EXPLODE explode_enable( void )
 {
 	// struct object
-	EXPLODE setup;
+	EXPLODE setup_explode = {
+		.par = {
+			.HH = 0,
+			.HL = 0,
+			.LH = 0,
+			.LL = 0,
+			.XF = 0,
+			.XI = 0
+		},
+		.update = EXPLODEupdate
+	};
 
-	// inic VAR
-	setup.par = explode_par_inic();
-	// function pointers
-	setup.update = EXPLODEupdate;
-
-	return setup;
+	return setup_explode;
 }
-// boot
+/*** Procedure and Function definition ***/
 void EXPLODEupdate(explode_parameter* par, IO_var x)
 {
 	par->XI = par->XF;
@@ -53,17 +46,14 @@ void EXPLODEupdate(explode_parameter* par, IO_var x)
 	par->LH = EXPLODElh(par);
 	par->HL = EXPLODEhl(par);
 }
-// hh
 IO_var EXPLODEhh(explode_parameter* par)
 {
 	return (par->XI & par->XF);
 }
-// ll
 IO_var EXPLODEll(explode_parameter* par)
 {
 	return ~(par->XI | par->XF);
 }
-// lh
 IO_var EXPLODElh(explode_parameter* par)
 {
 	IO_var i;
@@ -71,7 +61,6 @@ IO_var EXPLODElh(explode_parameter* par)
 	i &= par->XF;
 	return i;
 }
-// hl
 IO_var EXPLODEhl(explode_parameter* par)
 {
 	IO_var i;
