@@ -45,11 +45,11 @@ ATMEGA328 atmega328_enable(void){
 		setup_atmega328.exint = exint();
 	#endif
 	/***PORTB***/
-	setup_atmega328.portb_reg = portb_reg();
+	setup_atmega328.gpiob_reg = gpiob_reg();
 	/***PORTC***/
-	setup_atmega328.portc_reg = portc_reg();
+	setup_atmega328.gpioc_reg = gpioc_reg();
 	/***PORTD***/
-	setup_atmega328.portd_reg = portd_reg();
+	setup_atmega328.gpiod_reg = gpiod_reg();
 	/***SPI***/
 	setup_atmega328.spi_reg = spi_reg();
 	#if defined(_SPI_MODULE_)

@@ -21,17 +21,17 @@ Atmega328GPWR_TypeDef* gpwr_reg(void)
 	return (Atmega328GPWR_TypeDef*) 0x0000;
 }
 // I/O Port (PORTB)
-Atmega328PORTB_TypeDef* portb_reg(void)
+Atmega328PORTB_TypeDef* gpiob_reg(void)
 {
 	return (Atmega328PORTB_TypeDef*) 0x0023;
 }
 // I/O Port (PORTC)
-Atmega328PORTC_TypeDef* portc_reg(void)
+Atmega328PORTC_TypeDef* gpioc_reg(void)
 {
 	return (Atmega328PORTC_TypeDef*) 0x0026;
 }
 // I/O Port (PORTD)
-Atmega328PORTD_TypeDef* portd_reg(void)
+Atmega328PORTD_TypeDef* gpiod_reg(void)
 {
 	return (Atmega328PORTD_TypeDef*) 0x0029;
 }

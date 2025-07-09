@@ -114,11 +114,11 @@ typedef struct {
 		EXINT0* exint;
 	#endif
 	/***PORTB***/
-	Atmega328PORTB_TypeDef* portb_reg;
+	Atmega328PORTB_TypeDef* gpiob_reg;
 	/***PORTC***/
-	Atmega328PORTC_TypeDef* portc_reg;
+	Atmega328PORTC_TypeDef* gpioc_reg;
 	/***PORTD***/
-	Atmega328PORTD_TypeDef* portd_reg;
+	Atmega328PORTD_TypeDef* gpiod_reg;
 	/***SPI***/
 	Atmega328SerialPeripherialInterface_TypeDef* spi_reg;
 	#ifdef _SPI_MODULE_

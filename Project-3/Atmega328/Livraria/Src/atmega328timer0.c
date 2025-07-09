@@ -143,18 +143,18 @@ void TIMER_COUNTER0_start(unsigned int prescaler)
 	}	
 }
 void TIMER_COUNTER0_compoutmodeA(unsigned char compoutmode)
-//	compoutmode: Normal port operation, OC0 disconnected; Toggle OC0 on compare match; 
+//	compoutmode: Normal gpio operation, OC0 disconnected; Toggle OC0 on compare match; 
 //	Clear OC0 on compare match when up-counting. Set OC0 on compare match when downcounting. Clear OC0 on compare match;
 //	Set OC0 on compare match when up-counting. Clear OC0 on compare match when downcounting. Set OC0 on compare match ;
-//	default-Normal port operation, OC0 disconnected.
+//	default-Normal gpio operation, OC0 disconnected.
 {
 	tc0_reg()->tccr0a.var &= ~((1 << COM0A0) | (1 << COM0A1));
 	switch(compoutmode){
-		case 0: // Normal port operation, OC0 disconnected.
+		case 0: // Normal gpio operation, OC0 disconnected.
 		break;
 		case 1: // Reserved
 				// Toggle OC0 on compare match
-			portd_reg()->ddr.var |= (1 << 6);
+			gpiod_reg()->ddr.var |= (1 << 6);
 			tc0_reg()->tccr0a.var |= (1 << COM0A0);
 			
 		break;
@@ -162,47 +162,47 @@ void TIMER_COUNTER0_compoutmodeA(unsigned char compoutmode)
 				// Set OC0 on compare
 				// match when down counting.
 				// Clear OC0 on compare match
-			portd_reg()->ddr.var |= (1 << 6);
+			gpiod_reg()->ddr.var |= (1 << 6);
 			tc0_reg()->tccr0a.var |= (1 << COM0A1);
 		break;
 		case 3: // Set OC0 on compare match when up-counting.
 				// Clear OC0 on compare
 				// match when down counting.
 				// Set OC0 on compare match
-			portd_reg()->ddr.var |= (1 << 6);
+			gpiod_reg()->ddr.var |= (1 << 6);
 			tc0_reg()->tccr0a.var |= (1 << COM0A0) | (1 << COM0A1);
 		break;
-		default: // Normal port operation, OC0 disconnected.
+		default: // Normal gpio operation, OC0 disconnected.
 		break;
 	}
 }
 void TIMER_COUNTER0_compoutmodeB(unsigned char compoutmode)
-//	compoutmode: Normal port operation, OC0 disconnected; Toggle OC0 on compare match; 
+//	compoutmode: Normal gpio operation, OC0 disconnected; Toggle OC0 on compare match; 
 //	Clear OC0 on compare match when up-counting. Set OC0 on compare match when downcounting. Clear OC0 on compare match;
 //	Set OC0 on compare match when up-counting. Clear OC0 on compare match when downcounting. Set OC0 on compare match ;
-//	default-Normal port operation, OC0 disconnected.
+//	default-Normal gpio operation, OC0 disconnected.
 {
 	tc0_reg()->tccr0a.var &= ~((1 << COM0B0) | (1 << COM0B1));
 	switch(compoutmode){ // see table 53, 54, 55 in data sheet for more information
-		case 0: // Normal port operation, OC0 disconnected.
+		case 0: // Normal gpio operation, OC0 disconnected.
 		break;
 		case 1: // Reserved
 				// Toggle OC0 on compare match
-			portd_reg()->ddr.var |= (1 << 5);
+			gpiod_reg()->ddr.var |= (1 << 5);
 			tc0_reg()->tccr0a.var |= (1 << COM0B0);
 		break;
 		case 2: // Clear OC0 on compare match when up-counting.
 				// Set OC0 on compare
 				// match when down counting.
 				// Clear OC0 on compare match
-			portd_reg()->ddr.var |= (1 << 5);
+			gpiod_reg()->ddr.var |= (1 << 5);
 			tc0_reg()->tccr0a.var |= (1 << COM0B1);
 		break;
 		case 3: // Set OC0 on compare match when up-counting.
 				// Clear OC0 on compare
 				// match when down counting.
 				// Set OC0 on compare match
-			portd_reg()->ddr.var |= (1 << 5);
+			gpiod_reg()->ddr.var |= (1 << 5);
 			tc0_reg()->tccr0a.var |= (1 << COM0B0) | (1 << COM0B1);
 		break;
 		default: // Normal port operation, OC0 disconnected.

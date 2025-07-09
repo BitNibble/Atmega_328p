@@ -92,7 +92,7 @@ typedef struct {
 	PORT_b port; //0x25
 } Atmega328PORTB_TypeDef;
 
-Atmega328PORTB_TypeDef* portb_reg(void);
+Atmega328PORTB_TypeDef* gpiob_reg(void);
 
 // I/O Port (PORTC)
 typedef struct {
@@ -101,7 +101,7 @@ typedef struct {
 	PORT_c port; // 0x28
 } Atmega328PORTC_TypeDef;
 
-Atmega328PORTC_TypeDef* portc_reg(void);
+Atmega328PORTC_TypeDef* gpioc_reg(void);
 
 // I/O Port (PORTD)
 typedef struct {
@@ -110,7 +110,7 @@ typedef struct {
 	PORT_d port; // 0x2B
 } Atmega328PORTD_TypeDef;
 
-Atmega328PORTD_TypeDef* portd_reg(void);
+Atmega328PORTD_TypeDef* gpiod_reg(void);
 
 // Timer/Counter 0, 1 and 2 Interrupt Flag
 typedef struct {

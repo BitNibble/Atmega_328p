@@ -60,8 +60,8 @@ void TWI_init(uint8_t device_id, uint8_t prescaler)
 	else
 		cmd = (1 << TWGCE); // no address, but accept general call
 	twi_reg()->twar.var = cmd;
-	portc_reg()->ddr.var |= TWI_IO_MASK;
-	portc_reg()->port.var |= TWI_IO_MASK;
+	gpioc_reg()->ddr.var |= TWI_IO_MASK;
+	gpioc_reg()->port.var |= TWI_IO_MASK;
 	switch(prescaler){
 		case 1:
 			twi_reg()->twsr.par.twps = 0;

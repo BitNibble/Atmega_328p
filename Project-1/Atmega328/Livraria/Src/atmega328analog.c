@@ -67,22 +67,22 @@ ADC0 adc_enable( uint8_t Vreff, uint8_t Divfactor, int n_channel, ... )
 		ADC_CHANNEL_GAIN[i] = va_arg(list, int);
 		switch(ADC_CHANNEL_GAIN[i]){
 			case 0:
-				portc_reg()->ddr.par.c0 = 0;
+				gpioc_reg()->ddr.par.c0 = 0;
 			break;
 			case 1:
-				portc_reg()->ddr.par.c1 = 0;
+				gpioc_reg()->ddr.par.c1 = 0;
 			break;
 			case 2:
-				portc_reg()->ddr.par.c2 = 0;
+				gpioc_reg()->ddr.par.c2 = 0;
 			break;
 			case 3:
-				portc_reg()->ddr.par.c3 = 0;
+				gpioc_reg()->ddr.par.c3 = 0;
 			break;
 			case 4:
-				portc_reg()->ddr.par.c4 = 0;
+				gpioc_reg()->ddr.par.c4 = 0;
 			break;
 			case 5:
-				portc_reg()->ddr.par.c5 = 0;
+				gpioc_reg()->ddr.par.c5 = 0;
 			break;
 			default:
 			break;
