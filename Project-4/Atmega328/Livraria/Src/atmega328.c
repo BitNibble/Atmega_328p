@@ -3,11 +3,14 @@
 Author:   <sergio.salazar.santos@gmail.com>
 License:  GNU General Public License
 Hardware: Atmega 328
-Update:	  05072025
+Update:	  10072025
 **********************************************************/
 #include "atmega328.h"
 #include <stdarg.h>
 
+/*****************************/
+/****       MACROS        ****/
+/*****************************/
 #define FTDELAY_SIZE 256
 unsigned int ft_Delay_Lock[FTDELAY_SIZE] = {0};
 unsigned int ftCounter[FTDELAY_SIZE] = {0};
@@ -68,7 +71,7 @@ Atmega328TimerGeneralControlRegister_TypeDef* tc_gcontrol_reg(void)
 // Timer/Counter, 8-bit A sync (TC0)
 Atmega328TimerCounter0_TypeDef* tc0_reg(void)
 {
-	return (Atmega328TimerCounter0_TypeDef*) 0x0044;
+	return (Atmega328TimerCounter0_TypeDef*) 0x0035;
 }
 // Timer/Counter, 8-bit A sync Compare (TC0)
 Atmega328TimerCompareRegister0_TypeDef* tc0_compare_reg(void)
@@ -108,7 +111,7 @@ Atmega328WatchdogTimer_TypeDef* wdt_reg(void)
 // CPU Register (CPU)
 Atmega328CPURegister_TypeDef* cpu_reg(void)
 {
-	return (Atmega328CPURegister_TypeDef*) 0x0053;
+	return (Atmega328CPURegister_TypeDef*) 0x003E;
 }
 // External Interrupts Pin Change Mask (EXINT)
 Atmega328ExternalInterruptPinChangeMask_TypeDef* exint_pcmask_reg(void)
@@ -118,7 +121,7 @@ Atmega328ExternalInterruptPinChangeMask_TypeDef* exint_pcmask_reg(void)
 // External Interrupts (EXINT)
 Atmega328ExternalInterrupt_TypeDef* exint_reg(void)
 {
-	return (Atmega328ExternalInterrupt_TypeDef*) 0x0068;
+	return (Atmega328ExternalInterrupt_TypeDef*) 0x003B;
 }
 // Timer/Counter 0, 1 and 2 Interrupt Mask
 Atmega328TimerInterruptMask_TypeDef* tc_imask_reg(void)
@@ -138,7 +141,7 @@ Atmega328AnalogComparatorDid_TypeDef* ac_did_reg(void)
 // Timer/Counter, 16-bit (TC1)
 Atmega328TimerCounter1_TypeDef* tc1_reg(void)
 {
-	return (Atmega328TimerCounter1_TypeDef*) 0x0080;
+	return (Atmega328TimerCounter1_TypeDef*) 0x0036;
 }
 // Timer/Counter, 16-bit Compare (TC1)
 Atmega328TimerCompareRegister1_TypeDef* tc1_compare_reg(void)
@@ -148,7 +151,7 @@ Atmega328TimerCompareRegister1_TypeDef* tc1_compare_reg(void)
 // Timer/Counter, 8-bit (TC2)
 Atmega328TimerCounter2_TypeDef* tc2_reg(void)
 {
-	return (Atmega328TimerCounter2_TypeDef*) 0x00B0;
+	return (Atmega328TimerCounter2_TypeDef*) 0x0037;
 }
 // Timer/Counter, 8-bit Compare (TC2)
 Atmega328TimerCompareRegister2_TypeDef* tc2_compare_reg(void)
@@ -166,7 +169,9 @@ Atmega328Usart0_TypeDef* usart0_reg(void)
 	return (Atmega328Usart0_TypeDef*) 0x00C0;
 }
 
-/*** Atmega 128 Procedure and Function definition ***/
+/*********************************************************************/
+/**************** Procedure and Function definition ******************/
+/*********************************************************************/
 uint16_t readhlbyte(U_word reg)
 {
 	return (reg.par.h << 8) | reg.par.l;
@@ -191,7 +196,7 @@ uint16_t SwapByte(uint16_t num)
 	tp = (num << 8);
 	return (num >> 8) | tp;
 }
-/*** Procedure & Function ToolSet definition ***/
+/*** Procedure & Function ToolSet ***/
 inline uint8_t Msk_Pos(uint8_t Msk){
 	uint8_t Pos = 0;
 	if( Msk ){

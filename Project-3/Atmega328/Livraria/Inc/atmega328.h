@@ -3,7 +3,7 @@
 Author:   <sergio.salazar.santos@gmail.com>
 License:  GNU General Public License
 Hardware: Atmega328 by ETT ET-BASE
-Update:   05072025
+Update:   10072025
 ************************************************************************/
 /****** Comment:
 	Virtual Image Atmega 328.
@@ -161,11 +161,16 @@ Atmega328TimerGeneralControlRegister_TypeDef* tc_gcontrol_reg(void);
 
 // Timer/Counter, 8-bit A sync (TC0)
 typedef struct {
+	TC0_ifr tifr0; // 0x35
+	uint8_t fill1[13]; // (43 - 35) - 1
+	GTC_cr gtccr; // 0x43
 	TC0_cra tccr0a; // 0x44
 	TC0_crb tccr0b; // 0x45
 	TC0_nt tcnt0; // 0x46
 	TC0_ocra ocr0a; // 0x47
 	TC0_ocrb ocr0b; // 0x48
+	uint8_t fill2[37]; // (6E - 48) - 1
+	TC1_imsk timsk0; // 0x6E
 } Atmega328TimerCounter0_TypeDef;
 
 Atmega328TimerCounter0_TypeDef* tc0_reg(void);
@@ -214,6 +219,8 @@ Atmega328SerialPeripherialInterface_TypeDef* spi_reg(void);
 // Analog Comparator (AC)
 typedef struct {
 	AC_sr acsr; // 0x50 [acsr]
+	uint8_t fill[46]; // (0x7F - 0x50) - 1
+	AC_didr1 didr1; // 0x7F
 } Atmega328AnalogComparator_TypeDef;
 
 Atmega328AnalogComparator_TypeDef* ac_reg(void);
@@ -227,19 +234,24 @@ Atmega328WatchdogTimer_TypeDef* wdt_reg(void);
 
 // CPU Register (CPU)
 typedef struct {
+	MCU_gpior0 gpior0; // 0x3E
+	uint8_t fill1[11]; // (0x4A - 0x3E) - 1
+	MCU_gpior1 gpior1; // 0x4A
+	MCU_gpior2 gpior2; // 0x4B
+	uint8_t fill2[7]; // (0x53 - 0x4B) - 1
 	MCU_smcr smcr; // 0x53
 	MCU_sr mcusr; // 0x54
 	MCU_cr mcucr; // 0x55
-	uint8_t fill1; // (0x57 - 0x55) - 1
+	uint8_t fill3; // (0x57 - 0x55) - 1
 	MCU_spmcsr spmcsr; // 0x57
-	uint8_t fill2[5]; // (0x5D - 0x57) - 1
+	uint8_t fill4[5]; // (0x5D - 0x57) - 1
 	MCU_sp sp; // 0x5D 0x5E
 	MCU_sreg sreg; // 0x5F
-	uint8_t fill3; // (0x61 - 0x5F) - 1
+	uint8_t fill5; // (0x61 - 0x5F) - 1
 	MCU_clkpr clkpr; // 0x61
-	uint8_t fill4[2]; // (0x64 - 0x61) - 1
+	uint8_t fill6[2]; // (0x64 - 0x61) - 1
 	MCU_prr prr; // 0x64
-	uint8_t fill5; // (0x66 - 0x64) - 1
+	uint8_t fill7; // (0x66 - 0x64) - 1
 	MCU_osccal osccal; // 0x66
 } Atmega328CPURegister_TypeDef;
 
@@ -247,9 +259,13 @@ Atmega328CPURegister_TypeDef* cpu_reg(void);
 
 // External Interrupt (EXINT)
 typedef struct {
+	EXINT_pcifr pcifr; // 0x3B
+	EXINT_ifr eifr; // 0x3C
+	EXINT_imsk eimsk; // 0x3D
+	uint8_t fill1[42]; // (0x68 - 0x3D) - 1
 	EXINT_pcicr pcicr; // 0x68
 	EXINT_icra eicra; // 0x69
-	uint8_t fill; // (0x6B - 0x69) - 1
+	uint8_t fill2; // (0x6B - 0x69) - 1
 	EXINT_pcmsk0 pcmsk0; // 0x6B
 	EXINT_pcmsk1 pcmsk1; // 0x6C
 	EXINT_pcmsk2 pcmsk2; // 0x6D
@@ -283,7 +299,6 @@ typedef struct {
 	ADC_admux admux; // 0x7C
 	uint8_t fill; // (0x7E - 0x7C) - 1
 	ADC_didr0 didr0; // 0x7E
-	AC_didr1 didr1; // 0x7F
 } Atmega328AnalogToDigitalConverter_TypeDef;
 
 Atmega328AnalogToDigitalConverter_TypeDef* adc_reg(void);
@@ -298,10 +313,16 @@ Atmega328AnalogComparatorDid_TypeDef* ac_did_reg(void);
 
 // Timer/Counter, 16-bit (TC1)
 typedef struct {
+	TC1_ifr tifr1; // 0x36
+	uint8_t fill1[12]; // (0x43 - 0x36) - 1
+	GTC_cr gtccr; // 0x43
+	uint8_t fill2[43]; // (0x6F - 0x43) - 1
+	TC1_imsk timsk1; // 0x6F
+	uint8_t fill3[16]; // (0x80 - 0x6F) - 1
 	TC1_cra tccr1a; // 0x80
 	TC1_crb tccr1b; // 0x81
 	TC1_crc tccr1c; // 0x82
-	uint8_t fill; // (0x84 - 0x82) - 1
+	uint8_t fill4; // (0x84 - 0x82) - 1
 	TC1_nt tcnt1; // 0x84 0x85
 	TC1_icr icr1; // 0x86 0x87
 	TC1_ocra ocr1a; // 0x88 0x89
@@ -321,12 +342,18 @@ Atmega328TimerCompareRegister1_TypeDef* tc1_compare_reg(void);
 
 // Timer/Counter, 8-bit (TC2)
 typedef struct {
+	TC2_ifr tifr2; // 0x37
+	uint8_t fill1[11]; // (0x43 - 0x37) - 1
+	GTC_cr gtccr; // 0x43
+	uint8_t fill2[44]; // (0x70 - 0x43) - 1
+	TC2_imsk timsk2; // 0x70
+	uint8_t fill3[63]; // (0xB0 - 0x70) - 1
 	TC2_cra tccr2a; // 0xB0
 	TC2_crb tccr2b; // 0xB1
 	TC2_nt tcnt2; // 0xB2
 	TC2_ocra ocr2a; // 0xB3
 	TC2_ocrb ocr2b; // 0xB4
-	uint8_t fill; // (0xB6 - 0xB4) - 1
+	uint8_t fill4; // (0xB6 - 0xB4) - 1
 	TC2_assr assr; // 0xB6
 } Atmega328TimerCounter2_TypeDef;
 
@@ -366,7 +393,9 @@ typedef struct {
 
 Atmega328Usart0_TypeDef* usart0_reg(void);
 
-/*** Atmega 328 Procedure and Function ***/
+/*********************************************************************/
+/*************** Procedure and Function declaration ******************/
+/*********************************************************************/
 uint16_t readhlbyte(U_word reg);
 uint16_t readlhbyte(U_word reg);
 U_word writehlbyte(uint16_t val);

@@ -41,7 +41,9 @@ typedef union {
 	uint16_t var;
 } U_word;
 
-/**** REGISTERS ****/
+/*****************************/
+/****      REGISTERS      ****/
+/*****************************/
 // Reserved 0x20
 // Reserved 0x21
 // Reserved 0x22
