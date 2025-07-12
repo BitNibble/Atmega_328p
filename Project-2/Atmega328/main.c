@@ -19,7 +19,7 @@ Created:  20/04/2023 14:00:00
 -PC5 SCL pin 28
 ********************************************************************/
 /*** File library ***/
-#include "atmega328mapping.h"
+#include "atmega328.h"
 #include "function.h"
 #include "lcd2p.h"
 #include "pcf8563rtc.h"
@@ -36,9 +36,8 @@ uint16_t count;
 
 int main(void)
 {
-atmega328_enable();
 func_enable();
-lcd = lcd02p_enable(&DDRB, &PINB, &PORTB, &DDRC, &PINC, &PORTC);
+lcd02p_enable(&DDRB, &PINB, &PORTB, &DDRC, &PINC, &PORTC);
 rtc = pcf8563rtc_enable(16); // RTC with I2C
 
 for ( ; TRUE; ) // Looping
@@ -69,12 +68,9 @@ for ( ; TRUE; ) // Looping
 	//lcd.string_size( func()->ui16toa(count), 6 );
 	
 	
-}
-} /*** MAIN ***/
+}}
 
-/*** File Interrupt ***/
-
-/***EOF***/
+/*** EOF ***/
 
 /******
 1º Sequence

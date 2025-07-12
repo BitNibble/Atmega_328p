@@ -112,7 +112,7 @@ LCDline1[17] = '\0';
 d = 0; j=1; e=0;
 
 func_enable();
-lcd = lcd02p_enable(&DDRB, &PINB, &PORTB, &DDRC, &PINC, &PORTC);
+lcd02p_enable(&DDRB, &PINB, &PORTB, &DDRC, &PINC, &PORTC);
 
 // HC595 sh = HC595enable(&DDRB,&PORTB,3,1,0); //using arduino
 sh = hc595_enable(&DDRD,&PORTD,4,5,7); //4,5,7 using board from ETT with altered pin.

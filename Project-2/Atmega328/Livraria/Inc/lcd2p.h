@@ -3,7 +3,7 @@
 Author:   <sergio.salazar.santos@gmail.com>
 License:  GNU General Public License
 Hardware: all
-Date:     02072025
+Date:     12072025
 ************************************************************************/
 #ifndef _LCD2P_H_
 	#define _LCD2P_H_
@@ -14,26 +14,26 @@ Date:     02072025
 #endif
 
 /*** Global Library ***/
+#include <stdint.h>
 #include <inttypes.h>
 
 /*** Global Constant & Macro ***/
 // ASIGN PORT PINS TO LCD (can be setup in any way)
-// CMD
 #define LCD02P_RS 0
 #define LCD02P_RW 1
 #define LCD02P_EN 2
 #define LCD02P_NC 3
-// DATA
 #define LCD02P_DB4 0 // 4
 #define LCD02P_DB5 1 // 5
 #define LCD02P_DB6 2 // 6
 #define LCD02P_DB7 3 // 7
+/***************/
 
-/*** Global Variable ***/
+/*** Handler ***/
 typedef struct{
 	void (*write)(char c, unsigned short D_I);
 	char (*read)(unsigned short D_I);
-	void (*BF)(void);
+	uint8_t (*BF)(void);
 	void (*putch)(char c);
 	char (*getch)(void);
 	void (*string)(const char *s); // RAW
@@ -42,13 +42,12 @@ typedef struct{
 	void (*clear)(void);
 	void (*gotoxy)(unsigned int y, unsigned int x);
 	void (*reboot)(void);
+	int (*printf)(const char *fmt, ...);
 }LCD02P;
 
-/*** Global Function declaration ***/
-LCD02P lcd02p_enable(volatile uint8_t *cmdddr, volatile uint8_t *cmdpin, volatile uint8_t *cmdport, volatile uint8_t *dataddr, volatile uint8_t *datapin, volatile uint8_t *dataport);
+void lcd02p_enable(volatile uint8_t *cmdddr, volatile uint8_t *cmdpin, volatile uint8_t *cmdport, volatile uint8_t *dataddr, volatile uint8_t *datapin, volatile uint8_t *dataport);
 LCD02P* lcd02p(void);
 
 #endif
-
 /*** EOF ***/
 
